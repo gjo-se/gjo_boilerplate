@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="pull-right">
+        <div class="dropdown ">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
+                Sortierung
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li>
+                    <f:widget.link arguments="{order:'ASC', property: 'customerProductName'}">Name A-Z</f:widget.link>
+                </li>
+                <li>
+                    <f:widget.link arguments="{order:'DESC', property: 'customerProductName'}">Name Z-A</f:widget.link>
+                </li>
+                <li>
+                    <f:widget.link arguments="{order:'ASC', property: 'price.currentPrice'}">Preis aufsteigend</f:widget.link>
+                </li>
+                <li>
+                    <f:widget.link arguments="{order:'DESC', property: 'price.currentPrice'}">Preis absteigend</f:widget.link>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<f:renderChildren arguments="{contentArguments}"/>
