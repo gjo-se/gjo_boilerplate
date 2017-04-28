@@ -1,0 +1,159 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
+flux:schemaLocation="https://fluidtypo3.org/schemas/flux-master.xsd"
+xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+v:schemaLocation="https://fluidtypo3.org/schemas/vhs-master.xsd">
+
+	<f:layout name="Content" />
+
+	<f:section name="Configuration">
+		<flux:form id="ProductDetail" label="ProductDetail" description="ProductDetail" options="{group: 'MediaMarkt'}">
+	    	<flux:field.relation size="1" minItems="0" table="tx_mediamarkt_at_products" foreignLabel="Product_reference_number" name="product_id" condition="ORDER BY title"/>
+		</flux:form>
+	</f:section>
+
+	<f:section name="Preview">
+		Displayed Products:<br/>
+			{product_id}
+			<br>
+	</f:section>
+
+	<f:section name="Main">
+	<div class="row">
+		<div class="container">
+			<div class="product-specs-container">
+				<f:cObject typoscriptObjectPath="lib.productDetailHead" data="{product_id}">
+				<h2 class="product-title">MICROSOFT Surface Pro 4</h2>
+				<span class="product-subtitle">16GB / 512 GB i7e (TH4-00003)</span>
+				<img class="product-image" src="assets/img/SUR15_Pro4_Laptop_08.png">
+				</f:cObject>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="container">
+			<div class="product-specs-info-box product-description-box">
+				
+				<div class="product-info-box-title">Description</div>
+
+				<div class="product-info-box-content">
+					
+<f:format.htmlentitiesDecode><f:cObject typoscriptObjectPath="lib.productDetailDescription" data="{product_id}">
+					<h4>The tablet that can replace your laptop.</h4>
+					<p>Sit, arupis di officiu sandent exceatiatus et occae volest, sandi to dolorunt etur, ipici undi qui restiorisci susam et alicimaio illacea rchit, non excest volorunti opturia doluptatet voloribusam recaborrum inciam, quam harum</p>
+					</f:cObject></f:format.htmlentitiesDecode>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="container">
+			<f:cObject typoscriptObjectPath="lib.productDetailPrice" data="{product_id}">
+			<div class="product-specs-price-box">
+				<span class="price"><span class="number">1.329,- €</span></span>
+				<span class="delivery-cost">incl. MwSt. excl. delivery 4,99 €</span>
+			</div>
+			<div class="product-specs-delivery-info">
+				<span class="delivery-info-text">Immediately available in Onlineshop, delivery in 1-3 days</span>
+				<span class="availability-info-text">Check availability in local market</span>
+			</div>
+			</f:cObject>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="container">
+			<div class="product-specs-info-box product-number-box">
+				<div class="product-info-box-title">Artikelnummer</div>
+
+				<div class="product-info-box-content">
+					<f:cObject typoscriptObjectPath="lib.productDetailNumber" data="{product_id}">
+					<h4 class="product-number">1456519</h4>
+					</f:cObject>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="container">
+			<div class="product-specs-table-container">
+				<f:cObject typoscriptObjectPath="lib.productDetailTable" data="{product_id}">
+				<table class="product-specs-table">
+					<tr>
+						<th colspan="2">Display</th>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>LED Hintergrund-beleuchtung</td>
+						<td>ja</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+				</table>
+
+				<table class="product-specs-table">
+					<tr>
+						<th colspan="2">Display</th>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>LED Hintergrund-beleuchtung</td>
+						<td>ja</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+					<tr>
+						<td>Bildschirmdiagonale</td>
+						<td>31.2 cm / 12.3 Zoll</td>
+					</tr>
+				</table>
+				</f:cObject>
+			</div>
+		</div>
+	</div>
+	</f:section>
+</div>

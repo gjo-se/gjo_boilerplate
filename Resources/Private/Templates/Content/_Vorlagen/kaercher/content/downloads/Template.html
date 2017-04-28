@@ -1,0 +1,118 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:comment>Desktop</f:comment>
+<f:render partial="SectionOpeningTag" arguments="{
+    showanchor: content.0.anchor,
+    anchortitle: content.0.anchortitle,
+    uid: element.uid
+}"/>
+	<div class="row hidden-sm hidden-xs hidden-print">
+		<div class="col-sm-12">
+			<f:if condition="{content.0.headlineone}">
+                <f:render partial="Headline" arguments="{
+                    headline: content.0.headlineone,
+                    type: content.0.typeone
+                }"/>
+			</f:if>
+		</div>		
+	</div>
+	
+	<div class="row extramargin hidden-sm hidden-xs hidden-print">
+		<f:for each="{content.0.items}" as="item" iteration="iterator">
+			<f:if condition="{k:row(current:'{iterator.index}' columns:3)}">
+				</div><div class="row extramargin hidden-sm hidden-xs hidden-print">
+			</f:if>
+
+			<div class="col-md-2 col-lg-2 image-fit">			
+				<f:if condition="{item.image}">
+					<f:render section="image" arguments="{_all}" />
+				</f:if>
+			</div>
+			<div class="col-md-2 col-lg-2 divsize">
+				<f:if condition="{item.headline}">
+                    <f:render partial="Headline" arguments="{
+                        headline: item.headline,
+                        type: content.0.type,
+                        class: 'mobileheadline'
+                    }" />
+				</f:if>
+					<f:render partial="Text" arguments="{_all}" />
+				<f:if condition="{item.buttonlink}">
+					<f:then>
+						<f:render section="buttonwithlink" arguments="{_all}" />
+					</f:then>
+					<f:else>
+						<f:render section="buttonwithoutlink" arguments="{_all}" />					
+					</f:else>
+				</f:if>				
+			</div>
+		</f:for>		
+	</div>	
+</section>
+
+<f:comment>Mobile</f:comment>
+<f:render partial="SectionOpeningTag"/>
+    <div class="row hidden-lg hidden-md hidden-print">
+        <div class="col-sm-12">
+            <f:if condition="{content.0.headlineone}">
+                <f:render partial="Headline" arguments="{
+                        headline: content.0.headlineone,
+                        type: content.0.typeone
+                    }"/>
+            </f:if>
+        </div>
+    </div>
+
+	<f:for each="{content.0.items}" as="item">
+		<div class="row extramargin hidden-lg hidden-md hidden-print">
+			<div class="col-xs-6 col-sm-6 image-fit">			
+				<f:if condition="{item.image}">
+					<f:render section="image" arguments="{_all}" />
+				</f:if>
+			</div>
+			<div class="col-xs-6 col-sm-6 divsize">
+				<f:if condition="{item.headline}">
+					<f:render partial="Headline" arguments="{
+					    headline: item.headline,
+					    type: content.0.type,
+					    class: 'mobileheadline'
+					}" />
+				</f:if>
+					<f:render partial="Text" arguments="{_all}" />
+				<f:if condition="{item.buttonlink}">
+					<f:then>
+						<f:render section="buttonwithlink" arguments="{_all}" />
+					</f:then>
+					<f:else>
+						<f:render section="buttonwithoutlink" arguments="{_all}" />					
+					</f:else>
+				</f:if>				
+			</div>
+		</div>
+	</f:for>					
+</section>
+
+<f:section name="image">
+    <f:render partial="Image" arguments="{
+        image: item.image,
+        class: 'imagemobile img-borderstatic'
+    }" />
+</f:section>
+
+<f:section name="buttonwithlink">
+		<f:if condition="{item.color} == 1">
+			<a href="<k:uri.auto target="{item.buttonlink}"/>" {k:uri.auto(target:'{item.buttonlink}' returnLinkTarget:'TRUE')}><div class="btn btn-uppercase btn-yellow bottonposition"><span class="glyphicon glyphicon-download downloadbuttonicon"></span>Download</div></a>					
+		</f:if>
+		<f:if condition="{item.color} == 2">
+			<a href="<k:uri.auto target="{item.buttonlink}"/>" {k:uri.auto(target:'{item.buttonlink}' returnLinkTarget:'TRUE')}><div class="btn btn-uppercase btn-grey bottonposition"><span class="glyphicon glyphicon-download downloadbuttonicon"></span>Download</div></a>							
+		</f:if>
+</f:section>
+
+<f:section name="buttonwithoutlink">		
+		<f:if condition="{item.color} == 1">
+			<div class="btn btn-uppercase btn-yellow bottonposition"><span class="glyphicon glyphicon-download downloadbuttonicon"></span>Download</div>					
+		</f:if>
+		<f:if condition="{item.color} == 2">
+			<div class="btn btn-uppercase btn-grey bottonposition"><span class="glyphicon glyphicon-download downloadbuttonicon"></span>Download</div>
+		</f:if>
+</f:section>	

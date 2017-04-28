@@ -1,0 +1,535 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:if condition="{item.imageborder4}">
+<f:then>
+    <div class="row"> <!-- begin row -->
+        <f:if condition="{item.textleftcheckbox4} == 1"> <!-- begin if -->
+            <f:then>
+                <div class="col-sm-3">
+                    <f:if condition="{item.headlinelinkleft4}">
+                        <f:then>
+                            <f:if condition="{item.headlineleft4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkleft4}"/>"{k:uri.auto(target:'{item.headlinelinkleft4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineleft4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkleft4}">
+                        <f:then>
+                            <f:if condition="{item.imageleft4}">
+                                <a href="<k:uri.auto target="{item.linkleft4}"/>"{k:uri.auto(target:'{item.linkleft4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageleft4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                )}"
+                                />
+
+                                </a>
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageleft4}">
+
+                                <img data-src="{item.imageleft4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                )}"
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3">
+                    <f:if condition="{item.headlinelinkright4}">
+                        <f:then>
+                            <f:if condition="{item.headlineright4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkright4}"/>"{k:uri.auto(target:'{item.headlinelinkright4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineright4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkright4}">
+                        <f:then>
+                            <f:if condition="{item.imageright4}">
+                                <a href="<k:uri.auto target="{item.linkright4}"/>"{k:uri.auto(target:'{item.linkright4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageright4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                </a>
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageright4}">
+
+                                <img data-src="{item.imageright4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+            </f:then>
+            <f:else>
+                <div class="col-sm-3 hidden-lg hidden-md hidden-sm">
+                    <f:if condition="{item.headlinelinkleft4}">
+                        <f:then>
+                            <f:if condition="{item.headlineleft4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkleft4}"/>"{k:uri.auto(target:'{item.headlinelinkleft4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineleft4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkleft4}">
+                        <f:then>
+                            <f:if condition="{item.imageleft4}">
+                                <a href="<k:uri.auto target="{item.linkleft4}"/>"{k:uri.auto(target:'{item.linkleft4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageleft4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                )}"
+                                />
+
+                                </a>
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageleft4}">
+
+                                <img data-src="{item.imageleft4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                )}"
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 hidden-xs">
+                    <f:if condition="{item.headlinelinkleft4}">
+                        <f:then>
+                            <f:if condition="{item.headlineleft4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkleft4}"/>"{k:uri.auto(target:'{item.headlinelinkleft4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineleft4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 hidden-lg hidden-md hidden-sm">
+                    <f:if condition="{item.headlinelinkright4}">
+                        <f:then>
+                            <f:if condition="{item.headlineright4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkright4}"/>"{k:uri.auto(target:'{item.headlinelinkright4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineright4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkright4}">
+                        <f:then>
+                            <f:if condition="{item.imageright4}">
+                                <a href="<k:uri.auto target="{item.linkright4}"/>"{k:uri.auto(target:'{item.linkright4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageright4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                </a>
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageright4}">
+
+                                <img data-src="{item.imageright4}"
+                                     class="img-border"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 hidden-xs">
+                    <f:if condition="{item.headlinelinkright4}">
+                        <f:then>
+                            <f:if condition="{item.headlineright4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkright4}"/>"{k:uri.auto(target:'{item.headlinelinkright4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineright4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+            </f:else>
+        </f:if> <!-- end if -->
+    </div> <!-- end row -->
+</f:then>
+<f:else>
+    <div class="row"> <!-- begin row -->
+        <f:if condition="{item.textleftcheckbox4} == 1"> <!-- begin if -->
+            <f:then>
+                <div class="col-sm-3">
+                    <f:if condition="{item.headlinelinkleft4}">
+                        <f:then>
+                            <f:if condition="{item.headlineleft4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkleft4}"/>"{k:uri.auto(target:'{item.headlinelinkleft4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineleft4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkleft4}">
+                        <f:then>
+                            <f:if condition="{item.imageleft4}">
+                                <a href="<k:uri.auto target="{item.linkleft4}"/>"{k:uri.auto(target:'{item.linkleft4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageleft4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                            )}"
+                                />
+
+                                </a>
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageleft4}">
+
+                                <img data-src="{item.imageleft4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                            )}"
+
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3">
+                    <f:if condition="{item.headlinelinkright4}">
+                        <f:then>
+                            <f:if condition="{item.headlineright4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkright4}"/>"{k:uri.auto(target:'{item.headlinelinkright4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineright4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkright4}">
+                        <f:then>
+                            <f:if condition="{item.imageright4}">
+                                <a href="<k:uri.auto target="{item.linkright4}"/>"{k:uri.auto(target:'{item.linkright4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageright4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageright4}">
+
+                                <img data-src="{item.imageright4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+            </f:then>
+            <f:else>
+                <div class="col-sm-3 hidden-lg hidden-md hidden-sm">
+                    <f:if condition="{item.headlinelinkleft4}">
+                        <f:then>
+                            <f:if condition="{item.headlineleft4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkleft4}"/>"{k:uri.auto(target:'{item.headlinelinkleft4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineleft4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkleft4}">
+                        <f:then>
+                            <f:if condition="{item.imageleft4}">
+                                <a href="<k:uri.auto target="{item.linkleft4}"/>"{k:uri.auto(target:'{item.linkleft4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageleft4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                )}"
+                                />
+
+                                </a>
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageleft4}">
+
+                                <img data-src="{item.imageleft4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_left4,
+                                                then: item.overwrite_alt_tag_left4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageleft4.raw)}"
+                                )}"
+
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 hidden-xs">
+                    <f:if condition="{item.headlinelinkleft4}">
+                        <f:then>
+                            <f:if condition="{item.headlineleft4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkleft4}"/>"{k:uri.auto(target:'{item.headlinelinkleft4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineleft4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineleft4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textleft4}">
+                                <f:format.raw>{item.textleft4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 hidden-lg hidden-md hidden-sm">
+                    <f:if condition="{item.headlinelinkright4}">
+                        <f:then>
+                            <f:if condition="{item.headlineright4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkright4}"/>"{k:uri.auto(target:'{item.headlinelinkright4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineright4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 image-fit">
+                    <f:if condition="{item.linkright4}">
+                        <f:then>
+                            <f:if condition="{item.imageright4}">
+                                <a href="<k:uri.auto target="{item.linkright4}"/>"{k:uri.auto(target:'{item.linkright4}' returnLinkTarget:'TRUE')}>
+
+                                <img data-src="{item.imageright4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                </a>
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.imageright4}">
+
+                                <img data-src="{item.imageright4}"
+                                     alt="{f:if(condition: item.overwrite_alt_tag_right4,
+                                                then: item.overwrite_alt_tag_right4,
+                                                else: "{k:assets(data:'assettitle' uid:item.imageright4.raw)}"
+                                )}"
+                                />
+
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="col-sm-3 hidden-xs">
+                    <f:if condition="{item.headlinelinkright4}">
+                        <f:then>
+                            <f:if condition="{item.headlineright4}">
+                                <a href="<k:uri.auto target="{item.headlinelinkright4}"/>"{k:uri.auto(target:'{item.headlinelinkright4}' returnLinkTarget:'TRUE')}><h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}></a>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:then>
+                        <f:else>
+                            <f:if condition="{item.headlineright4}">
+                                <h{item.type4} class="mobileheadline"><f:format.htmlentities>{item.headlineright4}</f:format.htmlentities></h{item.type4}>
+                            </f:if>
+                            <f:if condition="{item.textright4}">
+                                <f:format.raw>{item.textright4}</f:format.raw>
+                            </f:if>
+                        </f:else>
+                    </f:if>
+                </div>
+            </f:else>
+        </f:if> <!-- end if -->
+    </div> <!-- end row -->
+</f:else>
+</f:if>

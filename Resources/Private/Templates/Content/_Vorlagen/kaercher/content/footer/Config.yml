@@ -1,0 +1,31 @@
+title: Footer links
+category: 5
+disabled: true
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+      validation:
+        Required: 1
+    -
+      label: Items
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        -
+          label: Linktext
+          name: linktext
+          type: textfield
+          validation:
+            Required: 1
+        -
+          label: Link
+          name: link
+          type: link 
+          tabs: page,external,email,assets         
+
+

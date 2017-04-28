@@ -1,0 +1,61 @@
+title: Accordion
+category: 3
+fields:
+  -   
+    -
+      label: Headline
+      name: headline
+      type: textfield   
+    -
+      label: Items
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        -
+          label: Headline Accordion
+          type: textfield
+          name: accordionheadline 
+          validation:
+            Required: 1 
+        -            
+          label: Headline Type Accordion
+          type: select
+          options:
+            2: 2
+            3: 3
+          name: type2
+          validation:
+              Required: 1                    
+        -
+          label: Headline Inside
+          type: textfield
+          name: headline      
+        -
+          label: Headline Type
+          type: select
+          options:
+            2: 2
+            3: 3
+            4: 4
+            5: 5
+            6: 6
+          name: type
+          validation:
+              Required: 1                            
+        -
+          label: Text
+          type: rte
+          name: text
+        -
+          label: Image
+          type: file
+          name: image
+          meta:
+            width: 1260
+            height: 456
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tag

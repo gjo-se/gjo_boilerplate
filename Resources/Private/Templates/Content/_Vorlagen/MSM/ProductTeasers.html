@@ -1,0 +1,114 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
+flux:schemaLocation="https://fluidtypo3.org/schemas/flux-master.xsd"
+xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+v:schemaLocation="https://fluidtypo3.org/schemas/vhs-master.xsd">
+
+	<f:layout name="Content" />
+
+	<f:section name="Configuration">
+		<flux:form id="ProductTeaser" label="ProductTeaser" description="ProductTeaser" options="{group: 'MediaMarkt'}">
+			<flux:field.select name="boxtype" items="{0: 'Please Select Box Type', 1: 'Top premium offer', 2: 'Premium Offer'}" default="0" requestUpdate="TRUE" required="TRUE"/>
+			<flux:field.input name="heading" label="Heading *" required="TRUE" displayCond="FIELD:boxtype:=:2"/>
+			<flux:form.section name="elements" label="Products">
+	    		<flux:form.object name="element" label="Product">
+	    			<flux:field.file name="brandlogo" required="TRUE" label="Brand Logo" allowed="png,jpg" uploadFolder="uploads/media" minItems="1" maxItems="1" size="1" showThumbnails="TRUE" />
+					<flux:field.relation size="1" minItems="0" table="tx_mediamarkt_at_products" foreignTableField="Product_reference_number" name="product_id" condition="ORDER BY title">
+					</flux:field.relation>
+					<flux:field.input required="TRUE" name="link" label="Link to category page">
+						<flux:wizard.link activeTab="page" />
+					</flux:field.input>
+					<flux:field.file name="image" label="Image" allowed="png,jpg" uploadFolder="uploads/media" minItems="0" maxItems="20"size="5" showThumbnails="TRUE" />
+	    		</flux:form.object>
+    		</flux:form.section>
+		</flux:form>
+	</f:section>
+
+	<f:section name="Preview">
+		Displayed Products:<br/>
+		<f:for each="{elements}" as="element">
+			{element.element.product_id}
+			<br>
+		</f:for>
+	</f:section>
+
+	<f:section name="Main">
+	<f:if condition="{boxtype}==2">
+		<div class="row">
+			<div class="container">
+				<div class="product-group-heading-normal">
+					<h2>{heading}</h2>
+				</div>
+			</div>
+		</div>
+	</f:if>
+	<div class="devices-container">
+		<f:for each="{elements}" as="element" iteration="elementIterator">
+			<f:if condition="{boxtype}==2">
+			<div class="row">
+				<div class="container">
+			</f:if>
+			<div class="product-box">
+				<div class="product-info">
+					<img src="uploads/media/{element.element.brandlogo}" alt="">
+					<f:cObject typoscriptObjectPath="lib.productTeaser" data="{element.element.product_id}">
+					<h2>Microsoft Surface Book</h2>
+					<h6>13,5" Tablet-PC</h6>
+					<h3>The ultimate laptop.</h3>
+					<ul>
+						<li>Intel® Core™ i5-6Y30 Processor (up to 2,20 GHz with Intel® Turbo-Boost-technology 2.0, 4 MB Intel® Smart-Cache)</li>
+		  				<li>Intel® Core™ i5-6Y30 Processor (up to 2,20 GHz with Intel® Turbo-Boost-technology 2.0, 4 MB Intel® Smart-Cache)</li>
+		  				<li>Intel® Core™ i5-6Y30 Processor (up to 2,20 GHz with Intel® Turbo-Boost-technology 2.0, 4 MB Intel® Smart-Cache)</li>
+					</ul>
+					<span class="product-no">Art. Nr: 1434940</span>
+				</f:cObject>
+				<f:cObject typoscriptObjectPath='lib.intellogo' data='{element.element.product_id}'>
+					<img class="intel-logo" src="" alt="">
+				</f:cObject>
+
+					<div class="product-images">
+						<!-- Slider main container -->
+						<div class="swiper-container">
+							<!-- Additional required wrapper -->
+							<div class="swiper-wrapper">
+							    <!-- Slides -->
+							    <div class="swiper-slide">
+									<f:cObject typoscriptObjectPath='lib.productImage' data='{element.element.product_id}' />
+								</div>
+							    <f:cObject typoscriptObjectPath="lib.productThumbnailImages" data="{element.element.image}" />
+							</div>
+						</div>
+						<!-- If we need navigation buttons -->
+						 <div class="swiper-button-prev"></div>
+						 <div class="swiper-button-next"></div>
+					</div>
+
+				</div>
+				<div class="product-image">
+					<f:cObject typoscriptObjectPath='lib.productImage' data='{element.element.product_id}' />
+				</div>
+				<div class="product-action">
+					<!-- <a href="#" class="teaser-button">Compare</a> -->
+					<f:link.typolink parameter="{element.element.link}" class="teaser-button">Mehr erfahren
+						<f:image src="EXT:gjo_introduction/Resources/Public/Assets/icons/dark-arrow-right-big.png"
+								 class="dark-icon-right"/>
+					</f:link.typolink>
+					<div class="pricebox">
+						<f:cObject typoscriptObjectPath="lib.productTeaserPrice" data="{element.element.product_id}">
+							<span class="price">ab <span class="number">1329,- €</span></span>
+						</f:cObject>
+					</div>
+				</div>
+			</div>
+			<f:if condition="{boxtype}==2">
+			</div>
+			</div>
+			</f:if>
+		</f:for>
+	<f:if condition="{boxtype}==2">
+		</div><!-- eo devices-container -->
+	</f:if>
+	</f:section>
+</div>

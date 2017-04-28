@@ -1,0 +1,75 @@
+title: Image with cover (full width)
+category: 2
+fields:
+  -
+    -
+      label: Image
+      type: file
+      name: image
+      validation:
+        Required: 1
+      meta:
+        width: 1260
+        height: 456
+    -
+      label: Overwrite Alt Tag
+      type: textfield
+      name: overwrite_alt_tag
+    -
+      label: Headline
+      type: textfield
+      name: headline
+    -
+      label: Headline link
+      type: link
+      name: headlinelink  
+      tabs: page,external,email,asset  
+    -
+      label: Headline type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type       
+    - 
+      label: Text
+      type: rte
+      name: text
+    -
+      label: Headline and text on bottom?
+      type: checkbox
+      name: onbottom
+    -
+      label: Horizontal line below the content?
+      name: horizontalruleone
+      type: checkbox
+    -
+      label: On cover
+      type: section
+    -
+      label: Linktext
+      type: textfield
+      name: linktext
+      validation:
+        Required: 1
+    -
+      label: Link
+      type: link
+      name: link
+      tabs: page,external,email,asset
+    -
+      label: Anchor
+      type: section
+    -
+      label: Activate anchor
+      name: anchor 
+      type: checkbox
+    -
+      label: Anchor title
+      name: anchortitle
+      type: textfield
+      if:
+        anchor: [1]

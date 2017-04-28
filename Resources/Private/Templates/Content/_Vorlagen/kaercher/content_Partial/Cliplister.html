@@ -1,0 +1,28 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<script type="text/javascript">
+	$(function () {
+
+		$('#video-{data.requestkey}').cliplister<![CDATA[({]]>
+			requestkey: "{data.requestkey}",
+			autoplay: {f:if(condition:'{data.layout} >= 5', then:'false', else:'true')},
+			lang: "{k:langInfo(mode:'iso-lang')},##",
+			keytype: {data.keytype}
+		<![CDATA[});]]>
+		
+		<f:if condition="{data.layout} < 10">	
+			$('#video-{data.requestkey}').cliplister('video');
+		</f:if>
+
+		<f:if condition="{data.layout} == 10">	
+			$('#video-{data.requestkey}').cliplister('imageContent');
+		</f:if>	
+
+		<f:if condition="{data.layout} == 11">	
+			$('#video-{data.requestkey}').cliplister('imageOverlay');
+		</f:if>
+
+	});
+</script>
+
+<div class="video-player" id="video-{data.requestkey}"></div>

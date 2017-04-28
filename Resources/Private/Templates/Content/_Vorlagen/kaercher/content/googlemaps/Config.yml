@@ -1,0 +1,26 @@
+title: Google Maps
+category: 7
+fields:
+  -
+    -
+      label: URL
+      name: url
+      type: textfield
+      validation:
+        Required: 1    
+    -
+      label: Width
+      name: width
+      type: textfield
+      validation:
+        Required: 1
+    -
+      label: Height
+      name: height
+      type: textfield
+      validation:
+        Required: 1
+    -
+      label: Pull Right
+      name: pullright
+      type: checkbox

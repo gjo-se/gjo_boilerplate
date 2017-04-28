@@ -1,0 +1,74 @@
+title: Image, Headline and Text (Three Columns)
+category: 2
+fields:
+  -
+    -
+      label: Headlines Type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type
+      validation:
+        Required: 1      
+    -
+      label: Items
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        -
+          label: Headline
+          type: textfield
+          name: headlinelinktext 
+          validation:
+            Required: 1                          
+        -
+          label: Headline Link
+          type: link
+          name: headlinelink  
+          tabs: page,external,email,asset    
+        -
+          label: Text
+          type: rte
+          name: text               
+        -
+          label: Image
+          type: file
+          name: image  
+          validation:
+            Required: 1                    
+          meta:
+            width: 406  
+            height: 203
+        -
+          label: Image Link
+          type: link
+          name: imagelink  
+          tabs: page,external,email,asset
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tag
+        -
+          label: Image - Border
+          type: checkbox
+          name: imageborder                                
+    -
+      label: Activate Anchor 
+      name: anchor 
+      type: checkbox
+    -
+      label: Anchor Title
+      name: anchortitle
+      type: textfield
+      if:
+        anchor: [1]                 
+    -
+      label: Horizontal Rule (col-sm-12)
+      name: horizontalruleone
+      type: checkbox

@@ -1,0 +1,101 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:if condition="{content.0.imagebottomforall}">
+    <f:then>		
+        <div class="row">				 
+            <div class="col-sm-3 image-fit">	
+                <f:render partial="AccordionPartials/Sub/Headlineandtextontop" arguments="{_all}" />													
+                <f:render partial="AccordionPartials/Sub/Itemimagelinktwocols1" arguments="{_all}" />
+            </div>	
+            <div class="col-sm-3 image-fit">	
+                <f:render partial="AccordionPartials/Sub/Headlineandtextontop2" arguments="{_all}" />
+                <f:render partial="AccordionPartials/Sub/Itemimagelinktwocols2" arguments="{_all}" />
+            </div>	
+            <div class="col-sm-3 image-fit">	
+                <f:render partial="AccordionPartials/Sub/Headlineandtextontop3" arguments="{_all}" />
+                <f:render partial="AccordionPartials/Sub/Itemimagelinkthreecols1" arguments="{_all}" />
+            </div>	
+            <div class="col-sm-3 image-fit">	
+                <f:render section="headlineandtextontop4" arguments="{_all}" />
+                <f:render section="itemimagelinkfourcols1" arguments="{_all}" />
+            </div>																	
+        </div>																					
+    </f:then>
+    <f:else>					
+        <div class="row">
+            <div class="col-sm-3 image-fit">
+                <f:render partial="AccordionPartials/Sub/Itemimagelinktwocols1" arguments="{_all}" />
+                <f:render partial="AccordionPartials/Sub/Headlineandtextonbottom" arguments="{_all}" />	
+            </div>	
+            <div class="col-sm-3 image-fit">
+                <f:render partial="AccordionPartials/Sub/Itemimagelinktwocols2" arguments="{_all}" />
+                <f:render partial="AccordionPartials/Sub/Headlineandtextonbottom2" arguments="{_all}" />
+            </div>	
+            <div class="col-sm-3 image-fit">
+                <f:render partial="AccordionPartials/Sub/Itemimagelinkthreecols1" arguments="{_all}" />
+                <f:render partial="AccordionPartials/Sub/Headlineandtextonbottom3" arguments="{_all}" />
+            </div>	
+            <div class="col-sm-3 image-fit">
+                <f:render section="itemimagelinkfourcols1" arguments="{_all}" />
+                <f:render section="headlineandtextonbottom4" arguments="{_all}" />
+            </div>						
+        </div>					
+    </f:else>		
+</f:if>
+
+<f:section name="itemimagelinkfourcols1">
+    <f:if condition="{item.imagelinkfourcols1}">
+        <f:then>
+            <f:if condition="{item.imagefourcols1}">                                                         
+                <a href="<k:uri.auto target="{item.imagelinkfourcols1}"/>"{k:uri.auto(target:'{item.imagelinkfourcols1}' returnLinkTarget:'TRUE')}>
+                <img data-src="{item.imagefourcols1}"
+                     alt="{f:if(condition: item.overwrite_alt_tagfourcols1,
+                                then: item.overwrite_alt_tagfourcols1,
+                                else: "{k:assets(data:'assettitle' uid:item.imagefourcols1.raw)}"
+                           )}"
+                     {f:if(condition: {item.imageborderforall}, then: ' class="img-border"')}
+                />
+                </a>
+            </f:if>
+        </f:then>
+        <f:else>
+            <f:if condition="{item.imagefourcols1}">
+                <img data-src="{item.imagefourcols1}"
+                     alt="{f:if(condition: item.overwrite_alt_tagfourcols1,
+                                then: item.overwrite_alt_tagfourcols1,
+                                else: "{k:assets(data:'assettitle' uid:item.imagefourcols1.raw)}"
+                )}"
+                {f:if(condition: {item.imageborderforall}, then: ' class="img-border"')}
+                />
+            </f:if>
+        </f:else>
+    </f:if>
+</f:section>
+
+<f:section name="headlineandtextontop4">
+    <f:if condition="{item.headlinelinkfourcols1}">
+        <f:then>
+            <a href="<k:uri.auto target="{item.headlinelinkfourcols1}"/>"{k:uri.auto(target:'{item.headlinelinkfourcols1}' returnLinkTarget:'TRUE')}><h{item.typeforall} class="mobileheadline headlinebottom"><f:format.htmlentities>{item.headlinefourcols1}</f:format.htmlentities></h{item.typeforall}></a>						
+        </f:then>
+        <f:else>
+            <h{item.typeforall} class="mobileheadline headlinebottom"><f:format.htmlentities>{item.headlinefourcols1}</f:format.htmlentities></h{item.typeforall}>
+        </f:else>
+    </f:if>													
+    <f:if condition="{item.textfourcols1}">
+        <f:format.raw>{item.textfourcols1}</f:format.raw>
+    </f:if>
+</f:section>
+
+<f:section name="headlineandtextonbottom4">
+    <f:if condition="{item.headlinelinkfourcols1}">
+        <f:then>
+            <a href="<k:uri.auto target="{item.headlinelinkfourcols1}"/>"{k:uri.auto(target:'{item.headlinelinkfourcols1}' returnLinkTarget:'TRUE')}><h{item.typeforall} class="headlinebottom mobileheadline"><f:format.htmlentities>{item.headlinefourcols1}</f:format.htmlentities></h{item.typeforall}></a>						
+        </f:then>
+        <f:else>
+            <h{item.typeforall} class="mobileheadline headlinebottom"><f:format.htmlentities>{item.headlinefourcols1}</f:format.htmlentities></h{item.typeforall}>
+        </f:else>
+    </f:if>																
+    <f:if condition="{item.textfourcols1}">
+        <f:format.raw>{item.textfourcols1}</f:format.raw>
+    </f:if>
+</f:section>

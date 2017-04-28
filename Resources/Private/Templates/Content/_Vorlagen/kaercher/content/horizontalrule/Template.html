@@ -1,0 +1,38 @@
+<section class="container">
+	<f:if condition="{content.0.horizontalruleone} == 1">
+		<f:if condition="{content.0.mobilehrnormal}">
+			<f:then>
+				<div class="row">
+					<div class="col-sm-12 col-xs-12">
+						<hr />
+					</div>
+				</div>			
+			</f:then>
+			<f:else>
+				<div class="row">
+					<div class="hidden-xs hidden-sm">
+						<hr />
+					</div>
+				</div>			
+			</f:else>			
+		</f:if>
+	</f:if>
+	<f:if condition="{content.0.horizontalrulebold} == 1">
+		<f:if condition="{content.0.mobilehrbold}">
+			<f:then>
+				<div class="row">
+					<div class="col-sm-12 col-xs-12">
+						<hr class="hrbold" />
+					</div>
+				</div>			
+			</f:then>
+			<f:else>
+				<div class="row">
+					<div class="hidden-xs hidden-sm">
+						<hr class="hrbold" />
+					</div>
+				</div>			
+			</f:else>			
+		</f:if>	
+	</f:if>
+</section>

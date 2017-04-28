@@ -1,0 +1,212 @@
+{namespace flux=FluidTYPO3\Flux\ViewHelpers}
+{namespace v=Tx_Vhs_ViewHelpers}
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://fluidtypo3.org/schemas/fluid-master.xsd"
+     xmlns:flux="http://fluidtypo3.org/schemas/flux-master.xsd"
+     xmlns:v="http://fluidtypo3.org/schemas/vhs-master.xsd">
+
+    <f:layout name="Content"/>
+
+    <f:section name="Configuration">
+
+        <flux:form wizardTab="CFM Inhalts Module" id="module3" icon="{v:extension.path.resources(path: 'Icons/icon-cfm.gif')}">
+            <flux:form.sheet name="mainconfig">
+                <flux:field.input name="maintitlesmall"/>
+                <flux:field.input name="maintitle"/>
+            </flux:form.sheet>
+
+            <flux:form.sheet name="upperleftcontent">
+                <flux:field.input name="upperlefttitle"/>
+                <flux:field.text name="upperlefttext"/>
+                <flux:field.file name="upperleftimage" allowed="jpg,jpeg,bmp,png, gif"/>
+            </flux:form.sheet>
+
+            <flux:form.sheet name="upperrightcontent">
+                <flux:field.input name="upperrighttitle"/>
+                <flux:field.text name="upperrighttext"/>
+                <flux:field.file name="upperrightimage" allowed="jpg,jpeg,bmp,png, gif"/>
+            </flux:form.sheet>
+
+            <flux:form.sheet name="lowerleftcontent">
+                <flux:field.input name="lowerlefttitle"/>
+                <flux:field.text name="lowerlefttext"/>
+                <flux:field.file name="lowerleftimage" allowed="jpg,jpeg,bmp,png, gif"/>
+            </flux:form.sheet>
+
+            <flux:form.sheet name="lowerrightcontent">
+                <flux:field.input name="lowerrighttitle"/>
+                <flux:field.text name="lowerrighttext"/>
+                <flux:field.file name="lowerrightimage" allowed="jpg,jpeg,bmp,png, gif"/>
+            </flux:form.sheet>
+
+        </flux:form>
+
+
+    </f:section>
+
+    <f:section name="Main">
+        <!--- Modul 3 --->
+        <div class="modul_3">
+            <div class="row">
+                <div class="columns large-12 modul_3_headline">
+                    <h3>{maintitlesmall}<br />
+                    <b>{maintitle}</b></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns large-12 modul_3_oben">
+                    <div class="columns large-2">&nbsp;</div>
+                    <div class="columns large-4 modul_3_obenlinks">
+                        <div class="columns large-6"><img src="/{upperleftimage}" alt="{upperleftimage}" /></div>
+                        <div class="columns large-6">
+                            <h4>{upperlefttitle}</h4>
+                            {upperlefttext}
+                        </div>
+                    </div>
+                    <div class="columns large-4 modul_3_obenrechts">
+                        <div class="columns large-6"><img src="/{upperrightimage}" alt="{upperrightimage}" /></div>
+                        <div class="columns large-6">
+                            <h4>{upperrighttitle}</h4>
+                            {upperrighttext}
+                        </div>
+                    </div>
+                    <div class="columns large-2">&nbsp;</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns large-12 modul_3_unten">
+                    <div class="columns large-2">&nbsp;</div>
+                    <div class="columns large-4 modul_3_untenlinks">
+                        <div class="columns large-6"><img src="/{lowerleftimage}" alt="{lowerleftimage}" /></div>
+                        <div class="columns large-6">
+                            <h4>{lowerlefttitle}</h4>
+                            {lowerlefttext}
+                        </div>
+                    </div>
+                    <div class="columns large-4 modul_3_untenrechts">
+                        <div class="columns large-6"><img src="/{lowerrightimage}" alt="{lowerrightimage}" /></div>
+                        <div class="columns large-6">
+                            <h4>{lowerrighttitle}</h4>
+                            {lowerrighttext}
+                        </div>
+                    </div>
+                    <div class="columns large-2">&nbsp;</div>
+                </div>
+            </div>
+        </div>
+
+
+    </f:section>
+
+    <f:section name="Preview">
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="3"><strong>Inhaltselement: Modul 3</strong></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center">
+                    <h3>{maintitlesmall}</h3>
+                    <h2>{maintitle}</h2><br />
+                </td>
+            </tr>
+            <tr>
+                <td width="49%">
+                        <table width="100%">
+                            <tr>
+                                <td width="50%">
+                                    <f:if condition="{upperleftimage}"><img src="/{upperleftimage}" alt="{upperleftimage}" width="98%"/></f:if>
+                                </td>
+                                <td width="50%">
+                                    <f:if condition="{upperlefttitle}"><h3>{upperlefttitle}</h3></h></f:if>
+                                    <f:if condition="{upperlefttext}"><p><f:format.crop maxCharacters="100">{upperlefttext}</f:format.crop></p></f:if>
+                                </td>
+                            </tr>
+                        </table>
+                </td>
+                <td width="2%">&nbsp;</td>
+                <td width="49%">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">
+                                <f:if condition="{upperrightimage}"><img src="/{upperrightimage}" alt="{upperrightimage}" width="98%"/></f:if>
+                            </td>
+                            <td width="50%">
+                                <f:if condition="{upperrighttitle}"><h3>{upperrighttitle}</h3></h></f:if>
+                                <f:if condition="{upperrighttext}"><p><f:format.crop maxCharacters="100">{upperrighttext}</f:format.crop></p></f:if>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td width="49%">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">
+                                <f:if condition="{lowerleftimage}"><img src="/{lowerleftimage}" alt="{lowerleftimage}" width="98%"/></f:if>
+                            </td>
+                            <td width="50%">
+                                <f:if condition="{lowerlefttitle}"><h3>{lowerlefttitle}</h3></h></f:if>
+                                <f:if condition="{lowerlefttext}"><p><f:format.crop maxCharacters="100">{lowerlefttext}</f:format.crop></p></f:if>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="2%">&nbsp;</td>
+                <td width="49%">
+                    <table width="100%">
+                        <tr>
+                            <td width="50%">
+                                <f:if condition="{lowerrightimage}"><img src="/{lowerrightimage}" alt="{lowerrightimage}" width="98%"/></f:if>
+                            </td>
+                            <td width="50%">
+                                <f:if condition="{lowerrighttitle}"><h3>{lowerrighttitle}</h3></h></f:if>
+                                <f:if condition="{lowerrighttext}"><p><f:format.crop maxCharacters="100">{lowerrighttext}</f:format.crop></p></f:if>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+
+    </f:section>
+
+    <f:section name="Value">col-md-{iteration.cycle}{f:if(condition: iteration.isLast, else: ',')}</f:section>
+
+
+
+
+
+
+
+
+
+    <f:section name="SharedObjectFields">
+        <flux:field.input name="header" label="Optional header for caption"/>
+        <flux:field.text name="caption" label="Optional caption body text" enableRichText="TRUE"/>
+        <flux:field.file name="iconImage" label="Optional Image for Navigation Dots"/>
+    </f:section>
+
+    <f:section name="Image">
+        <f:image src="{elementData.file}" alt="{elementData.header}" width="{settings.carousel.width}"/>
+    </f:section>
+
+    <f:section name="Content">
+        <div class="container">
+            <flux:content.render area="{elementData.id}"/>
+        </div>
+    </f:section>
+
+    <f:section name="Text">
+        <div class="container">
+            <f:if condition="{elementData.title}">
+                <{elementData.size}>
+                {elementData.title -> f:format.htmlentities()}
+            </{elementData.size}>
+            </f:if>
+            {elementData.text -> f:format.html()}
+        </div>
+    </f:section>
+</div>

@@ -1,0 +1,94 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:render partial="SectionOpeningTag" arguments="{
+    showanchor: content.0.anchor,
+    anchortitle: content.0.anchortitle,
+    uid: element.uid
+}"/>
+	<div class="row"> 	
+		<f:if condition="{content.0.imagebottom}">  		
+			<f:then>			
+				<f:for each="{content.0.items}" as="item" iteration="iterator">
+			       <f:if condition="{k:row(current:'{iterator.index}' columns:4)}">
+			            </div><div class="row">
+			        </f:if> 					
+					<div class="col-sm-6 col-md-3 image-fit">  
+						 <f:render section="headlineandtexttop" arguments="{_all}" />
+						 <f:render section="card" arguments="{_all}" />
+                        <f:if condition="{iterator.isLast}">
+                            <f:else>
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:else>
+                        </f:if>
+					</div>	
+				</f:for>
+			</f:then>			
+			<f:else>
+				<f:for each="{content.0.items}" as="item" iteration="iterator">
+				   <f:if condition="{k:row(current:'{iterator.index}' columns:4)}">
+				        </div><div class="row">
+				    </f:if> 
+				    <div class="col-sm-6 col-md-3 image-fit">
+                        <f:render section="card" arguments="{_all}" />
+                        <f:render section="headlineandtextbottom" arguments="{_all}" />
+                        <f:if condition="{iterator.isLast}">
+                            <f:else>
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:else>
+                        </f:if>
+					</div>
+				</f:for>							
+			</f:else>	
+        </f:if>
+    </div>
+
+    <f:if condition="{content.0.horizontalruleone}">
+        <f:render partial="Horizontalrule"/>
+    </f:if>
+</section>
+
+<f:section name="headlineandtexttop">
+    <f:render partial="Headline" arguments="{
+        headline: item.headline,
+        link: item.headlinelink,
+        type: content.0.type,
+        class: 'mobileheadline'
+    }" />
+
+    <f:render partial="Text" arguments="{
+        text: item.text
+    }" />
+</f:section>
+
+<f:section name="headlineandtextbottom">
+    <f:render partial="Headline" arguments="{
+        headline: item.headline,
+        link: item.headlinelink,
+        type: content.0.type,
+        class: 'mobileheadline headlinebottom'
+    }" />
+
+    <f:render partial="Text" arguments="{
+        text: item.text
+    }" />
+</f:section>
+
+<f:section name="card">
+    <a class="hidden-print" href="<k:uri.auto target="{item.link}"/>"{k:uri.auto(target:'{item.link}' returnLinkTarget:'TRUE')}>
+    <div class="card">
+        <img data-src="{item.image}"
+             alt="{f:if(condition: item.overwrite_alt_tag,
+                    then: item.overwrite_alt_tag,
+                    else: "{k:assets(data:'assettitle' uid:item.image.raw)}"
+        )}"
+        />
+        <div class="card-overlay" style="display: none; opacity: 0.98;">
+            <div class="card-text" style="margin-top: 207.5px; opacity: 0;">
+                <f:if condition="{item.linktextinside}">
+                    {item.linktextinside}
+                </f:if>
+            </div>
+        </div>
+    </div>
+    </a>
+</f:section>			        	        

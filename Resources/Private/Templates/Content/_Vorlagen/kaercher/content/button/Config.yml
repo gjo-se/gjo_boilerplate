@@ -1,0 +1,36 @@
+title: Button
+category: 7
+fields:
+  -
+    -
+      label: Color
+      type: select
+      options:
+        1: Yellow
+        2: Grey
+      name: color
+      validation:
+        Required: 1    
+    -
+      label: Position
+      type: select
+      options:
+        1: Left
+        2: Middle
+        3: Right
+      name: position
+      validation:
+        Required: 1    
+    -
+      label: Text
+      name: buttontext
+      type: textfield
+      validation:
+          Required: 1 
+    - 
+      label: Link
+      type: link      
+      name: buttonlink
+      tabs: page,external,email,asset
+      validation:
+          Required: 1                                

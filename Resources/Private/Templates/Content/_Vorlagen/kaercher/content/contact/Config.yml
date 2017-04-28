@@ -1,0 +1,147 @@
+title: Contact
+category: 1
+fields:
+  -
+    -
+      label: Layout
+      type: select
+      options:
+        1: 1
+      name: layout
+      validation:
+        Required: 1
+    -
+      label: Headline
+      type: textfield
+      name: headline
+    -
+      label: Distribution Company
+      type: textfield
+      name: dist_name
+      validation:
+        Required: 1
+    -
+      label: Subsidiary
+      type: textfield
+      name: subsidiary
+      validation:
+        Required: 1  
+    -
+      label: Street
+      type: textfield
+      name: street
+      validation:
+        Required: 1
+    -
+      label: House Number
+      type: textfield
+      name: house_number
+      validation:
+        Required: 1
+    -
+      label: Zipcode
+      type: textfield
+      name: zip_code
+      validation:
+        Required: 1
+    -
+      label: Location
+      type: textfield
+      name: location
+      validation:
+        Required: 1
+    -
+      label: Accessibility
+      type: textfield
+      name: accessibility
+    -
+      label: Telephone Number
+      type: textfield
+      name: tel_number
+    -
+      label: Fax Number
+      type: textfield
+      name: fax_number
+    -
+      label: E-Mail
+      type: textfield
+      name: email
+    -
+      label: Opening Hours
+      type: data
+      name: opening_hours
+      options:
+        -
+          label: Name (not visible in the frontend)
+          type: textfieldsingle
+          name: storage_title
+          validation:
+            Required: 1
+        -
+          label: Day of Intervalstart
+          name: day_start
+          type: select
+          options:
+            1: Monday
+            2: Tuesday
+            3: Wednesday
+            4: Thursday
+            5: Friday
+            6: Saturday
+            7: Sunday
+          validation:
+            Required: 1
+        -
+          label: Day of Intervalend
+          name: day_end
+          type: select
+          options:
+            1: Monday
+            2: Tuesday
+            3: Wednesday
+            4: Thursday
+            5: Friday
+            6: Saturday
+            7: Sunday
+          validation:
+            Required: 1
+        -
+          label: Lunch break
+          type: checkbox
+          name: has_lunchbreak
+        -
+          label: Time Begin
+          type: textfield
+          name: noBreak_begin
+          if:
+            has_lunchbreak: [0]
+        -
+          label: Time End
+          type: textfield
+          name: noBreak_end
+          if:
+            has_lunchbreak: [0]
+        -
+          label: Time Begin before midday
+          type: textfield
+          name: withBreak_begin_am
+          if:
+            has_lunchbreak: [1]
+        -
+          label: Time End before midday
+          type: textfield
+          name: withBreak_end_am
+          if:
+            has_lunchbreak: [1]
+        -
+          label: Time Begin afternoon
+          type: textfield
+          name: withBreak_begin_pm
+          if:
+            has_lunchbreak: [1]
+        -
+          label: Time End afternoon
+          type: textfield
+          name: withBreak_end_pm
+          if:
+            has_lunchbreak: [1]

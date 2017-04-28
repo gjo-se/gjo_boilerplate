@@ -1,0 +1,33 @@
+title: Footer text
+category: 5
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+      validation:
+        Required: 1
+    -
+      label: Headline type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type
+      validation:
+        Required: 1
+    -
+      label: Headline link
+      type: link
+      name: headlinelink 
+      tabs: page,external,email,asset       
+    - 
+      label: Text
+      type: rte
+      name: text
+      validation:
+        Required: 1

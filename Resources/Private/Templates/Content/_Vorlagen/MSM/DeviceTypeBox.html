@@ -1,0 +1,43 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+     xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
+     flux:schemaLocation="https://fluidtypo3.org/schemas/flux-master.xsd"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     v:schemaLocation="https://fluidtypo3.org/schemas/vhs-master.xsd">
+
+    <f:layout name="Content"/>
+
+    <f:section name="Configuration">
+        <flux:form id="DeviceTypeBox" label="DeviceTypeBox" description="DeviceTypeBox" options="{group: 'MediaMarkt'}">
+            <flux:field.input name="contentHeading" label="Heading *" required="TRUE"/>
+            <flux:field.text name="text" label="Text *" required="TRUE" rows="5" cols="30" enableRichText="TRUE"/>
+            <flux:field.file name="image" label="Image *" required="TRUE" allowed="png,jpg" uploadFolder="uploads/media" minItems="0"
+                             maxItems="1" size="1" showThumbnails="TRUE"/>
+            <flux:field.input name="buttonText" label="Button Text *" required="TRUE"/>
+            <flux:field.input name="buttonLink" label="Button Link *" required="TRUE">
+                <flux:wizard.link activeTab="page"/>
+            </flux:field.input>
+        </flux:form>
+    </f:section>
+
+    <f:section name="Preview">
+        {contentHeading}<br>
+        {text}
+    </f:section>
+
+    <f:section name="Main">
+        <div class="teaser-big gradient">
+            <div class="teaser-heading">
+                <h2>{contentHeading}</h2>
+                <f:format.html>{text}</f:format.html>
+            </div>
+            <img src="<f:uri.image src='uploads/media/{image}' width='500c'/>" alt="">
+
+            <a href="<v:uri.typolink configuration='{parameter: buttonLink}' />" class="teaser-button">{buttonText}
+                <f:image src="EXT:gjo_introduction/Resources/Public/Assets/icons/dark-arrow-right-big.png"
+                         class="dark-icon-right"/>
+            </a>
+        </div>
+    </f:section>
+</div>

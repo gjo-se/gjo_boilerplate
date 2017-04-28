@@ -1,0 +1,117 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     f:schemaLocation="https://fluidtypo3.org/schemas/fluid-master.xsd"
+     xmlns:flux="http://typo3.org/ns/FluidTYPO3/Flux/ViewHelpers"
+     flux:schemaLocation="https://fluidtypo3.org/schemas/flux-master.xsd"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     v:schemaLocation="https://fluidtypo3.org/schemas/vhs-master.xsd">
+
+    <f:layout name="Content"/>
+
+    <f:section name="Configuration">
+        <flux:form id="CallToActionBox" label="CallToActionBox" description="CallToActionBox" options="{group: 'MediaMarkt'}">
+            <flux:field.select name="boxType"
+                               items="{0: 'Please Select Box Type', 1: 'Wide Box with Price', 2: 'Wide Box Large Text No Price', 3: 'Small Box No Price'}"
+                               default="0" requestUpdate="TRUE"/>
+
+            <flux:field.input name="heading" label="Heading *" required="TRUE"/>
+            <flux:field.file name="imageLeft" label="Left Product Image *" required="TRUE" allowed="png,jpg" uploadFolder="uploads/media"
+                             minItems="0" maxItems="1" size="1" showThumbnails="TRUE" displayCond="FIELD:boxType:<:3"/>
+
+            <flux:field.file name="image" label="Product Image *" required="TRUE" allowed="png,jpg" uploadFolder="uploads/media"
+                             minItems="0" maxItems="1" size="1" showThumbnails="TRUE" displayCond="FIELD:boxType:=:3"/>
+
+            <flux:field.input name="productName" label="Product Name *" required="TRUE"/>
+            <flux:field.text name="text" label="Text *" required="TRUE" rows="5" cols="30" enableRichText="TRUE"/>
+            <flux:field.file name="imageBottom" label="Bottom Image" allowed="png,jpg" uploadFolder="uploads/media" minItems="0"
+                             maxItems="1" size="1" showThumbnails="TRUE" displayCond="FIELD:boxType:<:3"/>
+
+            <flux:field.input name="currency" label="Currency *" required="TRUE" displayCond="FIELD:boxType:=:1"/>
+            <flux:field.input name="price" label="Price *" required="TRUE" displayCond="FIELD:boxType:=:1"/>
+            <flux:field.input name="actionText" label="Action text *" required="TRUE" displayCond="FIELD:boxType:=:1"/>
+            <flux:field.input name="linkText" label="Link Text"/>
+            <flux:field.input name="actionLink" label="Buy now link">
+                <flux:wizard.link activeTab="page"/>
+            </flux:field.input>
+        </flux:form>
+    </f:section>
+
+    <f:section name="Preview">
+        <b>{heading}</b><br>
+        {text}
+    </f:section>
+
+    <f:section name="Main">
+        <f:if condition="{boxType}=='1'">
+            <div class="product-group-heading">
+                <h2>{heading}</h2>
+            </div>
+            <div class="product-box discount-box gradient">
+                <div class="product-image">
+                    <img src="<f:uri.image src='uploads/media/{imageLeft}'/>" alt="">
+                </div>
+                <div class="product-info">
+                    <h3>{productName}</h3>
+                    <f:format.html>{text}</f:format.html>
+                    <img src="<f:uri.image src='uploads/media/{imageBottom}'/>" alt="">
+                </div>
+                <div class="product-action">
+                    <div class="price-circle">
+                        <div class="price"><span class="currency">{currency}</span> {price} <span class="price-text">{actionText}</span>
+                        </div>
+                    </div>
+                </div>
+                <f:if condition="{linkText}">
+                    <f:link.typolink parameter="{actionLink}" class="teaser-button">
+                        {linkText}
+                        <f:image src="EXT:gjo_introduction/Resources/Public/Assets/icons/dark-arrow-right-big.png"
+                                 class="dark-icon-right"/>
+                    </f:link.typolink>
+                </f:if>
+            </div>
+        </f:if>
+
+        <f:if condition="{boxType}=='2'">
+            <div class="product-group-heading large">
+                <h2>{heading}</h2>
+            </div>
+            <div class="product-box promo">
+                <div class="product-image">
+                    <img src="<f:uri.image src='uploads/media/{imageLeft}'/>" alt="">
+                </div>
+                <div class="product-info">
+                    <h3>{productName}</h3>
+                    <f:format.html>{text}</f:format.html>
+                    <f:if condition="{linkText}">
+                        <f:link.typolink parameter="{actionLink}" class="teaser-button">
+                            {linkText} <f:image src="EXT:gjo_introduction/Resources/Public/Assets/icons/dark-arrow-right-big.png"
+                                                class="dark-icon-right"/>
+                        </f:link.typolink>
+                    </f:if>
+                    <img src="<f:uri.image src='uploads/media/{imageBottom}'/>" alt="">
+                </div>
+            </div>
+        </f:if>
+
+        <f:if condition="{boxType}=='3'">
+            <div class="product-group-heading">
+                <h2>{heading}</h2>
+            </div>
+            <div class="product-box">
+                <div class="product-image">
+                    <img src="<f:uri.image src='uploads/media/{image}'/>" alt="">
+                </div>
+                <div class="product-info">
+                    <h3>{productName}</h3>
+                    <f:format.html>{text}</f:format.html>
+                    <f:if condition="{linkText}">
+                        <f:link.typolink parameter="{actionLink}" class="teaser-button">
+                            {linkText}<f:image src="EXT:gjo_introduction/Resources/Public/Assets/icons/dark-arrow-right-big.png"
+                                               class="dark-icon-right"/>
+                        </f:link.typolink>
+                    </f:if>
+                </div>
+            </div>
+        </f:if>
+    </f:section>
+</div>

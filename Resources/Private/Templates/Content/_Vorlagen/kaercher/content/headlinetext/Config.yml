@@ -1,0 +1,47 @@
+title: Headline and Text (full width)
+category: 1
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+      validation:
+        Required: 1
+    -
+      label: Headline type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type
+      validation:
+        Required: 1
+    -
+      label: Headline link
+      type: link
+      name: headlinelink 
+      tabs: page,external,email,asset       
+    - 
+      label: Text
+      type: rte
+      name: text
+      validation:
+        Required: 1
+    -
+      label: Horizontal rule below the text?
+      name: horizontalruleone
+      type: checkbox  
+    -
+      label: Activate anchor
+      name: anchor 
+      type: checkbox
+    -
+      label: Anchor title
+      name: anchortitle
+      type: textfield
+      if:
+        anchor: [1]          

@@ -1,0 +1,33 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<k:json value="{image}" alias="obj">
+    <f:then>
+        <f:if condition="{0:obj.type} == {0:'cliplister'}">
+            <f:render partial="Cliplister" arguments="{data: obj, contentUid: contentUid}"/>
+        </f:if>
+    </f:then>
+    <f:else>
+        <f:if condition="{link}">
+            <f:then>
+                <a href="<k:uri.auto target="{link}"/>"{k:uri.auto(target:'{link}' returnLinkTarget:'TRUE')}>
+                    <img class="{class}"
+                         data-src="{image}"
+                         alt="{f:if(condition: overwrite_alt_tag,
+                                then: overwrite_alt_tag,
+                                else: "{k:assets(data:'assettitle' uid:image.raw)}"
+                              )}"
+                    >
+                </a>
+            </f:then>
+            <f:else>
+                <img class="{class}"
+                     data-src="{image}"
+                     alt="{f:if(condition: overwrite_alt_tag,
+                            then: overwrite_alt_tag,
+                            else: "{k:assets(data:'assettitle' uid:image.raw)}"
+                           )}"
+                >
+            </f:else>
+        </f:if>
+    </f:else>
+</k:json>

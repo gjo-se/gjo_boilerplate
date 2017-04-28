@@ -1,0 +1,78 @@
+{namespace flux=FluidTYPO3\Flux\ViewHelpers}
+{namespace v=Tx_Vhs_ViewHelpers}
+
+
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://fluidtypo3.org/schemas/fluid-master.xsd"
+     xmlns:flux="http://fluidtypo3.org/schemas/flux-master.xsd">
+
+
+    <f:layout name="Content"/>
+
+    <f:section name="Configuration">
+
+        <flux:form wizardTab="gjo_content" id="cfmmoduleone" icon="{v:extension.path.resources(path: 'Icons/icon-cfmmoduleone.gif')}">
+            <flux:form.sheet name="leftcontent">
+                <flux:field.input name="titlesmall"/>
+                <flux:field.input name="title"/>
+                <flux:field.text name="maintext" enableRichText="true"/>
+                <flux:grid>
+                    <flux:grid.row>
+                        <flux:grid.column>
+                            <flux:form.content name="content" label="Text / Bild / Slider (Typ1)"/>
+                        </flux:grid.column>
+                    </flux:grid.row>
+                </flux:grid>
+            </flux:form.sheet>
+        </flux:form>
+
+    </f:section>
+
+    <f:section name="Preview">
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="3"><strong>Inhaltselement: Modul 1</strong></td>
+            </tr>
+            <tr>
+                <td width="49%">
+                    <f:if condition="titlesmall"><h3>{titlesmall}</h3></f:if>
+                    <f:if condition="title"><h2>{title}</h2><br /></f:if>
+                    <f:if condition="{maintext}"><f:format.crop maxCharacters="100">{maintext}</f:format.crop><br /></f:if>
+                </td>
+                <td width="2%">&nbsp;</td>
+                <td width="49%">
+                    <flux:widget.grid/>
+                </td>
+            </tr>
+
+        </table>
+
+
+    </f:section>
+
+    <f:section name="Main">
+
+        <div class="modul_1">
+            <div class="row">
+                <div class="columns large-12 pad_null">
+                    <div class="columns large-6 bg_grey">
+                        <div class="columns large-4 modul_1_links_leer">&nbsp;</div>
+                        <div class="columns large-8 modul_1_links copytext">
+                            <h3>{titlesmall}<br />
+                                <b>{title}</b></h3>
+                            <f:if condition="maintext"><f:format.nl2br>{maintext}</f:format.nl2br></f:if>
+                        </div>
+                    </div>
+                    <div class="columns large-6 bg_white pad_null">
+                        <div class="columns large-8 modul_1_rechts">
+                            <flux:content.render area="content"/>
+                        </div>
+                        <div class="columns large-4">&nbsp;</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </f:section>
+</div>

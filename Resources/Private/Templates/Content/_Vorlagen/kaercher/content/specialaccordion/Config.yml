@@ -1,0 +1,609 @@
+title: Accordion Special 
+category: 3
+fields:
+  -
+    -
+      label: Items
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        - 
+          label: Storage title
+          type: textfield
+          name: storage_title
+          validation:
+            Required: 1         
+        -           
+          label: Select Content
+          type: select
+          options:
+            1: Image and Text (Two Columns)
+            2: Image and Text (50/50)
+            3: Image and Text (70/30)
+            4: Image and Text (Two Cols | Left / Right)
+            5: Text (One Column)
+            6: Text (Two Columns)
+            7: Text (Three Columns)
+            8: Image, Headline and Text (Two Columns)
+            9: Image, Headline and text (Three columns)
+            10: Image, Headline and Text (Four Columns)
+          name: selectcontent 
+          validation:
+            Required: 1 
+        -
+          label: Accordion Headline
+          type: textfield
+          name: accordionheadline
+          validation:
+            Required: 1   
+        -
+          label: Headline Type Accordion
+          type: select
+          options:
+            2: 2
+            3: 3
+          name: typeaccordion                                                                                                                                                        
+        - # Image and Text (Two Columns)                          
+          label: Image Left 
+          type: file
+          name: imageleft
+          validation:
+            Required: 1
+          meta:
+            width: 620
+            height: 310
+          if:
+            selectcontent: [1]
+        -
+          label: Image Link Left
+          type: link
+          name: imagelinkleft 
+          tabs: page,external,email,asset 
+          if:
+            selectcontent: [1]
+        -
+          label: Overwrite Alt Tag Left
+          type: textfield
+          name: overwrite_alt_tagleft1
+          if:
+            selectcontent: [1]
+        - 
+          label: Text Left 
+          type: rte
+          name: textleft
+          validation:
+            Required: 1 
+          if:
+            selectcontent: [1]   
+        -             
+          label: Image Right
+          type: file
+          name: imageright
+          validation:
+            Required: 1
+          meta:
+            width: 620
+            height: 310
+          if:
+            selectcontent: [1]
+        -
+          label: Image Link Right
+          type: link
+          name: imagelinkright 
+          tabs: page,external,email,asset 
+          if:
+            selectcontent: [1]
+        -
+          label: Overwrite Alt Tag Right
+          type: textfield
+          name: overwrite_alt_tagright1
+          if:
+            selectcontent: [1]
+        - 
+          label: Text Right
+          type: rte
+          name: textright
+          validation:
+            Required: 1 
+          if:
+            selectcontent: [1]    
+        -
+          label: Image On Bottom?
+          name: imagebottom
+          type: checkbox  
+          if:
+            selectcontent: [1]   
+        - # Image and Text (50 / 50)
+          label: Image
+          type: file
+          name: image2
+          validation: 
+            Required: 1
+          meta:
+            width: 620
+            height:
+          if:
+            selectcontent: [2]               
+        -
+          label: Image Link
+          type: link
+          name: imagelink2 
+          tabs: page,external,email,asset      
+          if:
+            selectcontent: [2]
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tag2
+          if:
+            selectcontent: [2]
+        -
+          label: Headline
+          type: textfield
+          name: headline2   
+          if:
+            selectcontent: [2]           
+        -
+          label: Headline Type
+          type: select
+          options:
+            2: 2
+            3: 3
+            4: 4
+            5: 5
+            6: 6
+          name: type2   
+          if:
+            selectcontent: [2]             
+        -
+          label: Headline Link
+          type: link
+          name: headlinelink2 
+          tabs: page,external,email,asset        
+          if:
+            selectcontent: [2]                     
+        -
+          label: Text
+          type: rte
+          name: text2   
+          if:
+            selectcontent: [2]           
+        -
+          label: Text On The Left Side?
+          type: checkbox
+          name: textleft2
+          if:
+            selectcontent: [2]               
+        -
+          label: Image - Border
+          type: checkbox
+          name: imageborder2    
+          if:
+            selectcontent: [2]                   
+        - # Image and Text (70 / 30)
+          label: Image
+          type: file
+          name: image3
+          validation: 
+            Required: 1
+          meta:
+            width: 406
+            height:
+          if:
+            selectcontent: [3]               
+        -
+          label: Image Link
+          type: link
+          name: imagelink3 
+          tabs: page,external,email,asset      
+          if:
+            selectcontent: [3]
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tag3
+          if:
+            selectcontent: [3]
+        -
+          label: Headline
+          type: textfield
+          name: headline3   
+          if:
+            selectcontent: [3]          
+        -
+          label: Headline Type
+          type: select
+          options:
+            2: 2
+            3: 3
+            4: 4
+            5: 5
+            6: 6
+          name: type3   
+          if:
+            selectcontent: [3]             
+        -
+          label: Headline Link
+          type: link
+          name: headlinelink3 
+          tabs: page,external,email,asset        
+          if:
+            selectcontent: [3]                     
+        -
+          label: Text
+          type: rte
+          name: text3   
+          if:
+            selectcontent: [3]           
+        -
+          label: Text On The Left Side?
+          type: checkbox
+          name: textleft3
+          if:
+            selectcontent: [3]               
+        -
+          label: Image - Border
+          type: checkbox
+          name: imageborder3    
+          if:
+            selectcontent: [3]    
+        - # IMAGE AND TEXT (Two Cols | Left / Right)
+          label: Image Left
+          type: file
+          name: imageleft4
+          meta:
+            width: 300
+            height: 
+          if:
+            selectcontent: [4]                
+        -
+          label: Image Link Left
+          type: link
+          name: linkleft4 
+          tabs: page,external,email,asset    
+          if:
+            selectcontent: [4]
+        -
+          label: Overwrite Alt Tag Left
+          type: textfield
+          name: overwrite_alt_tag_left4
+          if:
+            selectcontent: [4]
+        -
+          label: Headline Left
+          type: textfield
+          name: headlineleft4    
+          if:
+            selectcontent: [4] 
+        -
+          label: Headline Link Left
+          type: link
+          name: headlinelinkleft4 
+          tabs: page,external,email,asset    
+          if:
+            selectcontent: [4]                       
+        -
+          label: Text Left
+          type: rte
+          name: textleft4      
+          if:
+            selectcontent: [4]              
+        -
+          label: Image Right
+          type: file
+          name: imageright4
+          meta:
+            width: 300
+            height:  
+          if:
+            selectcontent: [4]             
+        -
+          label: Image Link Right
+          type: link
+          name: linkright4
+          tabs: page,external,email,asset
+          if:
+            selectcontent: [4]
+        -
+          label: Overwrite Alt Tag Right
+          type: textfield
+          name: overwrite_alt_tag_right4
+          if:
+            selectcontent: [4]
+        -
+          label: Headline Right
+          type: textfield
+          name: headlineright4 
+          if:
+            selectcontent: [4]           
+        -
+          label: Headline Link Right
+          type: link
+          name: headlinelinkright4
+          tabs: page,external,email,asset  
+          if:
+            selectcontent: [4]                                
+        -
+          label: Text Right
+          type: rte
+          name: textright4    
+          if:
+            selectcontent: [4]                         
+        -
+          label: Headlines Type
+          type: select
+          options:
+            2: 2
+            3: 3
+            4: 4
+            5: 5
+            6: 6
+          name: type4   
+          if:
+            selectcontent: [4]            
+        -
+          label: Text On The Left Side?
+          type: checkbox
+          name: textleftcheckbox4     
+          if:
+            selectcontent: [4]            
+        -
+          label: Image - Border
+          type: checkbox
+          name: imageborder4    
+          if:
+            selectcontent: [4]   
+        - # Text One Column
+          label: Text
+          type: rte
+          name: textonecolumn
+          validation:
+            Required: 1            
+          if:
+            selectcontent: [5]   
+        - # Text Two Columns
+          label: Text Left
+          type: rte
+          name: texttwocolumnsleft
+          validation:
+            Required: 1            
+          if:
+            selectcontent: [6]   
+        -
+          label: Text Right
+          type: rte
+          name: texttwocolumnsright
+          validation:
+            Required: 1            
+          if:
+            selectcontent: [6]     
+        - # Text Three Columns
+          label: Text Left
+          type: rte
+          name: textone
+          validation:
+            Required: 1            
+          if:
+            selectcontent: [7]   
+        -
+          label: Text Middle
+          type: rte
+          name: texttwo
+          validation:
+            Required: 1            
+          if:
+            selectcontent: [7]        
+        -
+          label: Text Right
+          type: rte
+          name: textthree
+          validation:
+            Required: 1            
+          if:
+            selectcontent: [7]      
+        - # Image, Headline and Text (Two, Three, Four)
+          label: Headline
+          type: textfield
+          name: headlinetwocols1
+          validation:
+            Required: 1     
+          if:
+            selectcontent: [8,9,10]             
+        -
+          label: Headline Link
+          type: link
+          name: headlinelinktwocols1 
+          tabs: page,external,email,asset    
+          if:
+            selectcontent: [8,9,10]             
+        - 
+          label: Text
+          type: rte
+          name: texttwocols1  
+          if:
+            selectcontent: [8,9,10]                   
+        -
+          label: Image
+          type: file
+          name: imagetwocols1
+          validation:
+            Required: 1      
+          meta:
+            width: 620
+            height: 310
+          if:
+            selectcontent: [8,9,10]            
+        -
+          label: Image Link
+          type: link
+          name: imagelinktwocols1  
+          tabs: page,external,email,asset   
+          if:
+            selectcontent: [8,9,10]
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tagtwocols1
+          if:
+            selectcontent: [8,9,10]
+        -    
+          label: Headline Two
+          type: textfield
+          name: headlinetwocols2
+          validation:
+            Required: 1     
+          if:
+            selectcontent: [8,9,10]             
+        -
+          label: Headline Link Two
+          type: link
+          name: headlinelinktwocols2  
+          tabs: page,external,email,asset    
+          if:
+            selectcontent: [8,9,10]             
+        - 
+          label: Text Two
+          type: rte
+          name: texttwocols2  
+          if:
+            selectcontent: [8,9,10]                   
+        -
+          label: Image Two
+          type: file
+          name: imagetwocols2
+          validation:
+            Required: 1      
+          meta:
+            width: 620
+            height: 310
+          if:
+            selectcontent: [8,9,10]            
+        -
+          label: Image Link Two
+          type: link
+          name: imagelinktwocols2  
+          tabs: page,external,email,asset   
+          if:
+            selectcontent: [8,9,10]
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tagtwocols2
+          if:
+            selectcontent: [8,9,10]
+        -
+          label: Headline Three
+          type: textfield
+          name: headlinethreecols1 
+          validation:
+            Required: 1     
+          if:
+            selectcontent: [9,10]             
+        -
+          label: Headline Link Three
+          type: link
+          name: headlinelinkthreecols1  
+          tabs: page,external,email,asset    
+          if:
+            selectcontent: [9,10]             
+        - 
+          label: Text Three
+          type: rte
+          name: textthreecols1  
+          if:
+            selectcontent: [9,10]                   
+        -
+          label: Image Three
+          type: file
+          name: imagethreecols1
+          validation:
+            Required: 1      
+          meta:
+            width: 620
+            height: 310
+          if:
+            selectcontent: [9,10]            
+        -
+          label: Image Link Three
+          type: link
+          name: imagelinkthreecols1  
+          tabs: page,external,email,asset   
+          if:
+            selectcontent: [9,10]
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tagthreecols1
+          if:
+            selectcontent: [9,10]
+        -                                      
+          label: Headline Four
+          type: textfield
+          name: headlinefourcols1
+          validation:
+            Required: 1     
+          if:
+            selectcontent: [10]             
+        - 
+          label: Headline Link Four
+          type: link
+          name: headlinelinkfourcols1 
+          tabs: page,external,email,asset    
+          if:
+            selectcontent: [10]             
+        - 
+          label: Text Four
+          type: rte
+          name: textfourcols1  
+          if:
+            selectcontent: [10]                   
+        -
+          label: Image Four
+          type: file
+          name: imagefourcols1
+          validation:
+            Required: 1      
+          meta:
+            width: 620
+            height: 310
+          if:
+            selectcontent: [10]            
+        -
+          label: Image Link Four
+          type: link
+          name: imagelinkfourcols1  
+          tabs: page,external,email,asset   
+          if:
+            selectcontent: [10]
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tagfourcols1
+          if:
+            selectcontent: [10]
+        -
+          label: Headlines Type
+          type: select
+          options:
+            2: 2
+            3: 3
+            4: 4
+            5: 5
+            6: 6
+          name: typeforall   
+          if:
+            selectcontent: [8,9,10]            
+        -
+          label: Image - Border
+          type: checkbox
+          name: imageborderforall    
+          if:
+            selectcontent: [8,9,10]                                                                                   
+        -
+          label: Images On Bottom?
+          type: checkbox
+          name: imagebottomforall   
+          if:
+            selectcontent: [8,9,10]                                                                                                                                                                                                                                                                                                                                                                    

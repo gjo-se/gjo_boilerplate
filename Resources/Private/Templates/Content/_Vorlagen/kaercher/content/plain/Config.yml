@@ -1,0 +1,10 @@
+title: Plain text
+category: 1
+fields:
+  -
+    -
+      label: Text
+      type: textarea
+      name: text
+      validation:
+        Required: 1

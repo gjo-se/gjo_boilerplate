@@ -1,0 +1,86 @@
+title: Social Media
+category: 7
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+      validation:
+        Required: 1
+    -
+      label: Facebook
+      name: facebook
+      type: checkbox
+    -
+      label: Facebook URL
+      name: facebookurl
+      type: textfield
+      if:
+        facebook: [1]
+    -
+      label: Google Plus
+      name: gplus
+      type: checkbox
+    -
+      label: Google Plus URL
+      name: gplusurl
+      type: textfield
+      if:
+        gplus: [1]
+    -
+      label: Twitter
+      name: twitter
+      type: checkbox
+    -
+      label: Twitter URL
+      name: twitterurl
+      type: textfield
+      if:
+        twitter: [1]
+    -
+      label: Youtube
+      name: youtube
+      type: checkbox
+    -
+      label: YouTube URL
+      name: youtubeurl
+      type: textfield
+      if:
+        youtube: [1]
+    -
+      label: Xing
+      name: xing
+      type: checkbox
+    -
+      label: Xing URL
+      name: xingurl
+      type: textfield
+      if:
+        xing: [1]
+    -
+      label: Other social media platforms
+      type: data
+      name: items
+      options:
+        -
+          label: Name
+          name: othername
+          type: textfield
+          validation:
+            Required: 1
+        -
+          label: URL
+          name: otherurl
+          type: textfield
+          validation:
+            Required: 1
+        -
+          label: Logo
+          name: otherlogo
+          type: file
+          validation:
+            Required: 1
+          meta:
+            width: 40
+            height: 40

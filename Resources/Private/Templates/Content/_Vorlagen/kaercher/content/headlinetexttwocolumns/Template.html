@@ -1,0 +1,29 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:render partial="SectionOpeningTag" arguments="{
+    showanchor: content.0.anchor,
+    anchortitle: content.0.anchortitle,
+    uid: element.uid
+}"/>
+    <div class="row">
+        <f:for each="{content.0.items}" as="item" iteration="iterator">
+            <f:if condition="{k:row(current:'{iterator.index}' columns:2)}">
+                </div><div class="row">
+            </f:if>
+            <div class="col-sm-6">
+                <f:render partial="Headline" arguments="{
+                    headline: item.headlinelinktext,
+                    link: item.headlinelink,
+                    type: content.0.type
+                }"/>
+                <f:render partial="Text" arguments="{
+                    text: item.text
+                }"/>
+            </div>
+        </f:for>
+    </div>
+
+    <f:if condition="{content.0.horizontalruleone}">
+        <f:render partial="Horizontalrule"/>
+    </f:if>
+</section>

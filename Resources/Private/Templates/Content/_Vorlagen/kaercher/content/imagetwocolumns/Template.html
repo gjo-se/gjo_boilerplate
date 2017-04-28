@@ -1,0 +1,38 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:render partial="SectionOpeningTag"/>
+	<div class="row"> 
+		<f:for each="{content.0.items}" as="item" iteration="iterator">
+            <f:if condition="{k:row(current:'{iterator.index}' columns:2)}">
+                </div><div class="row">
+            </f:if>
+
+            <div class="col-sm-6 image-fit">
+                <f:if condition="{item.imageborder}">
+                    <f:then>
+                        <f:render partial="Image" arguments="{
+                            contentUid: contentUid,
+                            image: item.image,
+                            link: item.imagelink,
+                            overwrite_alt_tag: item.overwrite_alt_tag,
+                            class: 'img-border'
+                        }"/>
+                    </f:then>
+                    <f:else>
+                        <f:render partial="Image" arguments="{
+                            contentUid: contentUid,
+                            image: item.image,
+                            link: item.imagelink,
+                            overwrite_alt_tag: item.overwrite_alt_tag
+                        }"/>
+                    </f:else>
+                </f:if>
+            </div>
+		</f:for>
+	</div> 
+    
+    <f:if condition="{content.0.horizontalruleone}">
+        <f:render partial="Horizontalrule"/>
+    </f:if>
+</section> 	
+									

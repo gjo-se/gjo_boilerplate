@@ -1,0 +1,10 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:render partial="Headline" arguments="{
+    headline: content.0.headline,
+    link: content.0.headlinelink,
+    type: content.0.type
+}"/>
+<f:render partial="Text" arguments="{
+    text: content.0.text
+}" />

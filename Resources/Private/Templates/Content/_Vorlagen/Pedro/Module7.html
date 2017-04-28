@@ -1,0 +1,163 @@
+{namespace flux=FluidTYPO3\Flux\ViewHelpers}
+{namespace v=Tx_Vhs_ViewHelpers}
+
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://fluidtypo3.org/schemas/fluid-master.xsd"
+     xmlns:flux="http://fluidtypo3.org/schemas/flux-master.xsd"
+     xmlns:v="http://fluidtypo3.org/schemas/vhs-master.xsd">
+
+    <f:layout name="Content"/>
+
+    <f:section name="Configuration">
+
+        <flux:form wizardTab="CFM Inhalts Module" id="module7" icon="{v:extension.path.resources(path: 'Icons/icon-cfm.gif')}">
+            <flux:form.sheet name="main">
+                <flux:field.input name="titlesmall" />
+                <flux:field.input name="title" />
+            </flux:form.sheet>
+            <flux:form.sheet name="imagecontent">
+                <flux:field.file name="image1" allowed="jpg,jpeg,bmp,png, gif"/>
+                <flux:field.input name="imagetitle1" />
+                <flux:field.input name="imagetext1" />
+                <flux:field.file name="image2" allowed="jpg,jpeg,bmp,png, gif"/>
+                <flux:field.input name="imagetitle2" />
+                <flux:field.input name="imagetext2" />
+                <flux:field.file name="image3" allowed="jpg,jpeg,bmp,png, gif"/>
+                <flux:field.input name="imagetitle3" />
+                <flux:field.input name="imagetext3" />
+                <flux:field.file name="image4" allowed="jpg,jpeg,bmp,png, gif"/>
+                <flux:field.input name="imagetitle4" />
+                <flux:field.input name="imagetext4" />
+            </flux:form.sheet>
+
+            <flux:form.sheet name="textcontent">
+                <flux:field.input name="texttitle1"></flux:field.input>
+                <flux:field.text name="text1"></flux:field.text>
+                <flux:field.input name="texttitle2"></flux:field.input>
+                <flux:field.text name="text2"></flux:field.text>
+                <flux:field.input name="texttitle3"></flux:field.input>
+                <flux:field.text name="text3"></flux:field.text>
+            </flux:form.sheet>
+
+            <flux:form.sheet name="linkcontent">
+                <flux:field.input name="buttontext"></flux:field.input>
+                <flux:field.input name="target">
+                    <flux:wizard.link activeTab="page"/>
+                </flux:field.input>
+            </flux:form.sheet>
+        </flux:form>
+    </f:section>
+
+    <f:section name="Preview">
+        <b>Inhaltselement: Modul 7</b><br />
+        <table width="100%" border="0">
+            <tr>
+                <td colspan="4" style="text-align: center"><b>{titlesmall}</b><br /><b>{title}</b></td>
+            </tr>
+            <tr>
+                <td style="text-align: center">
+                    <img src="/{image1}" width="150px"><br />
+                    <b>{imagetitle1}</b><br/>{imagetext1}
+                </td>
+                <td style="text-align: center">
+                    <img src="/{image2}" width="150px"><br />
+                    <b>{imagetitle2}</b><br/>{imagetext2}
+                </td>
+                <td style="text-align: center">
+                    <img src="/{image3}" width="150px"><br />
+                    <b>{imagetitle3}</b><br/>{imagetext3}
+                </td>
+                <td style="text-align: center">
+                    <img src="/{image4}" width="150px"><br />
+                    <b>{imagetitle4}</b><br/>{imagetext4}
+                </td>
+            </tr>
+            <tr><td colspan="4">&nbsp;</td></tr>
+            <tr>
+                <td colspan="2" style="padding-right: 5px;">
+                    <b>{texttitle1}</b><br />{text1}
+                </td>
+                <td colspan="2" style="padding-left: 5px;">
+                    <b>{texttitle2}</b><br />{text2}<br /><br />
+                    <b>{texttitle3}</b><br />{text3}
+                </td>
+            </tr>
+        </table>
+    </f:section>
+
+    <f:section name="Main">
+        <div class="modul_7">
+            <div class="row">
+                <div class="columns large-12">
+                    <div class="columns large-2">&nbsp;</div>
+                    <div class="columns large-8 modul_7_headline">
+                        <h3>{titlesmall}<br /><b>{title}</b></h3>
+                    </div>
+                    <div class="columns large-2">&nbsp;</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns large-12">
+                    <div class="columns large-2">&nbsp;</div>
+                    <div class="columns large-2 modul_7_kontakt">
+                        <img src="{image1}">
+                        <h4>{imagetitle1}</h4> {imagetext1}
+                    </div>
+                    <div class="columns large-2 modul_7_kontakt">
+                        <img src="{image2}">
+                        <h4>{imagetitle2}</h4> {imagetext2}
+                    </div>
+                    <div class="columns large-2 modul_7_kontakt">
+                        <img src="{image3}">
+                        <h4>{imagetitle3}</h4> {imagetext3}
+                    </div>
+                    <div class="columns large-2 modul_7_kontakt">
+                        <img src="{image4}">
+                        <h4>{imagetitle4}</h4> {imagetext4}
+                    </div>
+                    <div class="columns large-2">&nbsp;</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="columns large-12 bg_lightblue">
+                    <div class="columns large-2">&nbsp;</div>
+                    <div class="columns large-4 modul_7_links">
+                        <h4>{texttitle1}</h4>
+                        {text1}
+                    </div>
+                    <div class="columns large-4 modul_7_rechts">
+                        <h4>{texttitle2}</h4>
+                        {text2}
+                        <h4>{texttitle3}</h4>
+                        {text3}
+                    </div>
+                    <div class="columns large-2">&nbsp;</div>
+                </div>
+                <div class="columns large-12 center padtopbtm20">
+                    <f:link.page pageUid="{target}" class="myButton">{buttontext}</f:link.page>
+                </div>
+
+
+            </div>
+
+            <div class="home_footer">
+                <div class="row">
+                    <div class="columns large-12">
+                        <div class="columns large-2">&nbsp;</div>
+                        <div class="columns large-2 home_footer_logo">
+                            <img src="img/cfm_logo_footer.png">
+                        </div>
+                        <div class="columns large-6 home_footer_partner">
+                            <img src="img/partner_logo_footer.png">
+                        </div>
+
+                        <div class="columns large-2">&nbsp;</div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </f:section>
+</div>

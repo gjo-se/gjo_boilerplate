@@ -1,0 +1,138 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<section class="container hidden-print">  
+	<div class="row"> 
+		<f:render section="headline" arguments="{_all}" />
+	</div>
+</section>
+<div class="container hidden-xxs hidden-xs hidden-sm hidden-print"> 
+	<div class="row">  
+		<div class="col-sm-12 jcarousel-wrapper"> 
+			<div class="jcarousel" data-jcarousel="true"> 
+				<ul style="top: 0px; left: 0px;">
+					<li style="width: 1220px;">
+						<f:for each="{content.0.items}" as="item" iteration="iterator">
+					        <f:if condition="{k:row(current:'{iterator.index}' columns:3)}">
+				           		 </li><li style="width: 1220px;">
+			      		    </f:if> 
+							<div class="col-sm-4 image-fit">
+								<f:if condition="{item.imageborder}">
+									<f:then>
+										<f:render section="imagewithborder" arguments="{_all}" />
+										<f:render section="text" arguments="{_all}" />	
+									</f:then>
+									<f:else>
+										<f:render section="image" arguments="{_all}" />
+										<f:render section="text" arguments="{_all}" />	
+									</f:else>
+								</f:if>
+							</div>																	
+							<a class="jcarousel-control-prev" href="#" data-jcarouselcontrol="true"></a>
+							<a class="jcarousel-control-next" href="#" data-jcarouselcontrol="true"></a>																						
+						</f:for>
+					</li>
+				</ul>
+			</div> 
+
+			<p class="jcarousel-pagination" id="extramarginpagination" data-jcarouselpagination="true">
+				<a class="active" href="#1">1</a>
+				<a class="" href="#2">2</a>
+				<a class="" href="#3">3</a>
+			</p>
+		</div> 
+	</div> 	
+</div>	
+<div class="container hidden-md hidden-lg hidden-print">
+	<div class="row"> 
+		<div class="col-sm-12 image-fit jcarousel-wrapper"> 
+			<div class="jcarousel" data-jcarousel="true">
+				<ul style="top: 0px; left: -2440px;">
+					<f:for each="{content.0.items}" as="item">
+						<li style="width: 1220px;">
+							<f:if condition="{item.imageborder}">
+								<f:then>
+									<f:render section="imagewithborder" arguments="{_all}" />
+									<f:render section="text" arguments="{_all}" />	
+								</f:then>
+								<f:else>
+									<f:render section="image" arguments="{_all}" />
+									<f:render section="text" arguments="{_all}" />	
+								</f:else>
+							</f:if>		
+							<p class="extramargin"></p>		
+							<a class="carouselmobile jcarousel-control-prev" href="#"></a>
+							<a class="carouselmobile jcarousel-control-next" href="#"></a>				
+						</li>
+					</f:for>
+				</ul>
+			</div>	
+			<p class="jcarousel-pagination" id="extramarginpagination" data-jcarouselpagination="true"></p>
+		</div> 
+	</div> 	
+</div>  	
+
+
+
+<f:section name="headline">
+		<f:if condition="{content.0.headline}">
+			<div class="col-sm-12">
+                <f:render partial="Headline" arguments="{
+                    headline: content.0.headline,
+                    type: content.0.type,
+                    class: class
+                }" />
+			</div> 
+		</f:if>
+</f:section>
+
+<f:section name="image">
+	<f:if condition="{item.link}">
+		<f:then>
+			<f:if condition="{item.image}">
+				<a href="<k:uri.auto target="{item.link}"/>"{k:uri.auto(target:'{item.link}' returnLinkTarget:'TRUE')}><img data-src="{item.image}" alt="<k:assets data="assettitle" uid="{item.image.raw}"/>" /></a>
+			</f:if>
+		</f:then>
+		<f:else>	
+			<f:if condition="{item.image}">
+                <img data-src="{item.image}"
+                     alt="{f:if(condition: item.overwrite_alt_tag,
+                                then: item.overwrite_alt_tag,
+                                else: "{k:assets(data:'assettitle' uid:item.image.raw)}"
+                           )}"
+                />
+			</f:if>
+		</f:else>
+	</f:if>	
+</f:section>
+
+<f:section name="imagewithborder">
+	<f:if condition="{item.link}">
+		<f:then>
+			<f:if condition="{item.image}">
+				<a href="<k:uri.auto target="{item.link}"/>"{k:uri.auto(target:'{item.link}' returnLinkTarget:'TRUE')}><img class="img-border" data-src="{item.image}" alt="<k:assets data="assettitle" uid="{item.image.raw}"/>" /></a>
+			</f:if>
+		</f:then>
+		<f:else>	
+			<f:if condition="{item.image}">							
+				<img class="img-border"
+                     data-src="{item.image}"
+                     alt="{f:if(condition: item.overwrite_alt_tag,
+                                then: item.overwrite_alt_tag,
+                                else: "{k:assets(data:'assettitle' uid:item.image.raw)}"
+                           )}"
+                />
+			</f:if>										
+		</f:else>
+	</f:if>	
+</f:section>
+
+<f:section name="text">
+		<f:if condition="{item.imagetext}">
+			<f:then>												
+				<p class="text-center carouselsubtext"><f:format.raw>{item.imagetext}</f:format.raw></p>											
+			</f:then>
+			<f:else>
+				<p class="text-center carouselsubtext">&ensp;</p>
+			</f:else>								
+		</f:if>
+</f:section>

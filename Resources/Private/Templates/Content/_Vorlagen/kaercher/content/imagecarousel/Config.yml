@@ -1,0 +1,55 @@
+title: Image carousel
+category: 3
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+    -
+      label: Headline type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type     
+    -
+      label: Images
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        -
+          label: Name (not visible in the frontend)
+          type: textfieldsingle
+          name: storage_title
+          validation:
+            Required: 1
+        -
+          label: Image
+          type: file
+          name: image  
+          meta:
+            width: 406
+            height: 203
+        -
+          label: Image link
+          type: link
+          name: link 
+          tabs: page,external,email,asset    
+        -
+          label: Image text
+          type: textfield
+          name: imagetext    
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tag
+        -
+          label: Border around the image?
+          type: checkbox
+          name: imageborder                           

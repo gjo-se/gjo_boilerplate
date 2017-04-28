@@ -1,0 +1,130 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:if condition="{content.0.activateAutoscroll}">
+    <script>
+        var initAutoscroll = function () <![CDATA[{]]>
+                    $('#{element.uid}.jcarousel').jcarouselAutoscroll(<![CDATA[{
+                                ]]>
+                                interval: {content.0.interval},
+                                target: '+=1',
+                                autostart: true
+                            });
+            $('#{element.uid}.jcarousel').hover(function () <![CDATA[{]]>
+                        $(this).jcarouselAutoscroll('stop');
+                    },
+                    function () <![CDATA[{]]>
+                        $(this).jcarouselAutoscroll('start');
+                    });
+                };
+        $(document).ready(initAutoscroll);
+    </script>
+</f:if>
+<section class="container hidden-print">
+    <div class="row">
+        <div class="col-sm-12 image-fit jcarousel-wrapper">
+            <div class="jcarousel" id="{element.uid}">
+                <ul>
+                    <f:for each="{content.0.items}" as="item">
+                        <li>
+                            <f:render partial="Image" arguments="{
+                                contentUid: contentUid,
+                                image: item.image,
+                                link: item.imagelink,
+                                overwrite_alt_tag: item.overwrite_alt_tag
+                            }"/>
+                            <div class="col-xs-12 visible-xs visible-sm visible-md">
+                                <f:render section="imagesubtext" arguments="{_all}"/>
+                            </div>
+
+                            <f:render section="imageinsidetext" arguments="{_all}"/>
+
+                            <p class="extramargin"></p>
+                            <a class="carouselmobile jcarousel-control-prev carousel-left" href="#"></a>
+                            <a class="carouselmobile jcarousel-control-next carousel-right" href="#"></a>
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+            <p class="jcarousel-pagination"></p>
+        </div>
+    </div>
+</section>
+
+<f:section name="imagesubtext">
+    <f:if condition="{item.imageheadline}">
+        <f:render partial="Headline" arguments="{
+                headline: item.imageheadline,
+                class: 'headlinebottom text-center uppercase',
+                type: 2
+            }"/>
+    </f:if>
+    <f:if condition="{item.imagetext}">
+        <p class="text-center">
+            <f:render partial="Text" arguments="{
+                    text: item.imagetext
+                }"/>
+        </p>
+    </f:if>
+</f:section>
+
+<f:section name="imageinsidetext">
+    <f:if condition="{item.imagetextlink}">
+        <f:then>
+            <a href="<k:uri.auto target="{item.imagetextlink}"/>"{k:uri.auto(target:'{item.imagetextlink}'
+            returnLinkTarget:'TRUE')}>
+            <div class="photo-credits visible-lg col-lg-12"
+                 style="right: {item.right}%; top: {item.top}%; position: absolute;">
+                <f:if condition="{item.textcolor}">
+                    <f:then>
+                        <f:if condition="{item.imageheadline}">
+                            <p class="imageshowtextcolor imageshowtext">{item.imageheadline}</p>
+                        </f:if>
+                        <f:if condition="{item.imagetext}">
+                            <p class="imageshowtextcolor">
+                                <f:format.raw>{item.imagetext}</f:format.raw>
+                            </p>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{item.imageheadline}">
+                            <p class="imageshowtext">{item.imageheadline}</p>
+                        </f:if>
+                        <f:if condition="{item.imagetext}">
+                            <p>
+                                <f:format.raw>{item.imagetext}</f:format.raw>
+                            </p>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </div>
+            </a>
+        </f:then>
+        <f:else>
+            <div class="photo-credits visible-lg col-lg-12"
+                 style="right: {item.right}%; top: {item.top}%; position: absolute;">
+                <f:if condition="{item.textcolor}">
+                    <f:then>
+                        <f:if condition="{item.imageheadline}">
+                            <p class="imageshowtextcolor imageshowtext">{item.imageheadline}</p>
+                        </f:if>
+                        <f:if condition="{item.imagetext}">
+                            <p class="imageshowtextcolor">
+                                <f:format.raw>{item.imagetext}</f:format.raw>
+                            </p>
+                        </f:if>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{item.imageheadline}">
+                            <p class="imageshowtext">{item.imageheadline}</p>
+                        </f:if>
+                        <f:if condition="{item.imagetext}">
+                            <p>
+                                <f:format.raw>{item.imagetext}</f:format.raw>
+                            </p>
+                        </f:if>
+                    </f:else>
+                </f:if>
+            </div>
+        </f:else>
+    </f:if>
+</f:section>

@@ -1,0 +1,18 @@
+title: Ribbon
+category: 1
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+      validation:
+        Required: 1   
+#    - 
+#      label: No automatic uppercase headline?
+#      type: checkbox
+#      name: noUppercase    
+    -
+      label: Text
+      type: rte
+      name: bodytext

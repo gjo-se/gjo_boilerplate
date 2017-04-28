@@ -1,0 +1,10 @@
+{namespace kaercher = TYPO3\KaercherCentralControl\ViewHelpers}<title><f:format.cdata><f:format.raw>{title}</f:format.raw></f:format.cdata></title>
+<id>{id}</id>
+<link rel="self" href="<f:format.htmlspecialchars>{url}</f:format.htmlspecialchars>" />
+<content type="html"><f:format.cdata><f:format.raw><kaercher:format.stripComments>{content}</kaercher:format.stripComments></f:format.raw></f:format.cdata></content>
+<updated>{entry.updateTimeRFC3339}</updated>
+<k:client>{client}</k:client>
+<k:culture>{isocode}</k:culture>
+<k:status>changed</k:status>
+<summary></summary>
+<description></description>

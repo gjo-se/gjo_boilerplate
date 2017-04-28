@@ -1,0 +1,28 @@
+title: Text (two columns)
+category: 1
+fields:
+  -
+    -
+      label: Items
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options: 
+        -
+          label: Name (not visible in the frontend)
+          type: textfieldsingle
+          name: storage_title
+          validation:
+            Required: 1   
+        -
+          label: Text
+          type: rte
+          name: text 
+          validation:
+            Required: 1                           
+    -  
+      label: Horizontal line below the text?
+      name: horizontalruleone
+      type: checkbox
+          

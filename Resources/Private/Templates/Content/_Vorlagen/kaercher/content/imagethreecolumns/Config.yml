@@ -1,0 +1,46 @@
+title: Image (three columns)
+category: 2
+fields:
+  -     
+    -
+      label: Items
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        -
+          label: Name (not visible in the frontend)
+          type: textfieldsingle
+          name: storage_title
+          validation:
+            Required: 1        
+        -
+          label: Image
+          type: file
+          name: image  
+          validation:
+            Required: 1                    
+          meta:
+            width: 406  
+            height: 203
+        -
+          label: Link
+          type: link
+          name: imagelink  
+          tabs: page,external,email,asset   
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tag
+        -
+          label: Border around the image?
+          type: checkbox
+          name: imageborder                    
+    -
+      label: Horizontal line below the images?
+      name: horizontalruleone
+      type: checkbox    
+               
+        
+

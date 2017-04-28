@@ -1,0 +1,35 @@
+title: Image (full width)
+category: 2
+fields:
+  -
+    -
+      label: Image/Video
+      type: file
+      name: image
+      validation:
+        Required: 1
+      meta:
+        width: 1260
+        height: 456
+    -
+      label: Link (not usable for videos)
+      type: link
+      name: imagelink
+      tabs: page,external,email,asset
+    -
+      label: Overwrite Alt Tag
+      type: textfield
+      name: overwrite_alt_tag
+    -
+      label: Border around the image?
+      type: checkbox
+      name: imageborder
+    -
+      label: Horizontal line below the image/video?
+      name: horizontalruleone
+      type: checkbox      
+      
+       
+               
+        
+

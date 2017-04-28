@@ -1,0 +1,69 @@
+title: Image show
+category: 3
+fields:
+  -
+    -
+      label: Add Images
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        -
+          label: Headline
+          type: textfield
+          name: imageheadline
+          validation:
+            Required: 1
+        -
+          label: Text
+          name: imagetext
+          type: textarea
+          validation:
+            Required: 1
+        -
+          label: Text link
+          name: imagetextlink
+          type: link
+        -
+          label: Text color white?
+          name: textcolor
+          type: checkbox
+        -
+          label: Image
+          type: file
+          name: image
+          validation:
+            Required: 1          
+          meta:
+            width: 1260
+            height: 456
+        -
+          label: Image link
+          type: link
+          name: imagelink  
+          tabs: page,external,email,asset
+        -
+          label: Overwrite Alt Tag
+          type: textfield
+          name: overwrite_alt_tag
+        -
+          label: Distance from right (in %)
+          name: right
+          type: textfield
+        -
+          label: Distance from top (in %)
+          name: top
+          type: textfield
+    -
+      label: Activate Autoscroll
+      type: checkbox
+      name: activateAutoscroll
+    -
+      label: Autoscroll Interval in [ms]:
+      name: interval
+      type: textfieldsingle
+      validation:
+        Required: 1
+      if:
+        activateAutoscroll: [1]

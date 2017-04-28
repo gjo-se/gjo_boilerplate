@@ -1,0 +1,125 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:if condition="{content.0.imagebottom}"> 	
+	<f:then>
+        <f:render partial="SectionOpeningTag" arguments="{
+            showanchor: content.0.anchor,
+            anchortitle: content.0.anchortitle,
+            uid: element.uid
+        }"/>
+			<div class="row">				
+				<f:for each="{content.0.items}" as="item" iteration="iterator">
+			       <f:if condition="{k:row(current:'{iterator.index}' columns:2)}">
+			            </div><div class="row">
+			        </f:if> 
+					<div class="col-sm-6 image-fit">	
+						<f:render section="headlineandtextontop" arguments="{_all}" />
+
+                        <f:if condition="{item.imageborder}">
+							<f:then>
+                                <f:render partial="Image" arguments="{
+                                    contentUid: contentUid,
+                                    image: item.image,
+                                    link: item.imagelink,
+                                    overwrite_alt_tag: item.overwrite_alt_tag,
+                                    class: 'img-border'
+                                }"/>
+							</f:then>
+		           			<f:else>
+								<f:render partial="Image" arguments="{
+                                    contentUid: contentUid,
+                                    image: item.image,
+                                    link: item.imagelink,
+                                    overwrite_alt_tag: item.overwrite_alt_tag
+                                }"/>
+		           			</f:else>		
+						</f:if>
+
+                        <f:if condition="{iterator.isLast}">
+                            <f:else>
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:else>
+                        </f:if>
+					</div>		
+		 		</f:for>		
+			</div>												
+		<f:render partial="Horizontalrule" arguments="{_all}" />
+		</section>									
+	</f:then>
+	<f:else>
+        <f:render partial="SectionOpeningTag" arguments="{
+            showanchor: content.0.anchor,
+            anchortitle: content.0.anchortitle,
+            uid: element.uid
+        }"/>
+			<div class="row">
+				<f:for each="{content.0.items}" as="item" iteration="iterator">
+			       <f:if condition="{k:row(current:'{iterator.index}' columns:2)}">
+			            </div><div class="row">
+			        </f:if> 
+					<div class="col-sm-6 image-fit">
+
+                        <f:if condition="{item.imageborder}">
+                            <f:then>
+                                <f:render partial="Image" arguments="{
+                                    contentUid: contentUid,
+                                    image: item.image,
+                                    link: item.imagelink,
+                                    overwrite_alt_tag: item.overwrite_alt_tag,
+                                    class: 'img-border'
+                                }"/>
+                            </f:then>
+                            <f:else>
+                                <f:render partial="Image" arguments="{
+                                    contentUid: contentUid,
+                                    image: item.image,
+                                    link: item.imagelink,
+                                    overwrite_alt_tag: item.overwrite_alt_tag
+                                }"/>
+                            </f:else>
+                        </f:if>
+
+                        <f:render section="headlineandtextonbottom" arguments="{_all}" />
+
+                        <f:if condition="{iterator.isLast}">
+                            <f:else>
+                                <f:render partial="HorizontalruleForSmallView" />
+                            </f:else>
+                        </f:if>
+					</div>
+				</f:for>	
+				</div>
+
+            <f:if condition="{content.0.horizontalruleone}">
+                <f:render partial="Horizontalrule"/>
+            </f:if>
+		</section>			
+	</f:else>		
+</f:if>
+
+
+<f:section name="headlineandtextontop">
+    <f:render partial="Headline" arguments="{
+        headline: item.headline,
+        link: item.headlinelink,
+        type: content.0.type,
+        class: 'mobileheadline headlinebottom'
+    }" />
+
+    <f:render partial="Text" arguments="{
+        text: item.text
+    }" />
+</f:section>		
+	
+<f:section name="headlineandtextonbottom">
+    <f:render partial="Headline" arguments="{
+        headline: item.headline,
+        link: item.headlinelink,
+        type: content.0.type,
+        class: 'mobileheadline headlinebottom'
+    }" />
+
+    <f:render partial="Text" arguments="{
+        text: item.text
+    }" />
+</f:section>	      						        												

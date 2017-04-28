@@ -1,0 +1,43 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+<div class="openinghours">
+    <table>
+        <tbody>
+            <f:for each="{opening_hours}" as="rule">
+                <tr>
+                    <td>
+                        <f:if condition="{0:'{rule.day_start}'} == {0:'{rule.day_end}'}">
+                            <f:then>
+                                <k:translate key="date.dayOfWeek.{rule.day_start}.long" alt="{rule.day_start}" stripTags="1"></k:translate>:
+                            </f:then>
+                            <f:else>
+                                <k:translate key="date.dayOfWeek.{rule.day_start}.long" alt="{rule.day_start}" stripTags="1"></k:translate>
+                                -
+                                <k:translate key="date.dayOfWeek.{rule.day_end}.long" alt="{rule.day_end}" stripTags="1"></k:translate>:
+                            </f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{rule.has_lunchbreak}">
+                            <f:then>
+                                <![CDATA[<time]]> itemprop="openingHours" datetime="{k:format.SchemaDatetime(startday:'{rule.day_start}', endday:'{rule.day_end}', starttime_am:'{rule.withBreak_begin_am}', endtime_am:'{rule.withBreak_end_am}', starttime_pm:'{rule.withBreak_begin_pm}', endtime_pm:'{rule.withBreak_end_pm}')}">
+                            </f:then>
+                            <f:else>
+                                <![CDATA[<time]]> itemprop="openingHours" datetime="{k:format.SchemaDatetime(startday:'{rule.day_start}', endday:'{rule.day_end}', starttime_am:'{rule.noBreak_begin}', endtime_am:'{rule.noBreak_end}')}">
+                            </f:else>
+                        </f:if>
+                        <f:if condition="{rule.has_lunchbreak}">
+                            <f:then>
+                                <k:format.time time="{rule.withBreak_begin_am}" suppressoclock="1"/>-<k:format.time time="{rule.withBreak_end_am}" suppressoclock="0"/> /
+                                <k:format.time time="{rule.withBreak_begin_pm}" suppressoclock="1"/>-<k:format.time time="{rule.withBreak_end_pm}" suppressoclock="0"/>
+                            </f:then>
+                            <f:else>
+                                <k:format.time time="{rule.noBreak_begin}" suppressoclock="1"/>-<k:format.time time="{rule.noBreak_end}" />
+                            </f:else>
+                        </f:if>
+                                </time>
+                    </td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+</div>

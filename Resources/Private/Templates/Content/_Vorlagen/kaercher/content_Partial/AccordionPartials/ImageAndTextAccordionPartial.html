@@ -1,0 +1,54 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<div class="row">
+    <div class="col-sm-6 {f:if(condition: {item.textleft2}, then: '', else: ' col-sm-push-6')}">
+        <f:if condition="{item.headlinelink2}">
+            <f:then>
+                <f:if condition="{item.headline2}">
+                    <a href="<k:uri.auto target="{item.headlinelink2}"/>"{k:uri.auto(target:'{item.headlinelink2}' returnLinkTarget:'TRUE')}><h{item.type2} class="mobileheadline"><f:format.htmlentities>{item.headline2}</f:format.htmlentities></h{item.type2}></a>
+                </f:if>	
+                <f:if condition="{item.text2}">
+                    <f:format.raw>{item.text2}</f:format.raw>   
+                </f:if>             		
+            </f:then>
+            <f:else>
+                <f:if condition="{item.headline2}">
+                    <h{item.type2} class="mobileheadline"><f:format.htmlentities>{item.headline2}</f:format.htmlentities></h{item.type2}>
+                </f:if>
+                <f:if condition="{item.text2}">
+                    <f:format.raw>{item.text2}</f:format.raw>  
+                </f:if>
+            </f:else>
+        </f:if>                
+    </div>
+    <div class="col-sm-6 {f:if(condition: {item.textleft2}, then: '', else: ' col-sm-pull-6')} image-fit">
+        <f:render section="itemimagelink2" arguments="{_all}" />
+    </div>    
+</div>
+
+<f:section name="itemimagelink2">
+    <f:if condition="{item.imagelink2}">
+        <f:then>
+            <f:if condition="{item.image2}">
+                <a href="<k:uri.auto target="{item.imagelink2}"/>"{k:uri.auto(target:'{item.imagelink2}' returnLinkTarget:'TRUE')}>
+                <img data-src="{item.image2}"
+                     alt="{f:if(condition: item.overwrite_alt_tag2,
+                                then: item.overwrite_alt_tag2,
+                                else: "{k:assets(data:'assettitle' uid:item.image2.raw)}"
+                           )}"
+                />
+                </a>
+            </f:if>
+        </f:then>
+        <f:else>
+            <f:if condition="{item.image2}">
+                <img data-src="{item.image2}"
+                     alt="{f:if(condition: item.overwrite_alt_tag2,
+                                then: item.overwrite_alt_tag2,
+                                else: "{k:assets(data:'assettitle' uid:item.image2.raw)}"
+                           )}"
+                />
+            </f:if>
+        </f:else>
+    </f:if>
+</f:section>

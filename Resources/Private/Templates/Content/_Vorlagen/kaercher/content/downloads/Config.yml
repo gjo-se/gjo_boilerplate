@@ -1,0 +1,86 @@
+title: Downloads
+category: 7
+fields:
+  -
+    -
+      label: Content
+      type: section
+    -
+      label: Headline
+      type: textfield
+      name: headlineone
+    -
+      label: Headline type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: typeone
+    -
+      label: Headlines type for the items
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type      
+    -
+      label: Items
+      name: items
+      type: data
+      validation:
+        Required: 1
+      options:
+        -
+          label: Name (not visible in the frontend)
+          type: textfieldsingle
+          name: storage_title
+          validation:
+            Required: 1
+        -
+          label: Image
+          name: image
+          type: file
+          meta:
+            width: 140
+            height: 198 
+        -
+          label: Headline
+          name: headline
+          type: textfield
+        -
+          label: Text
+          name: text
+          type: rte
+        -
+          label: Button link
+          name: buttonlink
+          type: link
+          tabs: page,external,email,asset
+        -
+          label: Button color
+          type: select
+          options:
+            1: Yellow
+            2: Grey
+          name: color
+          validation:
+            Required: 1
+    -
+      label: Anchor
+      type: section
+    -
+      label: Activate anchor?
+      name: anchor
+      type: checkbox
+    -
+      label: Anchor title
+      name: anchortitle
+      type: textfield
+      if:
+        anchor: [1]

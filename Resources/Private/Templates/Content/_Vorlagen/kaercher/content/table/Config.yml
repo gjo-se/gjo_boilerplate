@@ -1,0 +1,40 @@
+title: Table Only
+category: 4
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+      validation:
+        Required: 1
+    -
+      label: Headline Type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type
+      validation:
+        Required: 1        
+    -
+      label: Headline Link
+      type: link
+      name: headlinelink  
+      tabs: page,external,email,asset               
+    -
+      label: Items
+      type: data
+      name: items
+      validation:
+        Required: 1
+      options:
+        -
+          label: Headline
+          name: headline
+        -
+          label: Text
+          name: bodytext

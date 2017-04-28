@@ -1,0 +1,13 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:if condition="{item.headlinelinkthreecols1}">
+    <f:then>
+        <a href="<k:uri.auto target="{item.headlinelinkthreecols1}"/>"{k:uri.auto(target:'{item.headlinelinktwocols2}' returnLinkTarget:'TRUE')}><h{item.typeforall} class="headlinebottom mobileheadline"><f:format.htmlentities>{item.headlinethreecols1}</f:format.htmlentities></h{item.typeforall}></a>						
+    </f:then>
+    <f:else>
+        <h{item.typeforall} class="mobileheadline headlinebottom"><f:format.htmlentities>{item.headlinethreecols1}</f:format.htmlentities></h{item.typeforall}>
+    </f:else>
+</f:if>																
+<f:if condition="{item.textthreecols1}">
+    <f:format.raw>{item.textthreecols1}</f:format.raw>
+</f:if>

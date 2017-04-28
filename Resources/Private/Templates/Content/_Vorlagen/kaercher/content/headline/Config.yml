@@ -1,0 +1,37 @@
+title: Headline (H2 - H6)
+category: 1
+fields:
+  -
+    -
+      label: Headline
+      type: textfield
+      name: headline
+      validation:
+        Required: 1
+    -
+      label: Headline Type
+      type: select
+      options:
+        2: 2
+        3: 3
+        4: 4
+        5: 5
+        6: 6
+      name: type
+      validation:
+        Required: 1
+    -
+      label: Link
+      type: link
+      name: headlinelink  
+      tabs: page,external,email,asset  
+    -
+      label: Activate anchor?
+      name: anchor 
+      type: checkbox
+    -
+      label: Anchor title
+      name: anchortitle
+      type: textfield
+      if:
+        anchor: [1]           

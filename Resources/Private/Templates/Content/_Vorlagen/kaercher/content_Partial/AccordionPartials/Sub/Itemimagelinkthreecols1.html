@@ -1,0 +1,26 @@
+{namespace k = TYPO3\KaercherCentralControl\ViewHelpers}
+
+<f:if condition="{item.imagelinkthreecols1}">
+    <f:then>
+        <f:if condition="{item.imagethreecols1}">
+            <a href="<k:uri.auto target="{item.imagethreecols1}"/>"{k:uri.auto(target:'{item.imagelinkthreecols1}' returnLinkTarget:'TRUE')}>
+            <img data-src="{item.imagethreecols1}"
+                 alt="{f:if(condition: item.overwrite_alt_tagthreecols1,
+                            then: item.overwrite_alt_tagthreecols1,
+                            else: "{k:assets(data:'assettitle' uid:item.imagethreecols1.raw)}"
+                       )}"
+            />
+            </a>
+        </f:if>
+    </f:then>
+    <f:else>
+        <f:if condition="{item.imagethreecols1}">
+            <img data-src="{item.imagethreecols1}"
+                 alt="{f:if(condition: item.overwrite_alt_tagthreecols1,
+                            then: item.overwrite_alt_tagthreecols1,
+                            else: "{k:assets(data:'assettitle' uid:item.imagethreecols1.raw)}"
+            )}"
+            />
+        </f:if>
+    </f:else>
+</f:if>
