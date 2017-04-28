@@ -1,0 +1,45 @@
+plugin.tx_gjoboilerplate {
+    view {
+        templateRootPath = {$filepaths.templateRootPath}
+        partialRootPath = {$filepaths.partialRootPath}
+        layoutRootPath = {$filepaths.layoutRootPath}
+    }
+
+    persistence {
+        storagePid =
+    }
+
+    settings {
+    }
+}
+
+config.tx_extbase {
+    persistence {
+        classes {
+            Gjo\GjoBoilerplate\Domain\Model\BackendUser {
+                mapping {
+                    tableName = be_users
+                    recordType = 0
+                }
+            }
+        }
+    }
+    objects {
+        TYPO3\CMS\Fluid\Core\Parser\TemplateParser {
+            className = Gjo\GjoBoilerplate\View\TemplateParser
+        }
+    }
+}
+
+lib.AJAXPrototype = PAGE
+lib.AJAXPrototype {
+    typeNum = 900
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        admPanel = 0
+        debug = 0
+        index_enable = 0
+        tx_realurl_enable = 0
+    }
+}

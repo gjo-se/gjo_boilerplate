@@ -1,0 +1,5 @@
+filepaths{
+    templateRootPath    = EXT:gjo_boilerplate/Resources/Private/Templates/
+    layoutRootPath      = EXT:gjo_boilerplate/Resources/Private/Layouts/
+    partialRootPath     = EXT:gjo_boilerplate/Resources/Private/Partials/
+}
