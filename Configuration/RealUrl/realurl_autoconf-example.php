@@ -95,42 +95,33 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl'] = array(
 
         'postVarSets' => array(
             '_DEFAULT' => array(
-                'plaintext' => array(
-                    'type'      => 'single',    // Special feature of postVars
-                    'keyValues' => array(
-                        'type' => 99
+
+                'controller' => array(
+                    array(
+                        'GETvar' => 'tx_gjopcfinder_product[action]',
+                        'noMatch' => 'bypass'
+                    ),
+                    array(
+                        'GETvar' => 'tx_gjopcfinder_product[controller]',
+                        'noMatch' => 'bypass'
+                    ),
+                    array(
+                        'GETvar' => 'no_cache',
+                        'noMatch' => 'bypass'
+                    ),
+                    array(
+                        'GETvar' => 'cHash',
+                        'noMatch' => 'bypass'
                     )
                 ),
-                'ext'       => array(
-                    array(
-                        'GETvar' => 'tx_myExt[p1]',
-                    ),
-                    array(
-                        'GETvar' => 'tx_myExt[p2]',
-                    ),
-                    array(
-                        'GETvar' => 'tx_myExt[p3]',
-                    ),
-                ),
-                'tt_news'   => array(
-                    array(
-                        'GETvar'   => 'tx_mininews[mode]',
-                        'valueMap' => array(
-                            'list'    => 1,
-                            'details' => 2,
-                        )
-                    ),
-                    array(
-                        'GETvar' => 'tx_mininews[showUid]',
-                    ),
-                ),
-                'news'      => array(
+
+                'product' => array(
                     0 => array(
-                        'GETvar'      => 'tx_news_pi1[news]',
+                        'GETvar'      => 'productTypeUid',
                         'lookUpTable' => array(
-                            'table'               => 'tx_news_domain_model_news',
+                            'table'               => 'tx_gjopcfinder_domain_model_producttype',
                             'id_field'            => 'uid',
-                            'alias_field'         => 'title',
+                            'alias_field'         => 'name',
                             'useUniqueCache'      => 1,
                             'useUniqueCache_conf' => array(
                                 'strtolower'     => 1,
@@ -139,6 +130,58 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['realurl'] = array(
                         ),
                     ),
                 ),
+
+                'p2' => array(
+                    0 => array(
+                        'GETvar'      => 'tx_gjopcfinder_product[productTypeUid]',
+                        'lookUpTable' => array(
+                            'table'               => 'tx_gjopcfinder_domain_model_producttype',
+                            'id_field'            => 'uid',
+                            'alias_field'         => 'name',
+                            'useUniqueCache'      => 1,
+                            'useUniqueCache_conf' => array(
+                                'strtolower'     => 1,
+                                'spaceCharacter' => '-',
+                            ),
+                        ),
+                    ),
+                    1 => array(
+                        'GETvar'      => 'tx_gjopcfinder_product[productOverwriteUid]',
+                        'lookUpTable' => array(
+                            'table'               => 'tx_gjopcfinder_domain_model_productoverwrite',
+                            'id_field'            => 'uid',
+                            'alias_field'         => 'product',
+                            'useUniqueCache'      => 1,
+                            'useUniqueCache_conf' => array(
+                                'strtolower'     => 1,
+                                'spaceCharacter' => '-',
+                            ),
+                        ),
+                    ),
+                    2 => array(
+                        'GETvar'      => 'tx_gjopcfinder_product[productDetailPid]',
+                        'noMatch' => 'bypass'
+                    )
+                ),
+
+                'products' => array(
+                    0 => array(
+                        'GETvar'      => 'product1',
+                    ),
+                    1 => array(
+                        'GETvar'      => 'product2',
+                    ),
+                    2 => array(
+                        'GETvar'      => 'product3',
+                    ),
+                ),
+
+                'seite'   => array(
+                    0 => array(
+                        'GETvar' => 'tx_gjopcfinder_product[@widget_1][currentPage]'
+                    ),
+                ),
+
             ),
         ),
 
