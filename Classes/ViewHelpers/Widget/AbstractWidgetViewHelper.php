@@ -24,4 +24,5 @@ use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper as CoreAbstractWidgetVi
 
 abstract class AbstractWidgetViewHelper extends CoreAbstractWidgetViewHelper
 {
+
 }

@@ -1,0 +1,139 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers">
+
+    <f:layout name="Default"/>
+
+    <f:section name="Main">
+        <f:render section="assets"/>
+        <f:render section="javaScript" arguments="{_all}"/>
+        <f:render section="textField" arguments="{_all}"/>
+    </f:section>
+
+
+    <f:section name="textField">
+        <f:form.textfield class="form-control {class}"
+                          name="{name}"
+                          id="{id}"
+                          placeholder="{placeholder}"
+                          additionalAttributes="{
+                            autocomplete: 'off'
+                          }"
+        />
+    </f:section>
+
+
+    <f:section name="assets">
+
+        <!--CSS-->
+
+        <v:asset.style name="tagmanagerCss"
+                       path="{v:extension.path.resources(path: 'Component/Autocomplete/tagmanager.css', extensionName: 'gjo_boilerplate')}"
+                       external="true"
+                       standalone="true"
+        />
+        <v:asset.style name="typeaheadCss"
+                       path="{v:extension.path.resources(path: 'Component/Autocomplete/typeahead.css', extensionName: 'gjo_boilerplate')}"
+                       external="true"
+                       standalone="true"
+        />
+
+        <!--JavaScript-->
+
+        <v:asset.script name="countries"
+                        path="{v:extension.path.resources(path: 'Data/countries.js', extensionName: 'gjo_boilerplate')}"
+                        external="true"
+                        standalone="true"
+                        allowMoveToFooter="1"
+        />
+        <v:asset.script name="states"
+                        path="{v:extension.path.resources(path: 'Data/states.js', extensionName: 'gjo_boilerplate')}"
+                        external="true"
+                        standalone="true"
+                        allowMoveToFooter="1"
+        />
+        <v:asset.script name="diacritics"
+                        path="{v:extension.path.resources(path: 'Data/diacritics.js', extensionName: 'gjo_boilerplate')}"
+                        external="true"
+                        standalone="true"
+                        allowMoveToFooter="1"
+        />
+        <v:asset.script name="typeaheadJs"
+                        path="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"
+                        dependencies="jQuery, bootstrapMinJs"
+                        external="true"
+                        standalone="true"
+                        allowMoveToFooter="1"
+        />
+        <v:asset.script name="tagmanagerJs"
+                        path="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"
+                        dependencies="typeaheadJs"
+                        external="true"
+                        standalone="true"
+                        allowMoveToFooter="1"
+        />
+
+        <v:asset.script name="autocomplete"
+                        path="{v:extension.path.resources(path: 'Component/Autocomplete/autocomplete.js')}"
+                        dependencies="typeaheadJs, tagmanagerJs"
+                        external="true"
+                        standalone="true"
+                        allowMoveToFooter="1"
+        />
+    </f:section>
+
+    <f:section name="javaScript">
+
+        <script type="text/javascript">
+
+            var autocomplete = [];
+            autocomplete['datasets'] = [];
+
+        </script>
+
+        <f:for each="{datasets}" as="dataset" iteration="iteration">
+            <script type="text/javascript">
+
+                autocomplete['datasets']['{iteration.index}'] = [];
+                autocomplete['datasets']['{iteration.index}']['source'] = '{dataset.source}';
+                autocomplete['datasets']['{iteration.index}']['templates'] = [];
+                autocomplete['datasets']['{iteration.index}']['templates']['header'] = '{dataset.templates.header}';
+                autocomplete['datasets']['{iteration.index}']['templates']['empty'] = '{dataset.templates.empty}';
+                autocomplete['datasets']['{iteration.index}']['templates']['suggestion'] = '{dataset.templates.suggestion}';
+
+            </script>
+        </f:for>
+
+        <f:debug inline="false" title="config.hint">{config.hint}</f:debug>
+        <script type="text/javascript">
+
+            autocomplete['id'] = '{id}';
+            autocomplete['name'] = '{name}';
+            autocomplete['extensionName'] = '{extensionName}';
+            autocomplete['suggestionLink'] = '{suggestionLink}';
+
+            autocomplete['config'] = [];
+            autocomplete['config']['minLength'] = '{config.minLength}';
+            autocomplete['config']['limit'] = '{config.limit}';
+            autocomplete['config']['hint'] = '{config.hint}';
+            autocomplete['config']['highlight'] = '{config.highlight}';
+
+            autocomplete['tagsManager'] = [];
+            autocomplete['tagsManager']['initialize'] = '{tagsManager.initialize}';
+            autocomplete['tagsManager']['tagsContainerID'] = '{tagsManager.tagsContainerID}';
+            autocomplete['tagsManager']['blinkBGColor_1'] = '{tagsManager.blinkBGColor_1}';
+            autocomplete['tagsManager']['blinkBGColor_2'] = '{tagsManager.blinkBGColor_2}';
+
+
+        </script>
+
+
+    </f:section>
+
+
+</div>
+
+
+
+
+

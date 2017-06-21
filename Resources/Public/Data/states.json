@@ -1,0 +1,238 @@
+[
+  {
+    "displayName": "Alabama",
+    "abbreviation": "AL"
+  },
+  {
+    "displayName": "Alaska",
+    "abbreviation": "AK"
+  },
+  {
+    "displayName": "American Samoa",
+    "abbreviation": "AS"
+  },
+  {
+    "displayName": "Arizona",
+    "abbreviation": "AZ"
+  },
+  {
+    "displayName": "Arkansas",
+    "abbreviation": "AR"
+  },
+  {
+    "displayName": "California",
+    "abbreviation": "CA"
+  },
+  {
+    "displayName": "Colorado",
+    "abbreviation": "CO"
+  },
+  {
+    "displayName": "Connecticut",
+    "abbreviation": "CT"
+  },
+  {
+    "displayName": "Delaware",
+    "abbreviation": "DE"
+  },
+  {
+    "displayName": "District Of Columbia",
+    "abbreviation": "DC"
+  },
+  {
+    "displayName": "Federated States Of Micronesia",
+    "abbreviation": "FM"
+  },
+  {
+    "displayName": "Florida",
+    "abbreviation": "FL"
+  },
+  {
+    "displayName": "Georgia",
+    "abbreviation": "GA"
+  },
+  {
+    "displayName": "Guam",
+    "abbreviation": "GU"
+  },
+  {
+    "displayName": "Hawaii",
+    "abbreviation": "HI"
+  },
+  {
+    "displayName": "Idaho",
+    "abbreviation": "ID"
+  },
+  {
+    "displayName": "Illinois",
+    "abbreviation": "IL"
+  },
+  {
+    "displayName": "Indiana",
+    "abbreviation": "IN"
+  },
+  {
+    "displayName": "Iowa",
+    "abbreviation": "IA"
+  },
+  {
+    "displayName": "Kansas",
+    "abbreviation": "KS"
+  },
+  {
+    "displayName": "Kentucky",
+    "abbreviation": "KY"
+  },
+  {
+    "displayName": "Louisiana",
+    "abbreviation": "LA"
+  },
+  {
+    "displayName": "Maine",
+    "abbreviation": "ME"
+  },
+  {
+    "displayName": "Marshall Islands",
+    "abbreviation": "MH"
+  },
+  {
+    "displayName": "Maryland",
+    "abbreviation": "MD"
+  },
+  {
+    "displayName": "Massachusetts",
+    "abbreviation": "MA"
+  },
+  {
+    "displayName": "Michigan",
+    "abbreviation": "MI"
+  },
+  {
+    "displayName": "Minnesota",
+    "abbreviation": "MN"
+  },
+  {
+    "displayName": "Mississippi",
+    "abbreviation": "MS"
+  },
+  {
+    "displayName": "Missouri",
+    "abbreviation": "MO"
+  },
+  {
+    "displayName": "Montana",
+    "abbreviation": "MT"
+  },
+  {
+    "displayName": "Nebraska",
+    "abbreviation": "NE"
+  },
+  {
+    "displayName": "Nevada",
+    "abbreviation": "NV"
+  },
+  {
+    "displayName": "New Hampshire",
+    "abbreviation": "NH"
+  },
+  {
+    "displayName": "New Jersey",
+    "abbreviation": "NJ"
+  },
+  {
+    "displayName": "New Mexico",
+    "abbreviation": "NM"
+  },
+  {
+    "displayName": "New York",
+    "abbreviation": "NY"
+  },
+  {
+    "displayName": "North Carolina",
+    "abbreviation": "NC"
+  },
+  {
+    "displayName": "North Dakota",
+    "abbreviation": "ND"
+  },
+  {
+    "displayName": "Northern Mariana Islands",
+    "abbreviation": "MP"
+  },
+  {
+    "displayName": "Ohio",
+    "abbreviation": "OH"
+  },
+  {
+    "displayName": "Oklahoma",
+    "abbreviation": "OK"
+  },
+  {
+    "displayName": "Oregon",
+    "abbreviation": "OR"
+  },
+  {
+    "displayName": "Palau",
+    "abbreviation": "PW"
+  },
+  {
+    "displayName": "Pennsylvania",
+    "abbreviation": "PA"
+  },
+  {
+    "displayName": "Puerto Rico",
+    "abbreviation": "PR"
+  },
+  {
+    "displayName": "Rhode Island",
+    "abbreviation": "RI"
+  },
+  {
+    "displayName": "South Carolina",
+    "abbreviation": "SC"
+  },
+  {
+    "displayName": "South Dakota",
+    "abbreviation": "SD"
+  },
+  {
+    "displayName": "Tennessee",
+    "abbreviation": "TN"
+  },
+  {
+    "displayName": "Texas",
+    "abbreviation": "TX"
+  },
+  {
+    "displayName": "Utah",
+    "abbreviation": "UT"
+  },
+  {
+    "displayName": "Vermont",
+    "abbreviation": "VT"
+  },
+  {
+    "displayName": "Virgin Islands",
+    "abbreviation": "VI"
+  },
+  {
+    "displayName": "Virginia",
+    "abbreviation": "VA"
+  },
+  {
+    "displayName": "Washington",
+    "abbreviation": "WA"
+  },
+  {
+    "displayName": "West Virginia",
+    "abbreviation": "WV"
+  },
+  {
+    "displayName": "Wisconsin",
+    "abbreviation": "WI"
+  },
+  {
+    "displayName": "Wyoming",
+    "abbreviation": "WY"
+  }
+]
