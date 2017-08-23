@@ -24,11 +24,6 @@ config.tx_extbase {
             }
         }
     }
-    objects {
-        TYPO3\CMS\Fluid\Core\Parser\TemplateParser {
-            className = Gjo\GjoBoilerplate\View\TemplateParser
-        }
-    }
 }
 
 lib.AJAXPrototype = PAGE
