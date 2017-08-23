@@ -20,6 +20,9 @@ namespace Gjo\GjoBoilerplate\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+//TODO: ab Vers. 8.1 - Nutzung von ConnectionPool
+// siehe 8.1 - Seite 21 ff.
+
 use \TYPO3\CMS\Extbase\Persistence\Repository;
 use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
