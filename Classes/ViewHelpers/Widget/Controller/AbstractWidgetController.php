@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller;
 
 /***************************************************************
  *  created: 22.02.16 - 08:24

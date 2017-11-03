@@ -18,7 +18,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-namespace Gjo\GjoBoilerplate\Utility;
+namespace GjoSe\GjoBoilerplate\Utility;
 
 use \TYPO3\CMS\Core\Utility\File\ExtendedFileUtility;
 

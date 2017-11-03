@@ -18,14 +18,14 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-namespace Gjo\GjoBoilerplate\Domain\Model;
+namespace GjoSe\GjoBoilerplate\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class AbstractModel
- * @package Gjo\GjoBoilerplate\Domain\Model
+ * @package GjoSe\GjoBoilerplate\Domain\Model
  */
 abstract class AbstractModel extends AbstractEntity
 {
@@ -60,7 +60,7 @@ abstract class AbstractModel extends AbstractEntity
     protected $crdate = 0;
 
     /**
-     * @var \Gjo\GjoBoilerplate\Domain\Model\BackendUser
+     * @var \GjoSe\GjoBoilerplate\Domain\Model\BackendUser
      */
     protected $cruserId = null;
 
@@ -173,7 +173,7 @@ abstract class AbstractModel extends AbstractEntity
     }
 
     /**
-     * @return \Gjo\GjoBoilerplate\Domain\Model\BackendUser
+     * @return \GjoSe\GjoBoilerplate\Domain\Model\BackendUser
      */
     public function getCruserId()
     {
@@ -181,7 +181,7 @@ abstract class AbstractModel extends AbstractEntity
     }
 
     /**
-     * @param \Gjo\GjoBoilerplate\Domain\Model\BackendUser $cruserId
+     * @param \GjoSe\GjoBoilerplate\Domain\Model\BackendUser $cruserId
      *
      * @return void
      */

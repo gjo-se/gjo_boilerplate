@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\Domain\Repository;
+namespace GjoSe\GjoBoilerplate\Domain\Repository;
 
 /***************************************************************
  *  created: 19.01.17 - 10:03
@@ -19,6 +19,10 @@ namespace Gjo\GjoBoilerplate\Domain\Repository;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+//TODO: ab Vers. 8.1 - Nutzung von ConnectionPool
+// siehe 8.1 - Seite 21 ff.
+// siehe 8.5 - Seite 39
 
 use \TYPO3\CMS\Extbase\Persistence\Repository;
 use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -70,7 +74,7 @@ class AbstractRepository extends Repository
         $this->defaultQuerySettings->setRespectStoragePage(false);
 
         $this->setDatabaseHandle();
-        $this->setPdoDatabaseHandle();
+//        $this->setPdoDatabaseHandle();
     }
 
     protected function clearQuery()
@@ -135,6 +139,12 @@ class AbstractRepository extends Repository
      */
     protected function getTableName()
     {
+
+//        TODO: das soll funktionieren:
+//        $className = \MyVendor\MyExt\Domain\Model\SomeModel::class;
+//        $dataMapper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class);
+//        $tableName = $dataMapper->getDataMap($className)->getTableName();
+
                 // TODO: das ging in 6.2 noch, aber nicht mehr in 7.6
 //        $tableName = $this->persistenceManager->getBackend()->getDataMapper()->getDataMap($this->getRepositoryClassName())->getTableName();
 
@@ -172,9 +182,11 @@ class AbstractRepository extends Repository
 
     public function setDatabaseHandle()
     {
+//        TODO: der Zugriff per $GLOBALS[TYPO3_DB] ist zwar mˆglich, wird aber nicht empfohlen!! Doctrine verwenden
         $this->db = $GLOBALS['TYPO3_DB'];
     }
 
+    // TODO: und der geht so überhautp nicht mehr!!
     public function setPdoDatabaseHandle()
     {
         $this->pdoDatabaseHandle = new \PDO('mysql:host=' . TYPO3_db_host . ';dbname=' . TYPO3_db, TYPO3_db_username, TYPO3_db_password);
