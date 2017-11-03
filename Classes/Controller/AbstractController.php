@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\Controller;
+namespace GjoSe\GjoBoilerplate\Controller;
 
 /***************************************************************
  *  created: 26.09.16 - 12:05

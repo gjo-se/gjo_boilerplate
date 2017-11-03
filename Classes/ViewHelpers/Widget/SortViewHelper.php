@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\ViewHelpers\Widget;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget;
 
 /***************************************************************
  *  created: 22.02.17 - 08:21
@@ -24,13 +24,13 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Class SortViewHelper
- * @package Gjo\GjoBoilerplate\ViewHelpers\Widget
+ * @package GjoSe\GjoBoilerplate\ViewHelpers\Widget
  */
 class SortViewHelper extends AbstractWidgetViewHelper
 {
 
     /**
-     * @var \Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller\SortController
+     * @var \GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller\SortController
      * @inject
      */
     protected $controller;

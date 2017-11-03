@@ -18,7 +18,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-namespace Gjo\GjoBoilerplate\Domain\Model;
+namespace GjoSe\GjoBoilerplate\Domain\Model;
 
 class BackendUser extends AbstractModel
 {

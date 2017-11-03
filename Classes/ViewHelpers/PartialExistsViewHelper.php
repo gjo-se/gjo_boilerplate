@@ -1,6 +1,6 @@
 <?php
 
-namespace Gjo\GjoBoilerplate\ViewHelpers;
+namespace GjoSe\GjoBoilerplate\ViewHelpers;
 
 
 /***************************************************************
@@ -27,7 +27,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 /**
  * Class PartialExistsViewHelper
- * @package Gjo\GjoBoilerplate\ViewHelpers
+ * @package GjoSe\GjoBoilerplate\ViewHelpers
  */
 class PartialExistsViewHelper extends FluidAbstractViewHelper
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\ViewHelpers\Widget;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget;
 
 /***************************************************************
  *  created: 16.06.17 - 07:51
@@ -20,18 +20,18 @@ namespace Gjo\GjoBoilerplate\ViewHelpers\Widget;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller\AutocompleteController;
+use GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller\AutocompleteController;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 /**
  * Class AutocompleteViewHelper
- * @package Gjo\GjoBoilerplate\ViewHelpers\Widget
+ * @package GjoSe\GjoBoilerplate\ViewHelpers\Widget
  */
 class AutocompleteViewHelper extends AbstractWidgetViewHelper
 {
 
     /**
-     * @var \Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller\AutocompleteController
+     * @var \GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller\AutocompleteController
      */
     protected $controller;
 
@@ -41,7 +41,7 @@ class AutocompleteViewHelper extends AbstractWidgetViewHelper
     protected $ajaxWidget = true;
 
     /**
-     * @param \Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller\AutocompleteController $controller
+     * @param \GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller\AutocompleteController $controller
      */
     public function injectAutocompleteController(AutocompleteController $controller)
     {

@@ -1,10 +1,10 @@
 <?php
-namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller;
+namespace GjoSe\GjoBoilerplate\Domain\Model;
 
 /***************************************************************
- *  created: 26.09.16 - 12:05
+ *  created: 06.09.17 - 13:25
  *  Copyright notice
- *  (c) 2016 Gregory Jo Erdmann <gregory.jo@gjo-se.com>
+ *  (c) 2017 Gregory Jo Erdmann <gregory.jo@gjo-se.com>
  *  All rights reserved
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
@@ -20,12 +20,21 @@ namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Fluid\ViewHelpers\Widget\Controller\PaginateController as FluidPaginateController;
-
 /**
- * Class PaginateController
- * @package GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller
+ * Class Pages
+ * @package GjoSe\GjoBoilerplate\Domain\Model
  */
-class PaginateController extends FluidPaginateController
+class Pages extends AbstractModel
 {
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     */
+    protected $categories;
+
+    /**
+     * @return  \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category> $categories
+     */
+    public function getCategories() {
+        return $this->categories;
+    }
 }

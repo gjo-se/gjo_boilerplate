@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller;
 
 /***************************************************************
  *  created: 16.06.17 - 07:51
@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class AutocompleteController
- * @package Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller
+ * @package GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller
  */
 class AutocompleteController extends AbstractWidgetController
 {

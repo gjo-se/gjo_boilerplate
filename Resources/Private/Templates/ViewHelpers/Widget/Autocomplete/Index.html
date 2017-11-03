@@ -23,7 +23,13 @@
     </f:section>
 
 
+    <!--TODO: schauen, ob das eine besser eAlternative ist:-->
+    <!--$this->pageRenderer->addJsFile(-->
+    <!--’EXT:myextension/Resources/Public/JavaScript/example.js’-->
+    <!--);-->
+
     <f:section name="assets">
+
 
         <!--CSS-->
 
@@ -44,33 +50,33 @@
                         path="{v:extension.path.resources(path: 'Data/countries.js', extensionName: 'gjo_boilerplate')}"
                         external="true"
                         standalone="true"
-                        allowMoveToFooter="1"
+                        movable="1"
         />
         <v:asset.script name="states"
                         path="{v:extension.path.resources(path: 'Data/states.js', extensionName: 'gjo_boilerplate')}"
                         external="true"
                         standalone="true"
-                        allowMoveToFooter="1"
+                        movable="1"
         />
         <v:asset.script name="diacritics"
                         path="{v:extension.path.resources(path: 'Data/diacritics.js', extensionName: 'gjo_boilerplate')}"
                         external="true"
                         standalone="true"
-                        allowMoveToFooter="1"
+                        movable="1"
         />
         <v:asset.script name="typeaheadJs"
                         path="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"
                         dependencies="jQuery, bootstrapMinJs"
                         external="true"
                         standalone="true"
-                        allowMoveToFooter="1"
+                        movable="1"
         />
         <v:asset.script name="tagmanagerJs"
                         path="https://cdnjs.cloudflare.com/ajax/libs/tagmanager/3.0.2/tagmanager.min.js"
                         dependencies="typeaheadJs"
                         external="true"
                         standalone="true"
-                        allowMoveToFooter="1"
+                        movable="1"
         />
 
         <v:asset.script name="autocomplete"
@@ -78,7 +84,7 @@
                         dependencies="typeaheadJs, tagmanagerJs"
                         external="true"
                         standalone="true"
-                        allowMoveToFooter="1"
+                        movable="1"
         />
     </f:section>
 
@@ -104,7 +110,6 @@
             </script>
         </f:for>
 
-        <f:debug inline="false" title="config.hint">{config.hint}</f:debug>
         <script type="text/javascript">
 
             autocomplete['id'] = '{id}';

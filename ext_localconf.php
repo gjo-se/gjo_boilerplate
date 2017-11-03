@@ -9,5 +9,5 @@ call_user_func(function () {
     }
 
     // Register "gjo:" namespace
-    $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['gjo'][] = 'Gjo\GjoBoilerplate\ViewHelpers';
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['fluid']['namespaces']['gjoSe'][] = 'GjoSe\GjoBoilerplate\ViewHelpers';
 });

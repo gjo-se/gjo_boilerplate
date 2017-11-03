@@ -16,10 +16,14 @@ plugin.tx_gjoboilerplate {
 config.tx_extbase {
     persistence {
         classes {
-            Gjo\GjoBoilerplate\Domain\Model\BackendUser {
+            GjoSe\GjoBoilerplate\Domain\Model\BackendUser {
                 mapping {
                     tableName = be_users
-                    recordType = 0
+                }
+            }
+            GjoSe\GjoBoilerplate\Domain\Model\Pages {
+                mapping {
+                    tableName = pages
                 }
             }
         }
