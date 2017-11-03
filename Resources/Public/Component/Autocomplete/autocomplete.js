@@ -160,9 +160,9 @@ gjoSe.autocomplete = {
             prefetch[index]['templates']['empty'] = prefetch[index]['templates']['header'] + '<div class="tt-suggestion-no-data">' + dataset['templates']['empty'] + '</div>';
 
             if (autocomplete.suggestionLink) {
-                prefetch[index]['templates']['suggestion'] = Handlebars.compile('<span  class="tt-suggestion"><a href="{{link}}">' + dataset['templates']['suggestion'] + '</a></span>');
+                prefetch[index]['templates']['suggestion'] = 'ohne Handlebars' //Handlebars.compile('<span  class="tt-suggestion"><a href="{{link}}">' + dataset['templates']['suggestion'] + '</a></span>');
             } else {
-                prefetch[index]['templates']['suggestion'] = Handlebars.compile('<span  class="tt-suggestion">' + dataset['templates']['suggestion'] + '</span>');
+                prefetch[index]['templates']['suggestion'] = 'ohne Handlebars' //Handlebars.compile('<span  class="tt-suggestion">' + dataset['templates']['suggestion'] + '</span>');
             }
         });
 
