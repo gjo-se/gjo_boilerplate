@@ -1,0 +1,74 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers">
+
+    <f:section name="h1">
+        <f:if condition="{content}">
+            <f:then>
+                <!--TODO: Tag: H1 durch if ersetzen, nicht inline-->
+                <h1>{content}</h1>
+            </f:then>
+            <f:else>
+                <h1><f:render partial="Utilities/Lorem" section="lorem{length}" arguments="{tag: 'H1'}" /></h1>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="h2">
+        <f:if condition="{content}">
+            <f:then>
+                <h2>{content}</h2>
+            </f:then>
+            <f:else>
+                <h2><f:render partial="Utilities/Lorem" section="lorem{length}" arguments="{tag: 'H2'}" /></h2>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="h3">
+        <f:if condition="{content}">
+            <f:then>
+                <h3>{content}</h3>
+            </f:then>
+            <f:else>
+                <h3><f:render partial="Utilities/Lorem" section="lorem{length}" arguments="{tag: 'H3'}" /></h3>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="h4">
+        <f:if condition="{content}">
+            <f:then>
+                <h4>{content}</h4>
+            </f:then>
+            <f:else>
+                <h4><f:render partial="Utilities/Lorem" section="lorem{length}" arguments="{tag: 'H4'}"/></h4>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="h5">
+        <f:if condition="{content}">
+            <f:then>
+                <h5>{content}</h5>
+            </f:then>
+            <f:else>
+                <h5><f:render partial="Utilities/Lorem" section="lorem{length}" arguments="{tag: 'H5'}" /></h5>
+            </f:else>
+        </f:if>
+    </f:section>
+
+    <f:section name="h6">
+        <f:if condition="{content}">
+            <f:then>
+                <h6>{content}</h6>
+            </f:then>
+            <f:else>
+                <h6><f:render partial="Utilities/Lorem" section="lorem{length}" arguments="{tag: 'H6'}" /></h6>
+            </f:else>
+        </f:if>
+    </f:section>
+
+
+
+</div>
