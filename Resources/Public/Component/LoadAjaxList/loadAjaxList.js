@@ -8,6 +8,8 @@
 
     var loadAjaxListProducts = function (offset, productFinderFilter) {
 
+        $("#loadingImage").show();
+
         $.ajax({
             //TODO: die URL sollte generisch im template gesetzt weden
             url: '/index.php/',
@@ -19,7 +21,8 @@
             },
             success: function(response) {
                 ajaxListsProductsContainer.append(response);
-                ajaxListsProductsHeadline.html(_getHeadlineContent())
+                ajaxListsProductsHeadline.html(_getHeadlineContent());
+                $("#loadingImage").hide();
                 ignoreScroll = false;
             },
             error: function(error) {
@@ -73,10 +76,6 @@
 
         sessionStorage.clear();
         sessionStorage.setItem('ajaxListProductsOffset', ajaxListProductsOffset);
-
-        // sessionStorageFilterInputValues();
-        // loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-
 
         $('#productFinder input[type=radio]').change(function () {
 
@@ -138,8 +137,70 @@
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
         });
 
+        // #### doorHeightSlider ####
+        var doorHeightSlider = $('#doorHeightSlider').get(0);
+        noUiSlider.create(doorHeightSlider, {
+            start: [2000],
+            step: 10,
+            range: {
+                'min': [1800],
+                'max': [2500]
+            }
+        });
+        doorHeightSlider.noUiSlider.set(2000);
+        doorHeightSlider.noUiSlider.on('update', function( values, handle ) {
+            $('#doorHeightSpan').html(parseInt(values[handle]));
+            $('#doorHeightInput').val(parseInt(values[handle]));
+        });
+        doorWidthSlider.noUiSlider.on('change', function( values, handle ) {
+            sessionStorageFilterInputValues();
+        });
+
+        // #### doorThicknessSlider ####
+        var doorThicknessSlider = $('#doorThicknessSlider').get(0);
+        noUiSlider.create(doorThicknessSlider, {
+            start: [40],
+            step: 1,
+            range: {
+                'min': [8],
+                'max': [70]
+            }
+        });
+        doorThicknessSlider.noUiSlider.set(40);
+        doorThicknessSlider.noUiSlider.on('update', function( values, handle ) {
+            $('#doorThicknessSpan').html(parseInt(values[handle]));
+            $('#doorThicknessInput').val(parseInt(values[handle]));
+        });
+        doorThicknessSlider.noUiSlider.on('change', function( values, handle ) {
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+        });
+
+        // #### doorWeightSlider ####
+        var doorWeightSlider = $('#doorWeightSlider').get(0);
+        noUiSlider.create(doorWeightSlider, {
+            start: [80],
+            step: 1,
+            range: {
+                'min': [20],
+                'max': [300]
+            }
+        });
+        doorWeightSlider.noUiSlider.set(80);
+        doorWeightSlider.noUiSlider.on('update', function( values, handle ) {
+            $('#doorWeightSpan').html(parseInt(values[handle]));
+            $('#doorWeightInput').val(parseInt(values[handle]));
+        });
+        doorWeightSlider.noUiSlider.on('change', function( values, handle ) {
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+        });
 
 
+        sessionStorageFilterInputValues();
+        loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
 
         $(window).scroll(function () {
