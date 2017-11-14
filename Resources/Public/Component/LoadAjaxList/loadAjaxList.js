@@ -71,6 +71,34 @@
             return 'Keine Produkte gefunden';
         }
     };
+    
+    var _setDoorThicknessSlider = function($start, $step, $min, $max){
+
+        var doorThicknessSlider = $('#doorThicknessSlider').get(0);
+
+        if($('#doorThicknessSlider').has('div').length){
+            doorThicknessSlider.noUiSlider.destroy();
+        }
+
+        noUiSlider.create(doorThicknessSlider, {
+            start: [$start],
+            step: $step,
+            range: {
+                'min': [$min],
+                'max': [$max]
+            }
+        });
+        doorThicknessSlider.noUiSlider.set($start);
+        doorThicknessSlider.noUiSlider.on('update', function( values, handle ) {
+            $('#doorThicknessSpan').html(parseInt(values[handle]));
+            $('#doorThicknessInput').val(parseInt(values[handle]));
+        });
+        doorThicknessSlider.noUiSlider.on('change', function( values, handle ) {
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+        });
+    };
 
     $(document).ready(function () {
 
@@ -83,10 +111,21 @@
             var button = $(this).parent();
 
             $(buttonGroup).find(':input').attr('checked', false);
-            $(buttonGroup).find('img').removeClass('border-tiger-orange rounded');
+            $(buttonGroup).find('img').removeClass('border-tiger-orange');
+            $(buttonGroup).find('img').addClass('border-gray-300');
 
             $(button).find(':input').attr('checked', true);
-            $(button).find('img').addClass('border-tiger-orange rounded');
+            $(button).find('img').addClass('border-tiger-orange');
+
+            if($(button).find(':input').val() == 'wood'){
+                $('.specific-material').removeClass('d-none');
+                _setDoorThicknessSlider(40, 1, 25, 70);
+            }
+            if($(button).find(':input').val() == 'glas'){
+                $('.specific-material').addClass('d-none');
+                _setDoorThicknessSlider(8, 2, 8, 12);
+
+            }
 
             sessionStorageFilterInputValues();
             clearAjaxListsProductsContainer();
@@ -156,26 +195,7 @@
             sessionStorageFilterInputValues();
         });
 
-        // #### doorThicknessSlider ####
-        var doorThicknessSlider = $('#doorThicknessSlider').get(0);
-        noUiSlider.create(doorThicknessSlider, {
-            start: [40],
-            step: 1,
-            range: {
-                'min': [8],
-                'max': [70]
-            }
-        });
-        doorThicknessSlider.noUiSlider.set(40);
-        doorThicknessSlider.noUiSlider.on('update', function( values, handle ) {
-            $('#doorThicknessSpan').html(parseInt(values[handle]));
-            $('#doorThicknessInput').val(parseInt(values[handle]));
-        });
-        doorThicknessSlider.noUiSlider.on('change', function( values, handle ) {
-            sessionStorageFilterInputValues();
-            clearAjaxListsProductsContainer();
-            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-        });
+        _setDoorThicknessSlider(40, 1, 25, 70);
 
         // #### doorWeightSlider ####
         var doorWeightSlider = $('#doorWeightSlider').get(0);
