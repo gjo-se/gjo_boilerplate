@@ -71,6 +71,19 @@
             return 'Keine Produkte gefunden';
         }
     };
+
+    var _setDoorWeight = function () {
+        var productFinderFilter = JSON.parse(sessionStorage.getItem('productFinderFilter'));
+        var doorWidth = parseInt(productFinderFilter['tx_gjotiger_product[doorWidth]']);
+        var doorHeight = parseInt(productFinderFilter['tx_gjotiger_product[doorHeight]']);
+        var doorThickness = parseInt(productFinderFilter['tx_gjotiger_product[doorThickness]']);
+        var spezificMaterial = parseInt(productFinderFilter['tx_gjotiger_product[spezificMaterial]']);
+
+        var doorWeight = parseInt((doorWidth / 1000) * (doorHeight / 1000) * (doorThickness / 1000) * spezificMaterial);
+
+        doorWeightSlider.noUiSlider.set(doorWeight);
+        sessionStorageFilterInputValues();
+    }
     
     var _setDoorThicknessSlider = function($start, $step, $min, $max){
 
@@ -95,6 +108,7 @@
         });
         doorThicknessSlider.noUiSlider.on('change', function( values, handle ) {
             sessionStorageFilterInputValues();
+            _setDoorWeight();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
         });
@@ -105,7 +119,7 @@
         sessionStorage.clear();
         sessionStorage.setItem('ajaxListProductsOffset', ajaxListProductsOffset);
 
-        $('#productFinder input[type=radio]').change(function () {
+        $('#productFinder input[type=radio]').change(function (event) {
 
             var buttonGroup = $(this).parent().parent();
             var button = $(this).parent();
@@ -119,15 +133,20 @@
 
             if($(button).find(':input').val() == 'wood'){
                 $('.specific-material').removeClass('d-none');
+                $('#specificMaterialItemGlas').attr('checked', false);
+                $('.specific-material').find(':input[value=400]').attr('checked', true);
                 _setDoorThicknessSlider(40, 1, 25, 70);
             }
             if($(button).find(':input').val() == 'glas'){
                 $('.specific-material').addClass('d-none');
+                $('.specific-material').find(':input').attr('checked', false);
+                $('#specificMaterialItemGlas').attr('checked', true);
                 _setDoorThicknessSlider(8, 2, 8, 12);
 
             }
 
             sessionStorageFilterInputValues();
+            _setDoorWeight();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
@@ -169,9 +188,11 @@
         doorWidthSlider.noUiSlider.on('update', function( values, handle ) {
             $('#doorWidthSpan').html(parseInt(values[handle]));
             $('#doorWidthInput').val(parseInt(values[handle]));
+
         });
         doorWidthSlider.noUiSlider.on('change', function( values, handle ) {
             sessionStorageFilterInputValues();
+            _setDoorWeight();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
         });
@@ -191,8 +212,11 @@
             $('#doorHeightSpan').html(parseInt(values[handle]));
             $('#doorHeightInput').val(parseInt(values[handle]));
         });
-        doorWidthSlider.noUiSlider.on('change', function( values, handle ) {
+        doorHeightSlider.noUiSlider.on('change', function( values, handle ) {
             sessionStorageFilterInputValues();
+            _setDoorWeight();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
         });
 
         _setDoorThicknessSlider(40, 1, 25, 70);
@@ -207,7 +231,7 @@
                 'max': [300]
             }
         });
-        doorWeightSlider.noUiSlider.set(80);
+        // doorWeightSlider.noUiSlider.set(80);
         doorWeightSlider.noUiSlider.on('update', function( values, handle ) {
             $('#doorWeightSpan').html(parseInt(values[handle]));
             $('#doorWeightInput').val(parseInt(values[handle]));
@@ -220,6 +244,7 @@
 
 
         sessionStorageFilterInputValues();
+        _setDoorWeight();
         loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
 
@@ -243,6 +268,10 @@
 
                 ignoreScroll = true;
             }
+        });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
         });
 
     });
