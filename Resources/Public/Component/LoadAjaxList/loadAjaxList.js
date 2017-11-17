@@ -6,6 +6,15 @@
     var ajaxListProductsCountInit = 0;
     var ignoreScroll = false;
 
+    var imagePlaceholder = 'http://via.placeholder.com/';
+    var imagePlaceholderDefaultColor = 'f8f9fa';
+    var imagePlaceholderDisabledColor = 'dee2e6';
+    var imagePlaceholderDisabledText = '?text=disabled';
+    var imagePlaceholderActiveColor = '343a40';
+
+    var imageDefault100 = imagePlaceholder + '100/' + imagePlaceholderDefaultColor;
+    var imageDisabled100 = imagePlaceholder + '100/' + imagePlaceholderDisabledColor + imagePlaceholderDisabledText;
+
     var loadAjaxListProducts = function (offset, productFinderFilter) {
 
         $("#loadingImage").show();
@@ -19,19 +28,19 @@
                 offset: offset,
                 productFinderFilter: productFinderFilter
             },
-            success: function(response) {
+            success: function (response) {
                 ajaxListsProductsContainer.append(response);
                 ajaxListsProductsHeadline.html(_getHeadlineContent());
                 $("#loadingImage").hide();
                 ignoreScroll = false;
             },
-            error: function(error) {
+            error: function (error) {
                 console.error(error);
             }
         });
     };
 
-    var sessionStorageFilterInputValues = function() {
+    var sessionStorageFilterInputValues = function () {
 
         var productFinderFilter = {};
         productFinderFilter['event'] = $(this).attr('name');
@@ -43,53 +52,73 @@
             productFinderFilter[name] = checkedInputField.val();
         });
 
-        $("#productFinder .input-text").each(function() {
+        var checkboxFields = $('input[type="checkbox"]', '#productFinder');
+        $.each(checkboxFields, function (i, field) {
+            var checkedInputField = $(field).parent().find(':checked');
+            var name = checkedInputField.attr('name');
+            productFinderFilter[name] = checkedInputField.val();
+        });
+
+        $("#productFinder .input-text").each(function () {
             productFinderFilter[$(this).attr('name')] = $(this).val();
         });
+
 
         sessionStorage.setItem('productFinderFilter', JSON.stringify(productFinderFilter));
     };
 
-    var clearAjaxListsProductsContainer = function() {
+    var clearAjaxListsProductsContainer = function () {
         var offset = ajaxListProductsOffset;
         sessionStorage.setItem('ajaxListProductsOffset', offset);
         ajaxListsProductsContainer.empty();
     };
 
-    var _getAjaxListProductsCount = function(){
-        if(sessionStorage.getItem('ajaxListProductsCount')){
+    var _getAjaxListProductsCount = function () {
+        if (sessionStorage.getItem('ajaxListProductsCount')) {
             return sessionStorage.getItem('ajaxListProductsCount');
-        }else{
+        } else {
             return ajaxListProductsCountInit;
         }
     };
 
-    var _getHeadlineContent = function(){
-        if(_getAjaxListProductsCount()){
+    var _getHeadlineContent = function () {
+        if (_getAjaxListProductsCount()) {
             return _getAjaxListProductsCount() + ' Produkte gefunden';
-        }else{
+        } else {
             return 'Keine Produkte gefunden';
         }
     };
 
-    var _setDoorWeight = function () {
+    var _setDoorWeight = function (doorWeightDefault) {
+
         var productFinderFilter = JSON.parse(sessionStorage.getItem('productFinderFilter'));
-        var doorWidth = parseInt(productFinderFilter['tx_gjotiger_product[doorWidth]']);
-        var doorHeight = parseInt(productFinderFilter['tx_gjotiger_product[doorHeight]']);
-        var doorThickness = parseInt(productFinderFilter['tx_gjotiger_product[doorThickness]']);
-        var spezificMaterial = parseInt(productFinderFilter['tx_gjotiger_product[spezificMaterial]']);
 
-        var doorWeight = parseInt((doorWidth / 1000) * (doorHeight / 1000) * (doorThickness / 1000) * spezificMaterial);
+        if(doorWeightDefault){
+            doorWeightSlider.noUiSlider.set(doorWeightDefault);
+        }else if(typeof productFinderFilter['tx_gjotiger_product[automaticCompute]'] !== 'undefined'){
 
-        doorWeightSlider.noUiSlider.set(doorWeight);
+            var doorWidth = parseInt(productFinderFilter['tx_gjotiger_product[doorWidth]']);
+            var doorHeight = parseInt(productFinderFilter['tx_gjotiger_product[doorHeight]']);
+            var doorThickness = parseInt(productFinderFilter['tx_gjotiger_product[doorThickness]']);
+            var spezificMaterial = parseInt(productFinderFilter['tx_gjotiger_product[spezificMaterial]']);
+
+            var doorWeight = parseInt((doorWidth / 1000) * (doorHeight / 1000) * (doorThickness / 1000) * spezificMaterial);
+
+            doorWeightSlider.noUiSlider.set(doorWeight);
+
+        }else{
+            // doorWeightSlider.noUiSlider.set(0);
+        }
+
+
         sessionStorageFilterInputValues();
     }
-    
-    var _setDoorThicknessSlider = function($start, $step, $min, $max){
+
+    var _setDoorThicknessSlider = function ($start, $step, $min, $max) {
 
         var doorThicknessSlider = $('#doorThicknessSlider').get(0);
 
-        if($('#doorThicknessSlider').has('div').length){
+        if ($('#doorThicknessSlider').has('div').length) {
             doorThicknessSlider.noUiSlider.destroy();
         }
 
@@ -102,11 +131,11 @@
             }
         });
         doorThicknessSlider.noUiSlider.set($start);
-        doorThicknessSlider.noUiSlider.on('update', function( values, handle ) {
+        doorThicknessSlider.noUiSlider.on('update', function (values, handle) {
             $('#doorThicknessSpan').html(parseInt(values[handle]));
             $('#doorThicknessInput').val(parseInt(values[handle]));
         });
-        doorThicknessSlider.noUiSlider.on('change', function( values, handle ) {
+        doorThicknessSlider.noUiSlider.on('change', function (values, handle) {
             sessionStorageFilterInputValues();
             _setDoorWeight();
             clearAjaxListsProductsContainer();
@@ -131,13 +160,18 @@
             $(button).find(':input').attr('checked', true);
             $(button).find('img').addClass('border-tiger-orange');
 
-            if($(button).find(':input').val() == 'wood'){
+            if ($(button).find(':input').val() == 'wood') {
                 $('.specific-material').removeClass('d-none');
                 $('#specificMaterialItemGlas').attr('checked', false);
-                $('.specific-material').find(':input[value=400]').attr('checked', true);
+                $('.specificMaterialItemWood').attr('checked', false);
+
+                $('.specificMaterialItemWood').parent().find('img').removeClass('border-tiger-orange');
+                $('.specificMaterialItemWood').parent().find('img').addClass('border-gray-300');
+
+                _setDoorWeight(0);
                 _setDoorThicknessSlider(40, 1, 25, 70);
             }
-            if($(button).find(':input').val() == 'glas'){
+            if ($(button).find(':input').val() == 'glas') {
                 $('.specific-material').addClass('d-none');
                 $('.specific-material').find(':input').attr('checked', false);
                 $('#specificMaterialItemGlas').attr('checked', true);
@@ -152,8 +186,46 @@
 
         });
 
+
+        $('#productFinder input[type=checkbox]').change(function (event) {
+
+            var button = $(this).parent();
+            var buttonInput = $(button).find(':input');
+            var buttonImage = $(button).find('img');
+            var buttonInputSynchron = $('.telescope-synchron [name=synchron]').find(':input');
+            var buttonImageSynchron = $('.telescope-synchron [name=synchron]').find('img');
+
+            if (buttonInput.attr('checked')) {
+                buttonInput.attr('checked', false);
+                buttonImage.removeClass('border-tiger-orange');
+                buttonImage.addClass('border-gray-300');
+            } else {
+                buttonInput.attr('checked', true);
+                buttonImage.addClass('border-tiger-orange');
+                buttonImage.removeClass('border-gray-300');
+            }
+
+            if($(button).find(':input[name=automaticCompute]')){
+                sessionStorageFilterInputValues();
+                _setDoorWeight();
+            }
+
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+        });
+
+
         // #### wingCountSlider ####
         var wingCountSlider = $('#wingCountSlider').get(0);
+        var buttonInput = $('.telescope-synchron').find(':input');
+        var buttonImage = $('.telescope-synchron').find('img');
+        var buttonInputTwoWings = $('.telescope-synchron .two-wings').find(':input');
+        var buttonImageTwoWings = $('.telescope-synchron .two-wings').find('img');
+        var buttonInputThreeWings = $('.telescope-synchron .three-wings').find(':input');
+        var buttonImageThreeWings = $('.telescope-synchron .three-wings').find('img');
+
         noUiSlider.create(wingCountSlider, {
             start: [1],
             step: 1,
@@ -164,11 +236,36 @@
         });
         wingCountSlider.noUiSlider.set(1);
 
-        wingCountSlider.noUiSlider.on('update', function( values, handle ) {
+        wingCountSlider.noUiSlider.on('update', function (values, handle) {
             $('#wingCountSpan').html(parseInt(values[handle]));
             $('#wingCountInput').val(parseInt(values[handle]));
         });
-        wingCountSlider.noUiSlider.on('change', function( values, handle ) {
+        wingCountSlider.noUiSlider.on('change', function (values, handle) {
+
+            buttonImage.removeClass('border-tiger-orange');
+            buttonImage.addClass('border-gray-300');
+
+            if (parseInt(this.get()) == 1) {
+                buttonInput.attr('disabled', true);
+                buttonInput.attr('checked', false);
+
+                buttonImage.attr('src', imageDisabled100);
+            }
+            if (parseInt(this.get()) == 2) {
+                buttonInputTwoWings.attr('disabled', false);
+                buttonInputThreeWings.attr('disabled', true);
+
+                buttonImageTwoWings.attr('src', imageDefault100);
+                buttonImageThreeWings.attr('src', imageDisabled100);
+            }
+            if (parseInt(this.get()) == 3) {
+                buttonImageTwoWings.attr('src', imageDisabled100);
+                buttonImageThreeWings.attr('src', imageDefault100);
+
+                buttonInputTwoWings.attr('disabled', true);
+                buttonInputThreeWings.attr('disabled', false);
+            }
+
             sessionStorageFilterInputValues();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
@@ -185,12 +282,12 @@
             }
         });
         doorWidthSlider.noUiSlider.set(1000);
-        doorWidthSlider.noUiSlider.on('update', function( values, handle ) {
+        doorWidthSlider.noUiSlider.on('update', function (values, handle) {
             $('#doorWidthSpan').html(parseInt(values[handle]));
             $('#doorWidthInput').val(parseInt(values[handle]));
 
         });
-        doorWidthSlider.noUiSlider.on('change', function( values, handle ) {
+        doorWidthSlider.noUiSlider.on('change', function (values, handle) {
             sessionStorageFilterInputValues();
             _setDoorWeight();
             clearAjaxListsProductsContainer();
@@ -208,11 +305,11 @@
             }
         });
         doorHeightSlider.noUiSlider.set(2000);
-        doorHeightSlider.noUiSlider.on('update', function( values, handle ) {
+        doorHeightSlider.noUiSlider.on('update', function (values, handle) {
             $('#doorHeightSpan').html(parseInt(values[handle]));
             $('#doorHeightInput').val(parseInt(values[handle]));
         });
-        doorHeightSlider.noUiSlider.on('change', function( values, handle ) {
+        doorHeightSlider.noUiSlider.on('change', function (values, handle) {
             sessionStorageFilterInputValues();
             _setDoorWeight();
             clearAjaxListsProductsContainer();
@@ -227,16 +324,15 @@
             start: [80],
             step: 1,
             range: {
-                'min': [20],
+                'min': [0],
                 'max': [300]
             }
         });
-        // doorWeightSlider.noUiSlider.set(80);
-        doorWeightSlider.noUiSlider.on('update', function( values, handle ) {
+        doorWeightSlider.noUiSlider.on('update', function (values, handle) {
             $('#doorWeightSpan').html(parseInt(values[handle]));
             $('#doorWeightInput').val(parseInt(values[handle]));
         });
-        doorWeightSlider.noUiSlider.on('change', function( values, handle ) {
+        doorWeightSlider.noUiSlider.on('change', function (values, handle) {
             sessionStorageFilterInputValues();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
@@ -262,7 +358,7 @@
 
                 var productFinderFilter = JSON.parse(sessionStorage.getItem('productFinderFilter'));
 
-                if((offset - ajaxListProductsLimit) <= parseInt(_getAjaxListProductsCount()) && productFinderFilter){
+                if ((offset - ajaxListProductsLimit) <= parseInt(_getAjaxListProductsCount()) && productFinderFilter) {
                     loadAjaxListProducts(offset, productFinderFilter);
                 }
 
