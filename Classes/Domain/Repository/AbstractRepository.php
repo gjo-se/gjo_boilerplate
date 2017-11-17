@@ -28,6 +28,7 @@ use \TYPO3\CMS\Extbase\Persistence\Repository;
 use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 class AbstractRepository extends Repository
 {
@@ -62,6 +63,16 @@ class AbstractRepository extends Repository
     protected $dataMapFactory;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     */
+    protected $configurationManager;
+
+    /**
+     * @var array
+     */
+    protected $settings;
+
+    /**
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
     public function __construct(ObjectManagerInterface $objectManager)
@@ -75,6 +86,25 @@ class AbstractRepository extends Repository
 
         $this->setDatabaseHandle();
 //        $this->setPdoDatabaseHandle();
+
+        $this->configurationManager = $this->objectManager->get('TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface');
+        $this->setSettings();
+    }
+
+    public function setSettings($type = '', $extension = null, $plugin = null)
+    {
+        switch ($type) {
+            case ('framework'):
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK;
+                break;
+            case ('full'):
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT;
+                break;
+            default:
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS;
+        }
+
+        $this->settings = $this->configurationManager->getConfiguration($type, $extension, $plugin);
     }
 
     protected function clearQuery()
