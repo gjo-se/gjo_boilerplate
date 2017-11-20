@@ -6,9 +6,13 @@
 
         <f:if condition="{falObject}">
             <f:then>
-                <f:for each="{falObject.image}" as="image">
+                <f:for each="{falObject}" as="image">
                     <f:image src="{image.uid}"
                              treatIdAsReference="1"
+                             maxWidth="{maxWidth}"
+                             height="{height}"
+                             width="{width}"
+                             class="{class}"
                     />
                 </f:for>
             </f:then>
