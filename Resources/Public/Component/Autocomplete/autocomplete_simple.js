@@ -6,7 +6,7 @@
     var initAutocomplete = function () {
         var $searchbox = $('.tx-indexedsearch-searchbox-sword');
         $searchbox.attr('autocomplete', 'off');
-        var container = $('.tx-indexedsearch-searchbox-results');
+        var container = $('.search-suggestions');
 
         $searchbox.bind('click keyup', function (e) {
             var $this = jQuery(this);
@@ -17,16 +17,14 @@
             timer = setTimeout(function () {
                 container.show();
                 if (e.type != 'click') {
-                    jQuery('.tx-indexedsearch-searchbox-results').html('<div class="ajax-loader"></div>');
+                    jQuery('.search-suggestions').html('<div class="ajax-loader"></div>');
                 }
                 if ($this.val().length > 2) {
                     $.ajax({
                         //TODO: die URL sollte generisch im template gesetzt weden
                     	url: '/index.php/?type=' + pageType + '&tx_gjotiger%5BsearchString%5D=' + encodeURIComponent($this.val()),
                     	success: function(response) {
-
-                    		console.log('Respnose: ' + response);
-                    		container.html(response);
+                            container.html(response);
                     	},
                     	error: function(error) {
                     		console.error(error);
