@@ -142,6 +142,10 @@
             _setDoorWeight();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+            $('body,html').animate({
+                scrollTop: 270
+            }, 800);
         });
     };
 
@@ -186,6 +190,10 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
+            $('body,html').animate({
+                scrollTop: 270
+            }, 800);
+
         });
 
 
@@ -215,6 +223,10 @@
             sessionStorageFilterInputValues();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+            $('body,html').animate({
+                scrollTop: 270
+            }, 800);
 
         });
 
@@ -271,6 +283,10 @@
             sessionStorageFilterInputValues();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+            $('body,html').animate({
+                scrollTop: 270
+            }, 800);
         });
 
         // #### doorWidthSlider ####
@@ -294,6 +310,10 @@
             _setDoorWeight();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+            $('body,html').animate({
+                scrollTop: 270
+            }, 800);
         });
 
         // #### doorHeightSlider ####
@@ -316,6 +336,10 @@
             _setDoorWeight();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+            $('body,html').animate({
+                scrollTop: 270
+            }, 800);
         });
 
         _setDoorThicknessSlider(40, 1, 25, 70);
@@ -331,6 +355,7 @@
             }
         });
         doorWeightSlider.noUiSlider.on('update', function (values, handle) {
+            // $('#automaticCompute').attr('checked', false);
             $('#doorWeightSpan').html(parseInt(values[handle]));
             $('#doorWeightInput').val(parseInt(values[handle]));
         });
@@ -338,6 +363,10 @@
             sessionStorageFilterInputValues();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+            $('body,html').animate({
+                scrollTop: 270
+            }, 800);
         });
 
 
