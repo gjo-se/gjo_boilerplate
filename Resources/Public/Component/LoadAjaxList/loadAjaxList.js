@@ -22,7 +22,7 @@
 
         $.ajax({
             //TODO: die URL sollte generisch im template gesetzt weden
-            url: '/index.php/',
+            url: '/index.php',
             method: 'POST',
             data: {
                 type: pageType,

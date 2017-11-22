@@ -22,7 +22,7 @@
                 if ($this.val().length > 2) {
                     $.ajax({
                         //TODO: die URL sollte generisch im template gesetzt weden
-                    	url: '/index.php/?type=' + pageType + '&tx_gjotiger%5BsearchString%5D=' + encodeURIComponent($this.val()),
+                    	url: '/index.php?type=' + pageType + '&tx_gjotiger%5BsearchString%5D=' + encodeURIComponent($this.val()),
                     	success: function(response) {
                             container.html(response);
                     	},
