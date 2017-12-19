@@ -105,12 +105,12 @@
 
         if(doorWeightDefault){
             doorWeightSlider.noUiSlider.set(doorWeightDefault);
-        }else if(typeof productFinderFilter['tx_gjotiger_product[automaticCompute]'] !== 'undefined'){
+        }else if(typeof productFinderFilter['automaticCompute'] !== 'undefined'){
+            var doorWidth = parseInt(productFinderFilter['doorWidth']);
+            var doorHeight = parseInt(productFinderFilter['doorHeight']);
+            var doorThickness = parseInt(productFinderFilter['doorThickness']);
+            var spezificMaterial = parseInt(productFinderFilter['spezificMaterial']);
 
-            var doorWidth = parseInt(productFinderFilter['tx_gjotiger_product[doorWidth]']);
-            var doorHeight = parseInt(productFinderFilter['tx_gjotiger_product[doorHeight]']);
-            var doorThickness = parseInt(productFinderFilter['tx_gjotiger_product[doorThickness]']);
-            var spezificMaterial = parseInt(productFinderFilter['tx_gjotiger_product[spezificMaterial]']);
 
             var doorWeight = parseInt((doorWidth / 1000) * (doorHeight / 1000) * (doorThickness / 1000) * spezificMaterial);
 
