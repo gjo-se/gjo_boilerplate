@@ -50,15 +50,18 @@
     var sessionStorageFilterInputValues = function () {
 
         var productFinderFilter = {};
+
+        //TODO: der kann so nicht funktionieren - this nicht verfügbar
         productFinderFilter['event'] = $(this).attr('name');
 
         var radioFields = $('input[type="radio"]', '#productFinder');
         $.each(radioFields, function (i, field) {
-            var checkedInputField = $(field).parent().find(':checked');
-            var name = checkedInputField.attr('name');
-            productFinderFilter[name] = checkedInputField.val();
+            if ($(field).attr("checked") === "checked") {
+                productFinderFilter[$(field).attr('name')] = $(field).val();
+            }
         });
 
+        // TODO: anpassen, wie Radios
         var checkboxFields = $('input[type="checkbox"]', '#productFinder');
         $.each(checkboxFields, function (i, field) {
             var checkedInputField = $(field).parent().find(':checked');
