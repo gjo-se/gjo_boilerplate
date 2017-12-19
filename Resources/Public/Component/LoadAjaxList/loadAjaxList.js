@@ -30,7 +30,7 @@
                 productFinderFilter: productFinderFilter
             },
             success: function (response) {
-                ajaxListsProductsContainer.append(response);
+                _setAjaxListsProductsContainer(response);
                 ajaxListsProductsHeadline.html(_getHeadlineContent());
                 $("#loadingImage").hide();
                 ajaxListsProductsHeadline.show();
@@ -41,6 +41,11 @@
             }
         });
     };
+
+    var _setAjaxListsProductsContainer = function(response){
+        var modifiedResponseObject = _setAimeosPrice(response);
+        ajaxListsProductsContainer.append(modifiedResponseObject);
+    }
 
     var sessionStorageFilterInputValues = function () {
 
@@ -147,6 +152,24 @@
                 scrollTop: 270
             }, 800);
         });
+    };
+
+    var _setAimeosPrice = function (response){
+
+        var response = response;
+        var responseObject = $('<div/>').html(response).contents();
+        var aimeosListProductItems = $('#listProductItems').find('span');
+
+        $.each(aimeosListProductItems, function (i, field) {
+            var aimeosProductItemId = $(this).attr('id');
+            var aimeosProductItemPrice = $(this).find("meta[itemprop='price']").attr('content');
+            var ajaxListsProductPrice = responseObject.find('#' + aimeosProductItemId).find('.price');
+
+            ajaxListsProductPrice.append(aimeosProductItemPrice);
+        });
+
+        return responseObject;
+
     };
 
     $(document).ready(function () {
