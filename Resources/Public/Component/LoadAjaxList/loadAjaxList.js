@@ -178,7 +178,10 @@
     $(document).ready(function () {
 
         sessionStorage.clear();
-        sessionStorage.setItem('ajaxListProductsOffset', ajaxListProductsOffset);
+
+        if(typeof ajaxListProductsOffset !== 'undefined'){
+            sessionStorage.setItem('ajaxListProductsOffset', ajaxListProductsOffset);
+        }
 
         $('#productFinder input[type=radio]').change(function (event) {
 
