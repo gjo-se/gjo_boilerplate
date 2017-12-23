@@ -15,7 +15,8 @@ class ProductSetViewHelper extends AbstractViewHelper
 {
     public function initializeArguments()
     {
-        $this->registerArgument('productItem', 'Aimeos\MShop\Product\Item\Standard', 'Aimeos ProductItem', true);
+        $this->registerArgument('productItem', 'Aimeos\MShop\Product\Item\Standard', 'Aimeos ProductItem');
+        $this->registerArgument('getParam', 'Boolean', 'get Param from URL, productSet=XY');
     }
 
     public function render()
@@ -27,14 +28,43 @@ class ProductSetViewHelper extends AbstractViewHelper
             throw new Exception('Aimeos view object is missing');
         }
 
-        $productItem = $this->arguments['productItem'];
 
+        switch ($this->arguments['property']) {
+            case 'price':
+                $property = $this->getPrice($serviceItem);
+                break;
+            case 'short-text':
+                $property = $this->getShortText($serviceItem);
+                break;
+            default:
+                $property = NULL;
+        }
+
+        $productSet = null;
+        if($this->arguments['productItem']){
+            $productSet = $this->getProductSet($this->arguments['productItem']);
+        }elseif ($this->arguments['getParam']){
+            $productSetId = $_GET['productSet'];
+            $productSet = $this->getProductSet(null, $productSetId);
+        }
+
+        return $productSet;
+    }
+
+    private function getProductSet($productItem = null, $productSetUid = null)
+    {
         $productSetRepository = $this->objectManager->get('GjoSe\GjoTiger\Domain\Repository\ProductSetRepository');
-        $productSetQueryResult = $productSetRepository->findByAimeosProductId($productItem->getId());
 
-        $productSet = NULL;
-        if($productSetQueryResult){
-            $productSet = $productSetQueryResult->getFirst();
+        if($productItem){
+            $productSetQueryResult = $productSetRepository->findByAimeosProductId($productItem->getId());
+
+            $productSet = NULL;
+            if($productSetQueryResult){
+                $productSet = $productSetQueryResult->getFirst();
+            }
+
+        }elseif ($productSetUid){
+            $productSet = $productSetRepository->findByUid($productSetUid);
         }
 
         return $productSet;
