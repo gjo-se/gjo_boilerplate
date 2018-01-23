@@ -23,6 +23,7 @@ namespace GjoSe\GjoBoilerplate\ViewHelpers;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper as CoreAbstractViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use GjoSe\GjoExtendsFemanager\Domain\Repository\FeUserRepository;
 
 
 abstract class AbstractViewHelper extends CoreAbstractViewHelper
@@ -41,8 +42,6 @@ abstract class AbstractViewHelper extends CoreAbstractViewHelper
      * @var array
      */
     protected $settings;
-
-
 
     public function __construct()
     {
@@ -65,6 +64,4 @@ abstract class AbstractViewHelper extends CoreAbstractViewHelper
 
         return $this->configurationManager->getConfiguration($type, $extension, $plugin);
     }
-
-
 }

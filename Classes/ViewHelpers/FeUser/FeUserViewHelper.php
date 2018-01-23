@@ -6,11 +6,15 @@
  * @package   TYPO3
  */
 
-namespace GjoSe\GjoBoilerplate\ViewHelpers;
+//TODO: hier gibt es eine Abhänigkeit zu femanager
+// sollte ich die ViewHelper nicht in die entsprechenden EXT verlagern?!
+// und jeweils den Pfad für den Namespace erweitern
+namespace GjoSe\GjoBoilerplate\ViewHelpers\FeUser;
 
+use GjoSe\GjoBoilerplate\ViewHelpers\FeUser\AbstractFeUserViewHelper;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Exception;
 
-class FeUserViewHelper extends AbstractViewHelper
+class FeUserViewHelper extends AbstractFeUserViewHelper
 {
 
     public function initializeArguments()
@@ -30,13 +34,7 @@ class FeUserViewHelper extends AbstractViewHelper
         }
 
         $property = $this->arguments['property'];
-
         $userData = $GLOBALS['TSFE']->fe_user->user;
-        $feGroup = $GLOBALS['TSFE']->fe_user->groupData;
-
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($userData);
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($feGroup);
-//        exit;
 
         if (null === $userData) {
             return null;
