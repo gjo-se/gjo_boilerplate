@@ -1,4 +1,5 @@
 <?php
+
 namespace GjoSe\GjoBoilerplate\Controller;
 
 /***************************************************************
@@ -22,14 +23,68 @@ namespace GjoSe\GjoBoilerplate\Controller;
 
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController as CoreAbstractController;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use GjoSe\GjoBoilerplate\Utility\SessionUtility;
 
 class AbstractController extends CoreAbstractController
 {
+
+    protected $feUser = null;
+
+    /**
+     * @var \GjoSe\GjoBoilerplate\Utility\SessionUtility
+     */
+    protected $sessionUtility;
+
     /**
      * @return string
      */
     protected function getExtKey()
     {
         return GeneralUtility::camelCaseToLowerCaseUnderscored($this->extensionName);
+    }
+
+    /**
+     * @return \GjoSe\GjoBoilerplate\Utility\SessionUtility
+     */
+    public function getSessionUtility()
+    {
+        if(!$this->sessionUtility){
+            $this->setSessionUtility($this->objectManager->get('GjoSe\GjoBoilerplate\Utility\SessionUtility'));
+        }
+        return $this->sessionUtility;
+    }
+
+    /**
+     * @param \GjoSe\GjoBoilerplate\Utility\SessionUtility $sessionUtility
+     *
+     * @return void
+     */
+    public function setSessionUtility(SessionUtility $sessionUtility)
+    {
+        $this->sessionUtility = $sessionUtility;
+    }
+
+
+
+    /**
+     * @return null
+     */
+    public function getFeUser()
+    {
+        if (!$this->feUser) {
+            $this->setFeUser($GLOBALS['TSFE']->fe_user->user);
+        }
+
+        return $this->feUser;
+    }
+
+    /**
+     * @param null $feUser
+     *
+     * @return void
+     */
+    public function setFeUser($feUser)
+    {
+        $this->feUser = $feUser;
     }
 }
