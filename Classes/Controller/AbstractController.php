@@ -24,9 +24,15 @@ namespace GjoSe\GjoBoilerplate\Controller;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController as CoreAbstractController;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use GjoSe\GjoBoilerplate\Utility\SessionUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 class AbstractController extends CoreAbstractController
 {
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+     */
+    protected $persistenceManager;
 
     protected $feUser = null;
 
@@ -34,6 +40,16 @@ class AbstractController extends CoreAbstractController
      * @var \GjoSe\GjoBoilerplate\Utility\SessionUtility
      */
     protected $sessionUtility;
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
+     *
+     * @return void
+     */
+    public function injectPersistenceManager(PersistenceManager $persistenceManager)
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
 
     /**
      * @return string
@@ -48,9 +64,10 @@ class AbstractController extends CoreAbstractController
      */
     public function getSessionUtility()
     {
-        if(!$this->sessionUtility){
+        if (!$this->sessionUtility) {
             $this->setSessionUtility($this->objectManager->get('GjoSe\GjoBoilerplate\Utility\SessionUtility'));
         }
+
         return $this->sessionUtility;
     }
 
@@ -63,8 +80,6 @@ class AbstractController extends CoreAbstractController
     {
         $this->sessionUtility = $sessionUtility;
     }
-
-
 
     /**
      * @return null
