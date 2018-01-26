@@ -24,6 +24,13 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
         );
 
         $this->registerArgument(
+            'orderproduct',
+            'GjoSe\GjoShop\Domain\Model\Orderproducts',
+            'orderproduct',
+            false
+        );
+
+        $this->registerArgument(
             'productSetVariantGroups',
             'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
             'productSetVariantGroups',
@@ -53,7 +60,7 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
                     $price = $this->getDisplayPrice(false);
                 }
             }
-        }else{
+        } else {
             $price = $this->getDisplayPrice();
         }
 
@@ -62,13 +69,14 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
 
     protected function getDisplayPrice($priceInclVat = true)
     {
-        $productSetVariant = $this->arguments['productSetVariant'];
+        $productSetVariant       = $this->arguments['productSetVariant'];
+        $orderproduct            = $this->arguments['orderproduct'];
         $productSetVariantGroups = $this->arguments['productSetVariantGroups'];
         $lowestPrice             = $this->arguments['lowestPrice'];
 
         $displayPrice = null;
 
-        if($productSetVariant){
+        if ($productSetVariant) {
             if ($priceInclVat) {
                 $tmpPrice = $productSetVariant->getPrice() + ($productSetVariant->getPrice() * $productSetVariant->getTax() / 100);
             } else {
@@ -76,30 +84,34 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
             }
 
             $displayPrice = $tmpPrice;
+        } elseif ($lowestPrice) {
+            foreach ($productSetVariantGroups as $productSetVariantGroup) {
+                $productSetVariants = $productSetVariantGroup->getProductSetVariants();
 
-        }else{
-            if ($lowestPrice) {
-                foreach ($productSetVariantGroups as $productSetVariantGroup) {
-                    $productSetVariants = $productSetVariantGroup->getProductSetVariants();
-
-                    $prices = array();
-                    if ($productSetVariants) {
-                        foreach ($productSetVariants as $key => $productSetVariant) {
-                            if ($priceInclVat) {
-                                $tmpPrice = $productSetVariant->getPrice() + ($productSetVariant->getPrice() * $productSetVariant->getTax() / 100);
-                            } else {
-                                $tmpPrice = $productSetVariant->getPrice();
-                            }
-
-                            array_push($prices, $tmpPrice);
+                $prices = array();
+                if ($productSetVariants) {
+                    foreach ($productSetVariants as $key => $productSetVariant) {
+                        if ($priceInclVat) {
+                            $tmpPrice = $productSetVariant->getPrice() + ($productSetVariant->getPrice() * $productSetVariant->getTax() / 100);
+                        } else {
+                            $tmpPrice = $productSetVariant->getPrice();
                         }
+
+                        array_push($prices, $tmpPrice);
                     }
                 }
-
-                $displayPrice = min($prices);
             }
-        }
 
+            $displayPrice = min($prices);
+        } elseif ($orderproduct) {
+            if ($priceInclVat) {
+                $tmpPrice = $orderproduct->getProductPrice() + ($orderproduct->getProductPrice() * $orderproduct->getProductVat() / 100);
+            } else {
+                $tmpPrice = $orderproduct->getProductPrice();
+            }
+
+            $displayPrice = $tmpPrice;
+        }
 
         return $displayPrice;
     }
