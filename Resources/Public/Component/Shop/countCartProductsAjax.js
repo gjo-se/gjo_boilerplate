@@ -24,4 +24,7 @@ var _countCartProducts = function () {
     };
 };
 
-_countCartProducts();
+
+$(document).ready(function () {
+    _countCartProducts();
+});
