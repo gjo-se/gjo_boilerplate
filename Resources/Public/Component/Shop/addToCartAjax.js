@@ -19,7 +19,7 @@
                 var responseObj = jQuery.parseJSON(response);
                 var openOrderCountProducts = responseObj.openOrderCountProducts;
 
-                _setOpenOrderCountProducts(openOrderCountProducts);
+                _countCartProducts();
                 _showAlertSuccessAddToCart();
 
             },
@@ -27,10 +27,6 @@
                 console.error(error);
             }
         });
-    };
-
-    var _setOpenOrderCountProducts = function (openOrderCountProducts) {
-        $('.openOrderCountProducts').html('(' + openOrderCountProducts + ')')
     };
 
     var _showAlertSuccessAddToCart = function () {
