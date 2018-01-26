@@ -1,8 +1,8 @@
 plugin.tx_gjoboilerplate {
     view {
-        templateRootPath = {$filepaths.templateRootPath}
-        partialRootPath = {$filepaths.partialRootPath}
-        layoutRootPath = {$filepaths.layoutRootPath}
+        templateRootPath = {$plugin.tx_gjoboilerplate.view.templateRootPath}
+        partialRootPath = {$plugin.tx_gjoboilerplate.view.partialRootPath}
+        layoutRootPath = {$plugin.tx_gjoboilerplate.view.layoutRootPath}
     }
 
     persistence {
