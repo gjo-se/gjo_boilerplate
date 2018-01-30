@@ -34,8 +34,6 @@ class AbstractController extends CoreAbstractController
      */
     protected $persistenceManager;
 
-    protected $feUser = null;
-
     /**
      * @var \GjoSe\GjoBoilerplate\Utility\SessionUtility
      */
@@ -79,27 +77,5 @@ class AbstractController extends CoreAbstractController
     public function setSessionUtility(SessionUtility $sessionUtility)
     {
         $this->sessionUtility = $sessionUtility;
-    }
-
-    /**
-     * @return null
-     */
-    public function getFeUser()
-    {
-        if (!$this->feUser) {
-            $this->setFeUser($GLOBALS['TSFE']->fe_user->user);
-        }
-
-        return $this->feUser;
-    }
-
-    /**
-     * @param null $feUser
-     *
-     * @return void
-     */
-    public function setFeUser($feUser)
-    {
-        $this->feUser = $feUser;
     }
 }

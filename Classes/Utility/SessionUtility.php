@@ -21,9 +21,26 @@
 namespace GjoSe\GjoBoilerplate\Utility;
 
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class SessionUtility
 {
+    const NOT_LOGGED_IN_FE_USER_SESSION_ID = 'notLoggedInFeUserSessionId';
+
+    /**
+     * @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected $frontendController = null;
+
+    /**
+     * @var null | \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
+     */
+    protected $feUser = null;
+
+    /**
+     * @var string
+     */
+    protected $sessionPrefix = '';
 
     /**
      * @var array
@@ -33,73 +50,75 @@ class SessionUtility
     /**
      * @var string
      */
-    protected $sessionPrefix = '';
+    protected $notLoggedInFeUserSessionId = '';
 
     /**
-     * @var TypoScriptFrontendController
+     * @var int
      */
-    protected $frontendController;
-
-    public function __construct()
-    {
-        $this->frontendController = $GLOBALS['TSFE'];
-    }
+    protected $loggedInFeUserUid = 0;
 
     /**
-     * @return void
+     * @return TypoScriptFrontendController
      */
-    public function initSession($sessionPrefix = '')
+    public function getFrontendController()
     {
-        $this->setSessionPrefix($sessionPrefix);
-
-        if ($this->frontendController->loginUser) {
-            $this->sessionData = $this->frontendController->fe_user->getKey('user', $this->sessionPrefix);
-        } else {
-            $this->sessionData = $this->frontendController->fe_user->getKey('ses', $this->sessionPrefix);
+        if(!$this->frontendController){
+            $this->setFrontendController($GLOBALS['TSFE']);
         }
+        return $this->frontendController;
     }
 
     /**
-     * @return void
-     */
-    public function storeSession()
-    {
-        if ($this->frontendController->loginUser) {
-            $this->frontendController->fe_user->setKey('user', $this->sessionPrefix, $this->getSessionData());
-        } else {
-            $this->frontendController->fe_user->setKey('ses', $this->sessionPrefix, $this->getSessionData());
-        }
-        $this->frontendController->storeSessionData();
-    }
-
-    /**
-     * @return void
-     */
-    public function destroySession()
-    {
-        if ($this->frontendController->loginUser) {
-            $this->frontendController->fe_user->setKey('user', $this->sessionPrefix, null);
-        } else {
-            $this->frontendController->fe_user->setKey('ses', $this->sessionPrefix, null);
-        }
-        $this->frontendController->storeSessionData();
-    }
-
-    /**
-     * @param string $key
-     * @param string $value
+     * @param TypoScriptFrontendController $frontendController
      *
      * @return void
      */
-    public function setSessionData($key, $value)
+    public function setFrontendController(TypoScriptFrontendController $frontendController)
     {
-        $this->sessionData[$key] = $value;
-        $this->storeSession();
+        $this->frontendController = $frontendController;
+    }
+
+    /**
+     * @return null | FrontendUserAuthentication
+     */
+    public function getFeUser()
+    {
+        if (!$this->feUser) {
+            $this->setFeUser($this->getFrontendController()->fe_user);
+        }
+
+        return $this->feUser;
+    }
+
+    /**
+     * @param FrontendUserAuthentication $feUser
+     *
+     * @return void
+     */
+    public function setFeUser(FrontendUserAuthentication $feUser)
+    {
+        $this->feUser = $feUser;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSessionPrefix()
+    {
+        return $this->sessionPrefix;
+    }
+
+    /**
+     * @param string $sessionPrefix
+     *
+     */
+    public function setSessionPrefix($sessionPrefix)
+    {
+        $this->sessionPrefix = $sessionPrefix;
     }
 
     /**
      * Retrieve a member of the $sessionData variable
-     *
      * If no $key is passed, returns the entire $sessionData array
      *
      * @param string $key     Parameter to search for
@@ -117,14 +136,102 @@ class SessionUtility
     }
 
     /**
-     * Set the s prefix
+     * @param string $key
+     * @param string $value
      *
-     * @param string $sessionPrefix
-     *
+     * @return void
      */
-    public function setSessionPrefix($sessionPrefix)
+    public function setSessionData($key, $value)
     {
-        $this->sessionPrefix = $sessionPrefix;
+        $this->sessionData[$key] = $value;
+        $this->storeSession();
+    }
+
+    /**
+     * @return string
+     */
+    public function getNotLoggedInFeUserSessionId()
+    {
+        if(!$this->notLoggedInFeUserSessionId){
+            $notLoggedInFeUserSessionData = $this->frontendController->fe_user->getKey('ses', $this->sessionPrefix);
+            $this->setNotLoggedInFeUserSessionId($notLoggedInFeUserSessionData[self::NOT_LOGGED_IN_FE_USER_SESSION_ID]);
+        }
+
+        return $this->notLoggedInFeUserSessionId;
+    }
+
+    /**
+     * @param string $notLoggedInFeUserSessionId
+     *
+     * @return void
+     */
+    public function setNotLoggedInFeUserSessionId($notLoggedInFeUserSessionId)
+    {
+        $this->notLoggedInFeUserSessionId = $notLoggedInFeUserSessionId;
+    }
+
+    /**
+     * @return void
+     */
+    public function initSession()
+    {
+        if ($this->getFrontendController()->loginUser) {
+            $this->sessionData = $this->frontendController->fe_user->getKey('user', $this->sessionPrefix);
+        } else {
+            $this->sessionData = $this->frontendController->fe_user->getKey('ses', $this->sessionPrefix);
+        }
+
+        if(!$this->getSessionData(self::NOT_LOGGED_IN_FE_USER_SESSION_ID)){
+            $this->setSessionData(self::NOT_LOGGED_IN_FE_USER_SESSION_ID, $this->getFeUser()->id);
+        }
+    }
+
+    /**
+     * @return integer
+     */
+    public function getLoggedInFeUserUid()
+    {
+        if(!$this->loggedInFeUserUid){
+            $this->setLoggedInFeUserUid($this->getFeUser()->user['uid']);
+        }
+
+        return $this->loggedInFeUserUid;
+    }
+
+    /**
+     * @param integer $loggedInFeUserUid
+     *
+     * @return void
+     */
+    public function setLoggedInFeUserUid($loggedInFeUserUid)
+    {
+        $this->loggedInFeUserUid = $loggedInFeUserUid;
+    }
+
+    /**
+     * @return void
+     */
+    public function storeSession()
+    {
+        if ($this->getFrontendController()->loginUser) {
+            $this->getFeUser()->setKey('user', $this->getSessionPrefix(), $this->getSessionData());
+        } else {
+            $this->getFeUser()->setKey('ses', $this->getSessionPrefix(), $this->getSessionData());
+        }
+        $this->getFrontendController()->storeSessionData();
+    }
+
+    /**
+     * @return void
+     */
+    public function destroySession()
+    {
+        if ($this->getFrontendController()->loginUser) {
+            $this->getFeUser()->setKey('user', $this->getSessionPrefix(), null);
+        } else {
+            $this->getFeUser()->setKey('ses', $this->getSessionPrefix(), null);
+        }
+        $this->getFrontendController()->storeSessionData();
     }
 
     /**
@@ -134,6 +241,7 @@ class SessionUtility
      */
     public function hasSessionKey($key)
     {
-        return isset($this->sessionData[$key]);
+        return isset($this->getSessionData()[$key]);
     }
+
 }
