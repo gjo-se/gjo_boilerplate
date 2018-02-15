@@ -25,6 +25,7 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class SessionUtility
 {
+
     const NOT_LOGGED_IN_FE_USER_SESSION_ID = 'notLoggedInFeUserSessionId';
 
     /**
@@ -62,9 +63,10 @@ class SessionUtility
      */
     public function getFrontendController()
     {
-        if(!$this->frontendController){
+        if (!$this->frontendController) {
             $this->setFrontendController($GLOBALS['TSFE']);
         }
+
         return $this->frontendController;
     }
 
@@ -152,8 +154,13 @@ class SessionUtility
      */
     public function getNotLoggedInFeUserSessionId()
     {
-        if(!$this->notLoggedInFeUserSessionId){
-            $notLoggedInFeUserSessionData = $this->frontendController->fe_user->getKey('ses', $this->sessionPrefix);
+        if (!$this->notLoggedInFeUserSessionId) {
+            if ($this->frontendController->fe_user->getKey('ses', $this->sessionPrefix)) {
+                $notLoggedInFeUserSessionData = $this->frontendController->fe_user->getKey('ses', $this->sessionPrefix);
+            }elseif ($this->frontendController->fe_user->getKey('user', $this->sessionPrefix)){
+                $notLoggedInFeUserSessionData = $this->frontendController->fe_user->getKey('user', $this->sessionPrefix);
+            }
+
             $this->setNotLoggedInFeUserSessionId($notLoggedInFeUserSessionData[self::NOT_LOGGED_IN_FE_USER_SESSION_ID]);
         }
 
@@ -181,7 +188,7 @@ class SessionUtility
             $this->sessionData = $this->frontendController->fe_user->getKey('ses', $this->sessionPrefix);
         }
 
-        if(!$this->getSessionData(self::NOT_LOGGED_IN_FE_USER_SESSION_ID)){
+        if (!$this->getSessionData(self::NOT_LOGGED_IN_FE_USER_SESSION_ID)) {
             $this->setSessionData(self::NOT_LOGGED_IN_FE_USER_SESSION_ID, $this->getFeUser()->id);
         }
     }
@@ -191,7 +198,7 @@ class SessionUtility
      */
     public function getLoggedInFeUserUid()
     {
-        if(!$this->loggedInFeUserUid){
+        if (!$this->loggedInFeUserUid) {
             $this->setLoggedInFeUserUid($this->getFeUser()->user['uid']);
         }
 
@@ -243,5 +250,4 @@ class SessionUtility
     {
         return isset($this->getSessionData()[$key]);
     }
-
 }
