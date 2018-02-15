@@ -2,7 +2,6 @@
 
 /**
  * @license   GPLv3, http://www.gnu.org/copyleft/gpl.html
- * @copyright Aimeos (aimeos.org), 2017
  * @package   TYPO3
  */
 
