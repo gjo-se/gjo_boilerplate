@@ -22,7 +22,7 @@
 
                 _countCartProducts();
                 _removeProductFromCart();
-                // _showAlertSuccessAddToCart();
+                _setOrderAmountAjax(openOrderUid);
 
             },
             error: function (error) {

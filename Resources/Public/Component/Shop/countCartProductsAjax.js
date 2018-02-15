@@ -20,7 +20,7 @@ var _countCartProducts = function () {
     });
 
     var _setOpenOrderCountProducts = function (openOrderCountProducts) {
-        $('.openOrderCountProducts').html('(' + openOrderCountProducts + ')')
+        $('.openOrderCountProducts').html(openOrderCountProducts)
     };
 };
 

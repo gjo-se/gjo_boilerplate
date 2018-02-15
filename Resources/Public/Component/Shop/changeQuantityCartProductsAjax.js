@@ -17,6 +17,11 @@
             },
             success: function (response) {
                 _countCartProducts();
+
+                if (typeof _setOrderAmountAjax === 'function') {
+                    _setOrderAmountAjax(openOrderUid);
+                }
+
             },
             error: function (error) {
                 console.error(error);
