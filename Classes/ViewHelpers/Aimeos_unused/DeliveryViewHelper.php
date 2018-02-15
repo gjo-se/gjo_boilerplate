@@ -2,11 +2,10 @@
 
 /**
  * @license   GPLv3, http://www.gnu.org/copyleft/gpl.html
- * @copyright Aimeos (aimeos.org), 2017
  * @package   TYPO3
  */
 
-namespace GjoSe\GjoBoilerplate\ViewHelpers\Aimeos;
+//namespace GjoSe\GjoBoilerplate\ViewHelpers\Aimeos;
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Exception;
