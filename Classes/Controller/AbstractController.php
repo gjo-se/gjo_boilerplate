@@ -26,9 +26,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use GjoSe\GjoBoilerplate\Utility\SessionUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use GjoSe\GjoBoilerplate\Service\SendMailService;
+
 class AbstractController extends CoreAbstractController
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
      */
@@ -40,6 +42,16 @@ class AbstractController extends CoreAbstractController
     protected $sessionUtility;
 
     /**
+     * @var string
+     */
+    protected $extensionKey = '';
+
+    /**
+     * @var \GjoSe\GjoBoilerplate\Service\SendMailService
+     */
+    protected $sendMailService = null;
+
+    /**
      * @param \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager $persistenceManager
      *
      * @return void
@@ -47,14 +59,6 @@ class AbstractController extends CoreAbstractController
     public function injectPersistenceManager(PersistenceManager $persistenceManager)
     {
         $this->persistenceManager = $persistenceManager;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getExtKey()
-    {
-        return GeneralUtility::camelCaseToLowerCaseUnderscored($this->extensionName);
     }
 
     /**
@@ -77,5 +81,35 @@ class AbstractController extends CoreAbstractController
     public function setSessionUtility(SessionUtility $sessionUtility)
     {
         $this->sessionUtility = $sessionUtility;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtensionKey()
+    {
+        if(!$this->extensionKey){
+            $this->setExtensionKey(GeneralUtility::camelCaseToLowerCaseUnderscored($this->extensionName));
+        }
+
+        return $this->extensionKey;
+    }
+
+    /**
+     * @param string $extensionKey
+     *
+     * @return void
+     */
+    public function setExtensionKey($extensionKey)
+    {
+        $this->extensionKey = $extensionKey;
+    }
+
+    /**
+     * @param \GjoSe\GjoBoilerplate\Service\SendMailService
+     */
+    public function injectSendMailService(SendMailService $sendMailService)
+    {
+        $this->sendMailService = $sendMailService;
     }
 }
