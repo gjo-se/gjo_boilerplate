@@ -23,7 +23,7 @@ namespace GjoSe\GjoBoilerplate\Utility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
-class SessionUtility
+class SessionUtility extends AbstractUtility
 {
 
     const NOT_LOGGED_IN_FE_USER_SESSION_ID = 'notLoggedInFeUserSessionId';
