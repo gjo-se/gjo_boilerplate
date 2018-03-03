@@ -36,6 +36,12 @@ abstract class AbstractUtility
     protected $objectManager;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     */
+    protected $configurationManager;
+
+
+    /**
      * @var \TYPO3\CMS\Extbase\Service\ImageService
      */
     protected $imageService;
