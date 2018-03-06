@@ -11,8 +11,6 @@ use GjoSe\GjoBoilerplate\Utility\ResponsiveImagesUtility;
 use GjoSe\GjoBoilerplate\Utility\SettingsUtility;
 use TYPO3\CMS\Core\Resource\Rendering\RendererRegistry;
 
-
-
 class MediaViewHelper extends CoreMediaViewHelper
 {
 
@@ -33,7 +31,6 @@ class MediaViewHelper extends CoreMediaViewHelper
         $this->settingsUtility = $settingsUtility;
     }
 
-
     /**
      * Initialize arguments.
      */
@@ -52,7 +49,6 @@ class MediaViewHelper extends CoreMediaViewHelper
         $this->registerArgument('contentElementData', 'array', 'Data-Array of ContentElement', false);
         $this->registerArgument('picturefill', 'bool', 'Use rendering suggested by picturefill.js', false, true);
         $this->registerArgument('lazyload', 'bool', 'Generate markup that supports lazyloading', false, false);
-
     }
 
     /**
@@ -63,11 +59,16 @@ class MediaViewHelper extends CoreMediaViewHelper
      */
     public function render()
     {
-        $file = $this->arguments['file'];
+        $file             = $this->arguments['file'];
         $additionalConfig = $this->arguments['additionalConfig'];
 
         $this->breakpoints = $this->getBreakPoints();
-        $width = max($this->witdh);
+
+        if ($this->arguments['width']) {
+            $width = $this->arguments['width'];
+        } elseif (count($this->witdh)) {
+            $width = max($this->witdh);
+        }
 
         $height = $this->arguments['height'];
 
@@ -78,7 +79,8 @@ class MediaViewHelper extends CoreMediaViewHelper
         }
 
         if (!($file instanceof FileInterface || $file instanceof AbstractFileFolder)) {
-            throw new \UnexpectedValueException('Supplied file object type ' . get_class($file) . ' must be FileInterface or AbstractFileFolder.', 1454252193);
+            throw new \UnexpectedValueException('Supplied file object type ' . get_class($file) . ' must be FileInterface or AbstractFileFolder.',
+                1454252193);
         }
 
         $fileRenderer = RendererRegistry::getInstance()->getRenderer($file);
@@ -88,10 +90,10 @@ class MediaViewHelper extends CoreMediaViewHelper
             return $this->renderImage($file, $width, $height);
         } else {
             $additionalConfig = array_merge_recursive($this->arguments, $additionalConfig);
+
             return $fileRenderer->render($file, $width, $height, $additionalConfig);
         }
     }
-
 
     /**
      * Render img tag
@@ -125,12 +127,12 @@ class MediaViewHelper extends CoreMediaViewHelper
     protected function renderPicture(FileInterface $image, $width, $height)
     {
         // Get crop variants
-        $cropString = $image instanceof FileReference ? $image->getProperty('crop') : '';
-        $cropVariantCollection = CropVariantCollection::create((string) $cropString);
+        $cropString            = $image instanceof FileReference ? $image->getProperty('crop') : '';
+        $cropVariantCollection = CropVariantCollection::create((string)$cropString);
 
         $cropVariant = $this->arguments['cropVariant'] ?: 'default';
-        $cropArea = $cropVariantCollection->getCropArea($cropVariant);
-        $focusArea = $cropVariantCollection->getFocusArea($cropVariant);
+        $cropArea    = $cropVariantCollection->getCropArea($cropVariant);
+        $focusArea   = $cropVariantCollection->getFocusArea($cropVariant);
 
         // Generate fallback image
         $fallbackImage = $this->generateFallbackImage($image, $width, $cropArea);
@@ -164,12 +166,12 @@ class MediaViewHelper extends CoreMediaViewHelper
     protected function renderImageSrcset(FileInterface $image, $width, $height)
     {
         // Get crop variants
-        $cropString = $image instanceof FileReference ? $image->getProperty('crop') : '';
-        $cropVariantCollection = CropVariantCollection::create((string) $cropString);
+        $cropString            = $image instanceof FileReference ? $image->getProperty('crop') : '';
+        $cropVariantCollection = CropVariantCollection::create((string)$cropString);
 
         $cropVariant = $this->arguments['cropVariant'] ?: 'default';
-        $cropArea = $cropVariantCollection->getCropArea($cropVariant);
-        $focusArea = $cropVariantCollection->getFocusArea($cropVariant);
+        $cropArea    = $cropVariantCollection->getCropArea($cropVariant);
+        $focusArea   = $cropVariantCollection->getFocusArea($cropVariant);
 
         // Generate fallback image
         $fallbackImage = $this->generateFallbackImage($image, $width, $cropArea);
@@ -204,10 +206,10 @@ class MediaViewHelper extends CoreMediaViewHelper
     {
         $processingInstructions = [
             'width' => $width,
-            'crop' => $cropArea->isEmpty() ? null : $cropArea->makeAbsoluteBasedOnFile($image),
+            'crop'  => $cropArea->isEmpty() ? null : $cropArea->makeAbsoluteBasedOnFile($image),
         ];
-        $imageService = $this->getImageService();
-        $fallbackImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
+        $imageService           = $this->getImageService();
+        $fallbackImage          = $imageService->applyProcessingInstructions($image, $processingInstructions);
 
         return $fallbackImage;
     }
@@ -225,31 +227,29 @@ class MediaViewHelper extends CoreMediaViewHelper
 
     protected function getBreakPoints()
     {
-        if($this->arguments['breakpoints']){
+        if ($this->arguments['breakpoints']) {
             return $this->arguments['breakpoints'];
-        }
-        else{
-            $settings = $this->settingsUtility->getSettings('extension', 'gjointroduction');
+        } else {
+            $settings     = $this->settingsUtility->getSettings('extension', 'gjointroduction');
             $cropVariants = $settings['cropVariants'];
 
             $breakpoints = array();
             foreach ($cropVariants as $key => $cropVariant) {
                 $breakpoints[] = [
-                 'cropVariant' => $key,
-                    'media' => $cropVariant['media'],
-                    'srcset' => [$this->getSrcset($key)],
-                    'sizes' => $cropVariant['media'] . ' ' . $this->getSrcset($key, $this->getColCountsArray()) . 'px'
+                    'cropVariant' => $key,
+                    'media'       => $cropVariant['media'],
+                    'srcset'      => [$this->getSrcset($key)],
+                    'sizes'       => $cropVariant['media'] . ' ' . $this->getSrcset($key, $this->getColCountsArray()) . 'px'
                 ];
             }
 
             return $breakpoints;
-
         }
     }
 
     protected function getContentElementData()
     {
-        if(isset($this->arguments['contentElementData'])){
+        if (isset($this->arguments['contentElementData'])) {
             return $this->arguments['contentElementData'];
         }
 
@@ -258,7 +258,7 @@ class MediaViewHelper extends CoreMediaViewHelper
 
     protected function getGridelementsColumn()
     {
-        if($this->getContentElementData()){
+        if ($this->getContentElementData()) {
             return $this->getContentElementData()['tx_gridelements_columns'];
         }
 
@@ -269,65 +269,64 @@ class MediaViewHelper extends CoreMediaViewHelper
     {
         $parentgridFlexformColCss = 'parentgrid_flexform_col' . $this->getGridelementsColumn() . '_css';
 
-        if(isset($this->getContentElementData()[$parentgridFlexformColCss])){
-           return $this->getContentElementData()[$parentgridFlexformColCss];
+        if (isset($this->getContentElementData()[$parentgridFlexformColCss])) {
+            return $this->getContentElementData()[$parentgridFlexformColCss];
         }
+
         return false;
     }
 
     protected function getColCountsArray()
     {
         $parentgridFlexformColCss = explode(' ', $this->getParentgridFlexformColCss());
-        $breakpointColCounts = array();
+        $breakpointColCounts      = array();
         foreach ($parentgridFlexformColCss as $parentgridFlexformColCssValue) {
 
             $serachString = '/col-[0-9]/';
-            if(preg_match($serachString, $parentgridFlexformColCssValue)) {
+            if (preg_match($serachString, $parentgridFlexformColCssValue)) {
                 $breakpointColCounts['mobile']['col'] = substr($parentgridFlexformColCssValue, strlen('col-'));
             }
 
             $serachString = '/col-sm-[0-9]/';
-            if(preg_match($serachString, $parentgridFlexformColCssValue)){
+            if (preg_match($serachString, $parentgridFlexformColCssValue)) {
                 $breakpointColCounts['tablet']['col'] = substr($parentgridFlexformColCssValue, strlen('col-sm-'));
             }
 
             $serachString = '/col-md-[0-9]/';
-            if(preg_match($serachString, $parentgridFlexformColCssValue)){
+            if (preg_match($serachString, $parentgridFlexformColCssValue)) {
                 $breakpointColCounts['laptop']['col'] = substr($parentgridFlexformColCssValue, strlen('col-md-'));
             }
 
             $serachString = '/col-lg-[0-9]/';
-            if(preg_match($serachString, $parentgridFlexformColCssValue)){
+            if (preg_match($serachString, $parentgridFlexformColCssValue)) {
                 $breakpointColCounts['desktop']['col'] = substr($parentgridFlexformColCssValue, strlen('col-lg-'));
             }
 
             $serachString = '/col-xl-[0-9]/';
-            if(preg_match($serachString, $parentgridFlexformColCssValue)){
+            if (preg_match($serachString, $parentgridFlexformColCssValue)) {
                 $breakpointColCounts['widescreen']['col'] = substr($parentgridFlexformColCssValue, strlen('col-xl-'));
             }
-
         }
 
         return $breakpointColCounts;
-
     }
 
     protected function getSrcset($key)
     {
-        $settings = $this->settingsUtility->getSettings('extension', 'gjointroduction');
+        $settings       = $this->settingsUtility->getSettings('extension', 'gjointroduction');
         $containerWidth = intval($settings['cropVariants'][$key]['container']);
-        $gridSystem = intval($settings['gridSystem']);
+        $gridSystem     = intval($settings['gridSystem']);
 
         $colWidthDesktop = intval($this->getColCountsArray()['desktop']['col']);
-        $colWidthLaptop = intval($this->getColCountsArray()['laptop']['col']);
-        $colWidthTablet = intval($this->getColCountsArray()['tablet']['col']);
-        $colWidthMobile = intval($this->getColCountsArray()['mobile']['col']);
+        $colWidthLaptop  = intval($this->getColCountsArray()['laptop']['col']);
+        $colWidthTablet  = intval($this->getColCountsArray()['tablet']['col']);
+        $colWidthMobile  = intval($this->getColCountsArray()['mobile']['col']);
 
         $widestImage = array();
-        if($key == 'desktop') {
+        if ($key == 'desktop') {
 
             if ($colWidthDesktop) {
-                    return $this->witdh[] = $containerWidth / $gridSystem * $colWidthDesktop;
+                return $this->witdh[] = $containerWidth / $gridSystem * $colWidthDesktop;
             }
             if ($colWidthLaptop) {
                 return $this->witdh[] = $containerWidth / $gridSystem * $colWidthLaptop;
@@ -340,30 +339,30 @@ class MediaViewHelper extends CoreMediaViewHelper
             }
         }
 
-        if($key == 'laptop'){
+        if ($key == 'laptop') {
 
-            if($colWidthLaptop){
+            if ($colWidthLaptop) {
                 return $this->witdh[] = $containerWidth / $gridSystem * $colWidthLaptop;
             }
-            if($colWidthTablet){
+            if ($colWidthTablet) {
                 return $this->witdh[] = $containerWidth / $gridSystem * $colWidthTablet;
             }
-            if($colWidthMobile){
+            if ($colWidthMobile) {
                 return $this->witdh[] = $containerWidth / $gridSystem * $colWidthMobile;
             }
         }
 
-        if($key == 'tablet'){
-            if($colWidthTablet){
+        if ($key == 'tablet') {
+            if ($colWidthTablet) {
                 return $this->witdh[] = $containerWidth / $gridSystem * $colWidthTablet;
             }
-            if($colWidthMobile){
+            if ($colWidthMobile) {
                 return $this->witdh[] = $containerWidth / $gridSystem * $colWidthMobile;
             }
         }
 
-        if($key == 'mobile'){
-            if($colWidthMobile){
+        if ($key == 'mobile') {
+            if ($colWidthMobile) {
                 return $this->witdh[] = $containerWidth / $gridSystem * $colWidthMobile;
             }
         }
