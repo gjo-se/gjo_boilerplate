@@ -31,20 +31,23 @@ class GetLowestPriceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
         }
 
         $productSetVariantGroups = $this->arguments['productSetVariantGroups'];
+        $prices             = array();
+        $lowestPrice = null;
 
         foreach ($productSetVariantGroups as $productSetVariantGroup) {
 
             $productSetVariants = $productSetVariantGroup->getProductSetVariants();
-            $prices             = array();
             if ($productSetVariants) {
 
                 foreach ($productSetVariants as $key => $productSetVariant) {
                     array_push($prices, $productSetVariant->getPrice());
                 }
+
+                $lowestPrice = min($prices);
+
             }
         }
 
-        $lowestPrice = min($prices);
 
         return $lowestPrice;
     }
