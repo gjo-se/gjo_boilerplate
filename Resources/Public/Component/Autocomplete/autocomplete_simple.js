@@ -4,7 +4,7 @@
     var timer = null;
 
     var initAutocomplete = function () {
-        var $searchbox = $('.tx-indexedsearch-searchbox-sword');
+        var $searchbox = $('.search-sword');
         $searchbox.attr('autocomplete', 'off');
         var container = $('.search-suggestions');
 
@@ -34,7 +34,7 @@
                     container.hide();
                     container.html('');
                 }
-            }, 300);
+            }, 1);
         });
         $(document).bind('click keyup', function (e) {
             if (!container.is(e.target) && container.has(e.target).length === 0 && !$(e.target).hasClass('tx-indexedsearch-searchbox-sword')) {
