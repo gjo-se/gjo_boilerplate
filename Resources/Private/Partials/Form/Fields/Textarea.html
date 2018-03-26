@@ -1,0 +1,44 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+    <v:variable.set name="field" value="{name}"/>
+    <v:variable.set name="locallang" value="LLL:EXT:gjo_boilerplate/Resources/Private/Language/form.xlf"/>
+
+    <f:form.textarea id="{f:if(condition: '{id}', then:'{id}', else:'{field}')}"
+                     property="{f:if(condition: '{property}', then:'{property}', else:'{field}')}"
+                     name="{f:if(condition: '{name}', then:'{name}', else:'{field}')}"
+                     value="{value}"
+                     class="{f:if(condition: '{class}', then:'{class}', else:'form-control md-textarea')}"
+                     errorClass="{f:if(condition: '{errorClass}', then:'{errorClass}', else:'f3-form-error')}"
+                     autofocus="{autofocus}"
+                     placeholder="{placeholder}"
+                     disabled="{disabled}"
+                     title="{tooltip}"
+                     accesskey="{accesskey}"
+                     tabindex="{tabindex}"
+                     rows="{f:if(condition: '{rows}', then:'{rows}', else:'2')}"
+                     cols="{cols}"
+                     additionalAttributes="{additionalAttributes}"
+                     data="{data}"
+    />
+
+    <label for="{f:if(condition: '{label}', then:'{label}', else:'{field}')}"
+           class="{labelClass} {gjoSe:form.hasError(property:'{field}',then:'text-danger')}">
+        <f:translate key="{locallang}:form.field.{name}"/>
+    </label>
+
+    <span class="small text-danger">
+        <f:render partial="Form/ErrorMessage"
+                  arguments="{
+                      object: '{formName}',
+                      property:'{field}'
+                  }"
+        />
+    </span>
+
+
+
+</div>
+

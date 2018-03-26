@@ -1,0 +1,23 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+
+    <f:form.validationResults for="{object}">
+        <v:variable.set name="propertyErrors"
+                        value="{gjoSe:form.property(subject:'{validationResults.flattenedErrors}', propertyName:'{property}')}"/>
+
+        <f:if condition="{propertyErrors}">
+            <ul class="list-group">
+                <f:for each="{propertyErrors}" as="error">
+                    <li>
+                        {error}
+                    </li>
+                </f:for>
+            </ul>
+        </f:if>
+
+    </f:form.validationResults>
+
+</div>
