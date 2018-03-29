@@ -25,7 +25,8 @@ gjoSe.validation = {};
             whitespace: 'Ws',
             regex: {
                 alphabetic: /^[\p{L} ]*$/u,
-                alphanumeric: /^[\p{L}\d ]*$/u
+                alphanumeric: /^[\p{L}\d ]*$/u,
+                numeric: /^-?\d+([,.])?\d*$/
 
                 // email: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
                 // uri: /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/,
@@ -183,13 +184,10 @@ gjoSe.validation = {};
                 var regex = gjoSe.validation._config.regex.alphanumeric;
                 return regex.test(fieldValue)
             },
-            // numeric: function (value, fieldName) {
-            //     var result = $.isNumeric(value);
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_numeric, 'Numeric');
-            //     }
-            //     return result;
-            // },
+            numeric: function (fieldValue) {
+                var regex = gjoSe.validation._config.regex.numeric;
+                return regex.test(fieldValue)
+            },
             // email: function (value, fieldName) {
             //     var regex = validation._config.regex.email;
             //     var result = regex.test(value);

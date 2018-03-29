@@ -68,6 +68,15 @@
                 <source>The given subject was not a valid alphabetic string.</source>
                 <target>Zulässige Zeichen: Buchstaben a-z, Umlaute, Zahlen und Leerzeichen.</target>
             </trans-unit>
+            <trans-unit id="validator.numeric.error">
+                <source>The given subject was not a valid numeric.</source>
+                <target>Zulässige Zeichen: Zahlen, Punkt und Komma.</target>
+            </trans-unit>
+
+
+
+
+
 
 
 
