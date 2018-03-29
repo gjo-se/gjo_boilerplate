@@ -8,15 +8,15 @@
         <v:variable.set name="propertyErrors"
                         value="{gjoSe:form.property(subject:'{validationResults.flattenedErrors}', propertyName:'{property}')}"/>
 
-        <f:if condition="{propertyErrors}">
-            <ul class="list-group">
+        <ul class="error-message list-group">
+            <f:if condition="{propertyErrors}">
                 <f:for each="{propertyErrors}" as="error">
                     <li>
                         {error}
                     </li>
                 </f:for>
-            </ul>
-        </f:if>
+            </f:if>
+        </ul>
 
     </f:form.validationResults>
 

@@ -54,9 +54,20 @@
             ###### Messages          ######
             ###############################
 
-            <trans-unit id="validator.notempty.empty">
+
+
+            <trans-unit id="validator.alphabetic.error">
+                <source>The given subject was not a valid alphabetic string.</source>
+            </trans-unit>
+            <trans-unit id="validator.alphanumeric.error">
+                <source>The given subject was not a valid alphanumeric string.</source>
+            </trans-unit>
+
+            <trans-unit id="validator.required.error">
                 <source>Dieses Feld darf nicht leer sein.</source>
             </trans-unit>
+
+
             <trans-unit id="validator.emailaddress.notvalid">
                 <source>Der Eingabewert ist keine gültige Email-Adresse.</source>
             </trans-unit>

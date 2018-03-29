@@ -60,10 +60,23 @@
             ###### Messages          ######
             ###############################
 
+            <trans-unit id="validator.alphabetic.error">
+                <source>The given subject was not a valid alphabetic string.</source>
+                <target>Zulässige Zeichen: Buchstaben a-z, Umlaute und Leerzeichen.</target>
+            </trans-unit>
+            <trans-unit id="validator.alphanumeric.error">
+                <source>The given subject was not a valid alphabetic string.</source>
+                <target>Zulässige Zeichen: Buchstaben a-z, Umlaute, Zahlen und Leerzeichen.</target>
+            </trans-unit>
+
+
+
             <trans-unit id="validator.notempty.empty">
                 <source>Dieses Feld darf nicht leer sein.</source>
                 <target>Dieses Feld darf nicht leer sein.</target>
             </trans-unit>
+
+
             <trans-unit id="validator.emailaddress.notvalid">
                 <source>Der Eingabewert ist keine gültige Email-Adresse.</source>
                 <target>Der Eingabewert ist keine gültige Email-Adresse.</target>
