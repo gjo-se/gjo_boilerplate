@@ -26,9 +26,8 @@ gjoSe.validation = {};
             regex: {
                 alphabetic: /^[\p{L} ]*$/u,
                 alphanumeric: /^[\p{L}\d ]*$/u,
-                numeric: /^-?\d+([,.])?\d*$/
-
-                // email: /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
+                numeric: /^-?\d+([,.])?\d*$/,
+                email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
                 // uri: /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/,
 
             },
@@ -158,7 +157,7 @@ gjoSe.validation = {};
                     var fieldValue = gjoSe.validation._getFieldValue($field);
 
                     var fieldValidatorArr = fieldValidatorValue.split(gjoSe.validation._config.fieldValidatorAttributeSplit);
-                    var fieldValidator = fieldValidatorArr[0];
+                    var fieldValidator = $.trim(fieldValidatorArr[0]);
 
                     var fieldValidatorAttribute = '';
                     if (fieldValidatorArr.length > 1) {
@@ -188,14 +187,10 @@ gjoSe.validation = {};
                 var regex = gjoSe.validation._config.regex.numeric;
                 return regex.test(fieldValue)
             },
-            // email: function (value, fieldName) {
-            //     var regex = validation._config.regex.email;
-            //     var result = regex.test(value);
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_email, 'Email');
-            //     }
-            //     return result;
-            // },
+            email: function (fieldValue) {
+                var regex = gjoSe.validation._config.regex.email;
+                return regex.test(fieldValue)
+            },
             // uri: function (value, fieldName) {
             //     var regex = validation._config.regex.uri;
             //     var result = regex.test(value);

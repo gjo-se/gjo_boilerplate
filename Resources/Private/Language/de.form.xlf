@@ -72,6 +72,10 @@
                 <source>The given subject was not a valid numeric.</source>
                 <target>Zulässige Zeichen: Zahlen, Punkt und Komma.</target>
             </trans-unit>
+            <trans-unit id="validator.email.error">
+                <source>The given subject was not a valid email address.</source>
+                <target>Der Eingabewert ist keine gültige Email-Adresse.</target>
+            </trans-unit>
 
 
 
@@ -86,10 +90,6 @@
             </trans-unit>
 
 
-            <trans-unit id="validator.emailaddress.notvalid">
-                <source>Der Eingabewert ist keine gültige Email-Adresse.</source>
-                <target>Der Eingabewert ist keine gültige Email-Adresse.</target>
-            </trans-unit>
 
             <trans-unit id="validator.stringlength.between">
                 <source>The length of the given string was not between %s and %s characters.</source>

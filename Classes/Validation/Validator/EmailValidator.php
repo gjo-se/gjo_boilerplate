@@ -22,32 +22,23 @@ namespace GjoSe\GjoBoilerplate\Validation\Validator;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class EmailAddressValidator extends AbstractValidator
+class EmailValidator extends AbstractValidator
 {
+
+    const REGEX = '/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i';
+
     /**
      * Checks if the given value is a valid email address.
      *
      * @param mixed $value The value that should be validated
-     * @api
      */
     public function isValid($value)
     {
-        if (!is_string($value) || !$this->validEmail($value)) {
+        if (!preg_match(self::REGEX, $value)) {
             $this->addError(
                 $this->translateErrorMessage(
-                    'LLL:' . $this->translationFile . 'validator.emailaddress.notvalid'
+                    'LLL:' . $this->translationFile . 'validator.email.error'
                 ), 1221559976);
         }
-    }
-
-    /**
-     * Checking syntax of input email address
-     *
-     * @param string $emailAddress Input string to evaluate
-     * @return bool Returns TRUE if the $email address (input string) is valid
-     */
-    protected function validEmail($emailAddress)
-    {
-        return GeneralUtility::validEmail($emailAddress);
     }
 }
