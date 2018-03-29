@@ -20,7 +20,7 @@ namespace GjoSe\GjoBoilerplate\Validation\Validator;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class NotEmptyValidator extends AbstractValidator
+class RequiredValidator extends AbstractValidator
 {
     /**
 
@@ -38,25 +38,25 @@ class NotEmptyValidator extends AbstractValidator
         if ($value === null) {
             $this->addError(
                 $this->translateErrorMessage(
-                    'LLL:' . $this->translationFile . 'validator.notempty.empty'
+                    'LLL:' . $this->translationFile . 'validator.required.error'
                 ), 1221560910);
         }
         if ($value === '') {
             $this->addError(
                 $this->translateErrorMessage(
-                    'LLL:' . $this->translationFile . 'validator.notempty.empty'
+                    'LLL:' . $this->translationFile . 'validator.required.error'
                 ), 1221560999);
         }
         if (is_array($value) && empty($value)) {
             $this->addError(
                 $this->translateErrorMessage(
-                    'LLL:' . $this->translationFile . 'validator.notempty.empty'
+                    'LLL:' . $this->translationFile . 'validator.required.error'
                 ), 1347992400);
         }
         if (is_object($value) && $value instanceof \Countable && $value->count() === 0) {
             $this->addError(
                 $this->translateErrorMessage(
-                    'LLL:' . $this->translationFile . 'validator.notempty.empty'
+                    'LLL:' . $this->translationFile . 'validator.required.error'
                 ), 1347992453);
         }
     }
