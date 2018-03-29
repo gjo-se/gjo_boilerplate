@@ -13,9 +13,13 @@
         var errorMessage_numeric = '<f:translate key="{locallang}:validator.numeric.error"/>';
         var errorMessage_email = '<f:translate key="{locallang}:validator.email.error"/>';
         var errorMessage_uri = '<f:translate key="{locallang}:validator.uri.error"/>';
+        var errorMessage_required = '<f:translate key="{locallang}:validator.required.error"/>';
 
-
-        var errorMessage_required = '<f:translate key="{locallang}:validator.notempty.empty"/>';
+        // TODO: hier brauch ich die Angaben aus dem Field des Validators!! - auf Vers. 2.0
+        // eigenen ViewHelper anlegen - VariablenInhalte ansehen (Fehler wegen Array vs. String für arguments)
+        var errorMessage_stringLength_between = '<f:translate key="{locallang}:validator.stringLength.error.between" />';
+        var errorMessage_stringLength_min = '<f:translate key="{locallang}:validator.stringLength.error.min"/>';
+        var errorMessage_stringLength_max = '<f:translate key="{locallang}:validator.stringLength.error.max"/>';
 
 
     </script>

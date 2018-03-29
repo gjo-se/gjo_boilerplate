@@ -20,29 +20,28 @@ namespace GjoSe\GjoBoilerplate\Validation\Validator;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-class StringLengthValidator extends AbstractValidator
+class stringLengthValidator extends AbstractValidator
 {
     /**
      * @var array
      */
     protected $supportedOptions = [
-        'minimum' => [0, 'Minimum length for a valid string', 'integer'],
-        'maximum' => [PHP_INT_MAX, 'Maximum length for a valid string', 'integer']
+        'min' => [0, 'min length for a valid string', 'integer'],
+        'max' => [PHP_INT_MAX, 'max length for a valid string', 'integer']
     ];
 
     /**
      * Checks if the given value is a valid string (or can be cast to a string
-     * if an object is given) and its length is between minimum and maximum
+     * if an object is given) and its length is between min and max
      * specified in the validation options.
      *
      * @param mixed $value The value that should be validated
      * @throws \TYPO3\CMS\Extbase\Validation\Exception\InvalidValidationOptionsException
-     * @api
      */
     public function isValid($value)
     {
-        if ($this->options['maximum'] < $this->options['minimum']) {
-            throw new \TYPO3\CMS\Extbase\Validation\Exception\InvalidValidationOptionsException('The \'maximum\' is shorter than the \'minimum\' in the StringLengthValidator.', 1238107096);
+        if ($this->options['max'] < $this->options['min']) {
+            throw new \TYPO3\CMS\Extbase\Validation\Exception\InvalidValidationOptionsException('The \'max\' is shorter than the \'min\' in the StringLengthValidator.', 1238107096);
         }
 
         if (is_object($value)) {
@@ -57,40 +56,46 @@ class StringLengthValidator extends AbstractValidator
 
         $stringLength = mb_strlen($value, 'utf-8');
         $isValid = true;
-        if ($stringLength < $this->options['minimum']) {
+        if ($stringLength < $this->options['min']) {
             $isValid = false;
         }
-        if ($stringLength > $this->options['maximum']) {
+        if ($stringLength > $this->options['max']) {
             $isValid = false;
         }
 
         if ($isValid === false) {
-            if ($this->options['minimum'] > 0 && $this->options['maximum'] < PHP_INT_MAX) {
+            if ($this->options['min'] > 0 && $this->options['max'] < PHP_INT_MAX) {
                 $this->addError(
                     $this->translateErrorMessage(
-                        'LLL:' . $this->translationFile . 'validator.stringlength.between',
+                        'LLL:' . $this->translationFile . 'validator.stringLength.error.between',
+                        null,
                         [
-                            $this->options['minimum'],
-                            $this->options['maximum']
+                            $this->options['min'],
+                            $this->options['max']
                         ]
-                    ), 1428504122, [$this->options['minimum'], $this->options['maximum']]);
-            } elseif ($this->options['minimum'] > 0) {
+                    ), 1428504122, [$this->options['min'], $this->options['max']]);
+            } elseif ($this->options['min'] > 0) {
+                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('2');
+                exit;
                 $this->addError(
                     $this->translateErrorMessage(
-                        'LLL:' . $this->translationFile . 'validator.stringlength.less',
+                        'LLL:' . $this->translationFile . 'validator.stringLength.error.min',
+                        null,
                         [
-                            $this->options['minimum']
+                            $this->options['min']
                         ]
-                    ), 1238108068, [$this->options['minimum']]);
+                    ), 1238108068, [$this->options['min']]);
             } else {
+                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('3');
+                exit;
                 $this->addError(
                     $this->translateErrorMessage(
-                        'LLL:' . $this->translationFile . 'validator.stringlength.exceed',
-                        '',
+                        'LLL:' . $this->translationFile . 'validator.stringLength.error.max',
+                        null,
                         [
-                            $this->options['maximum']
+                            $this->options['max']
                         ]
-                    ), 1238108069, [$this->options['maximum']]);
+                    ), 1238108069, [$this->options['max']]);
             }
         }
     }

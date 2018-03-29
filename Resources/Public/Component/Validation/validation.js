@@ -100,8 +100,8 @@ gjoSe.validation = {};
             }
         },
 
-        _setErrorMessage: function (fieldValidator, fieldValidatorAttribute, $fieldErrorMessageContainer) {
-            var errorMessageVariableName = 'errorMessage_' + fieldValidator + fieldValidatorAttribute;
+        _setErrorMessage: function (fieldValidator, $fieldErrorMessageContainer) {
+            var errorMessageVariableName = 'errorMessage_' + fieldValidator;
             $fieldErrorMessageContainer.append('<li>' + window[errorMessageVariableName] + '</li>');
         },
 
@@ -152,50 +152,116 @@ gjoSe.validation = {};
             if (fieldValidators.length > 0) {
                 $.each(fieldValidators, function (key, fieldValidatorValue) {
 
-                    var fieldName = gjoSe.validation._getFieldName($field);
-                    var fieldValue = gjoSe.validation._getFieldValue($field);
-
                     var fieldValidatorArr = fieldValidatorValue.split(gjoSe.validation._config.fieldValidatorAttributeSplit);
                     var fieldValidator = $.trim(fieldValidatorArr[0]);
 
-                    var fieldValidatorAttribute = '';
+
+                    // TODO: das kann bestimmt sauberer - und in _getFieldValidatorAttributes
+                    // splits in config schieben
+                    var fieldValidatorAttributeArr = [];
                     if (fieldValidatorArr.length > 1) {
-                        fieldValidatorAttribute = fieldValidatorArr[1];
+                        var fieldValidatorAttributes = fieldValidatorArr[1].split('|');
+                        if(fieldValidatorAttributes.length > 0){
+                            $.each(fieldValidatorAttributes, function (key, fieldValidatorAttribute) {
+                                var fieldValidatorAttributes_helper = fieldValidatorAttribute.split('=');
+                                fieldValidatorAttributeArr[fieldValidatorAttributes_helper[0]] = fieldValidatorAttributes_helper[1];
+                            })
+                        }
                     }
 
                     if (typeof(gjoSe.validation._runValidator[fieldValidator]) !== 'undefined') {
-                        if (!gjoSe.validation._runValidator[fieldValidator](fieldValue, fieldValidatorAttribute)) {
-                            gjoSe.validation._setErrorMessage(fieldValidator, fieldValidatorAttribute, gjoSe.validation._getFieldErrorMessageContainer(null, $field));
-                            gjoSe.validation._config.formErrors.push(fieldName + '_' + fieldValidator);
-                        }
+                        gjoSe.validation._runValidator[fieldValidator]($field, fieldValidatorAttributeArr);
                     }
                 });
             }
         },
 
         _runValidator: {
-            alphabetic: function (fieldValue) {
+            alphabetic: function ($field) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
                 var regex = gjoSe.validation._config.regex.alphabetic;
-                return regex.test(fieldValue);
+                if(!regex.test(fieldValue)){
+                    gjoSe.validation._setErrorMessage('alphabetic', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_alphabetic');
+                }
             },
-            alphanumeric: function (fieldValue) {
+            alphanumeric: function ($field) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
                 var regex = gjoSe.validation._config.regex.alphanumeric;
-                return regex.test(fieldValue)
+                if(!regex.test(fieldValue)){
+                    gjoSe.validation._setErrorMessage('alphanumeric', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_alphanumeric');
+                }
             },
-            numeric: function (fieldValue) {
+            numeric: function ($field) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
                 var regex = gjoSe.validation._config.regex.numeric;
-                return regex.test(fieldValue)
+                if(!regex.test(fieldValue)){
+                    gjoSe.validation._setErrorMessage('numeric', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_numeric');
+                }
             },
-            email: function (fieldValue) {
+            email: function ($field) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
                 var regex = gjoSe.validation._config.regex.email;
-                return regex.test(fieldValue)
+                if(!regex.test(fieldValue)){
+                    gjoSe.validation._setErrorMessage('email', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_email');
+                }
             },
-            uri: function (fieldValue) {
+            uri: function ($field) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
                 var regex = gjoSe.validation._config.regex.uri;
-                return regex.test(fieldValue)
+                if(!regex.test(fieldValue)){
+                    gjoSe.validation._setErrorMessage('uri', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_uri');
+                }
             },
-            required: function (fieldValue) {
-                return fieldValue === '' ? false : true;
+            required: function ($field) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
+                if(fieldValue === ''){
+                    gjoSe.validation._setErrorMessage('required', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_required');
+                }
+            },
+            sringLength: function ($field, fieldValidatorAttribute) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
+                var min = fieldValidatorAttribute.min;
+                var max = fieldValidatorAttribute.max;
+
+                var minType = typeof(min);
+                var maxType = typeof(max);
+
+                if (typeof(min) === 'string' && typeof(max) === 'string'){
+                    if(fieldValue.length < min || fieldValue.length > max){
+                        gjoSe.validation._setErrorMessage('stringLength_between', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                        gjoSe.validation._config.formErrors.push(fieldName + '_stringLength_between');
+                    }
+
+                }
+
+                if (typeof(min) === 'string' && typeof(max) !== 'string'){
+                    if(fieldValue.length < min){
+                        gjoSe.validation._setErrorMessage('stringLength_min', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                        gjoSe.validation._config.formErrors.push(fieldName + '_stringLength_min');
+                    }
+
+                }
+
+                if (typeof(min) !== 'string' && typeof(max) === 'string'){
+                    if(fieldValue.length > max){
+                        gjoSe.validation._setErrorMessage('stringLength_max', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                        gjoSe.validation._config.formErrors.push(fieldName + '_stringLength_max');
+                    }
+
+                }
             },
             // // length:
             // min: function (value, fieldName, len) {
