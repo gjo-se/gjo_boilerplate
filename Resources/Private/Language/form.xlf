@@ -68,6 +68,9 @@
             <trans-unit id="validator.email.error">
                 <source>The given subject was not a valid email address.</source>
             </trans-unit>
+            <trans-unit id="validator.uri.error">
+                <source>The given subject was not a valid url.</source>
+            </trans-unit>
 
 
 

@@ -28,8 +28,7 @@ gjoSe.validation = {};
                 alphanumeric: /^[\p{L}\d ]*$/u,
                 numeric: /^-?\d+([,.])?\d*$/,
                 email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-                // uri: /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/,
-
+                uri: /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
             },
             formErrors: {}
 
@@ -191,14 +190,10 @@ gjoSe.validation = {};
                 var regex = gjoSe.validation._config.regex.email;
                 return regex.test(fieldValue)
             },
-            // uri: function (value, fieldName) {
-            //     var regex = validation._config.regex.uri;
-            //     var result = regex.test(value);
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_uri, 'Uri');
-            //     }
-            //     return result;
-            // },
+            uri: function (fieldValue) {
+                var regex = gjoSe.validation._config.regex.uri;
+                return regex.test(fieldValue)
+            },
             required: function (fieldValue) {
                 return fieldValue === '' ? false : true;
             },

@@ -76,6 +76,10 @@
                 <source>The given subject was not a valid email address.</source>
                 <target>Der Eingabewert ist keine gültige Email-Adresse.</target>
             </trans-unit>
+            <trans-unit id="validator.uri.error">
+                <source>The given subject was not a valid url.</source>
+                <target>Der Eingabewert ist keine gültige Url.</target>
+            </trans-unit>
 
 
 
