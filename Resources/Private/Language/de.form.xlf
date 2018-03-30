@@ -106,6 +106,21 @@
             </trans-unit>
 
 
+            ################################
+            ###### Object-Validierung ######
+            ################################
+
+            ## Schlüssel sollten in Ext stehen, wio auch das Object ist:
+            ## File umbennen: validator
+            ## objectValidator.validTestForm.error.methodenname
+
+            <trans-unit id="validator.validTestForm.error.compare">
+                <source>The given subjects must be equal.</source>
+                <target>Die Eingabewerte müssen übereinstimmen.</target>
+            </trans-unit>
+
+
+
 
 
 

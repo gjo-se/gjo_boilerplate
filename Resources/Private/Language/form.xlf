@@ -50,9 +50,9 @@
 
 
 
-            ###############################
-            ###### Messages          ######
-            ###############################
+            ##################################
+            ###### Validierung - Messages ####
+            ##################################
 
 
 
@@ -88,6 +88,15 @@
             </trans-unit>
             <trans-unit id="validator.numericRange.error.range">
                 <source>The given subject was not in the valid range (%s - %s).</source>
+            </trans-unit>
+
+
+            ################################
+            ###### Object-Validierung ######
+            ################################
+
+            <trans-unit id="validator.validTestForm.error.compare">
+                <source>The given subjects must be equal.</source>
             </trans-unit>
 
 

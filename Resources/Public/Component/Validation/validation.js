@@ -90,6 +90,10 @@ gjoSe.validation = {};
             return $field.attr('name');
         },
 
+        _getFieldByName: function ($form, fieldName) {
+            return $form.find('[name*=' + fieldName + ']');
+        },
+
         _getFieldErrorMessageContainer: function ($form, $field) {
 
             if ($form) {
@@ -283,14 +287,19 @@ gjoSe.validation = {};
                     }
                 }
             },
+            confirm: function ($field, $fieldToConfirm) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
 
-            // confirm: function (value, fieldName, field) {
-            //     var result = value === validation._getValue($(field));
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_confirm, 'Confirm');
-            //     }
-            //     return result;
-            // }
+                var fieldToConfirm = gjoSe.validation._getFieldByName(gjoSe.validation._getForm(), $fieldToConfirm.field);
+                var fieldToConfirmName = gjoSe.validation._getFieldName(fieldToConfirm);
+                var fieldToConfirmValue = gjoSe.validation._getFieldValue(fieldToConfirm);
+
+                if (fieldValue !== fieldToConfirmValue) {
+                    gjoSe.validation._setErrorMessage('confirm', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_confirm');
+                }
+            }
         },
 
     }
