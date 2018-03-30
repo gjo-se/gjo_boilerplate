@@ -83,6 +83,13 @@
             <trans-unit id="validator.stringLength.error.max">
                 <source>The length of the given string exceeded %s characters.</source>
             </trans-unit>
+            <trans-unit id="validator.numericRange.error.notvalid">
+                <source>The given subject was not a valid number.</source>
+            </trans-unit>
+            <trans-unit id="validator.numericRange.error.range">
+                <source>The given subject was not in the valid range (%s - %s).</source>
+            </trans-unit>
+
 
 		</body>
 	</file>

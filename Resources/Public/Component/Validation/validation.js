@@ -236,9 +236,6 @@ gjoSe.validation = {};
                 var min = fieldValidatorAttribute.min;
                 var max = fieldValidatorAttribute.max;
 
-                var minType = typeof(min);
-                var maxType = typeof(max);
-
                 if (typeof(min) === 'string' && typeof(max) === 'string'){
                     if(fieldValue.length < min || fieldValue.length > max){
                         gjoSe.validation._setErrorMessage('stringLength_between', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
@@ -263,50 +260,26 @@ gjoSe.validation = {};
 
                 }
             },
-            // // length:
-            // min: function (value, fieldName, len) {
-            //     var result = value.length >= len;
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_length_min, 'Length');
-            //     }
-            //     return result;
-            // },
-            // max: function (value, fieldName, len) {
-            //     var result = value.length <= len;
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_length_max, 'Length');
-            //     }
-            //     return result;
-            // },
-            // // between:
-            // gte: function (value, fieldName, min) {
-            //     var result = Number(value) >= min;
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_greaterThanEqual, 'Between');
-            //     }
-            //     return result;
-            // },
-            // lte: function (value, fieldName, max) {
-            //     var result = Number(value) <= max;
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_lessThanEqual, 'Between');
-            //     }
-            //     return result;
-            // },
-            // gt: function (value, fieldName, min) {
-            //     var result = Number(value) > min;
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_greaterThan, 'GreaterThan');
-            //     }
-            //     return result;
-            // },
-            // lt: function (value, fieldName, max) {
-            //     var result = Number(value) < max;
-            //     if (!result) {
-            //         validation._getErrorMessage(fieldName, error_lessThan, 'LessThan');
-            //     }
-            //     return result;
-            // },
+            numericRange: function ($field, fieldValidatorAttribute) {
+                var fieldName = gjoSe.validation._getFieldName($field);
+                var fieldValue = gjoSe.validation._getFieldValue($field);
+                var min = fieldValidatorAttribute.min;
+                var max = fieldValidatorAttribute.max;
+
+                gjoSe.validation._runValidator['numeric']($field);
+
+                if (min > max) {
+                    var helper = min;
+                    min = max;
+                    max = helper;
+                }
+
+                if (fieldValue < min || fieldValue > max) {
+                    gjoSe.validation._setErrorMessage('numericRange_range', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
+                    gjoSe.validation._config.formErrors.push(fieldName + '_numericRange_range');
+                }
+            },
+            
             // confirm: function (value, fieldName, field) {
             //     var result = value === validation._getValue($(field));
             //     if (!result) {

@@ -96,6 +96,14 @@
                 <source>The length of the given string exceeded %s characters.</source>
                 <target>Die Länge der angegebenen Zeichenkette übersteigt %s Zeichen.</target>
             </trans-unit>
+            <trans-unit id="validator.numericRange.error.notvalid">
+                <source>The given subject was not a valid number.</source>
+                <target>Der Eingabewert ist keine gültige Zahl.</target>
+            </trans-unit>
+            <trans-unit id="validator.numericRange.error.range">
+                <source>The given subject was not in the valid range (%s - %s).</source>
+                <target>Die Länge der angegebene Zahl liegt nicht im Bereich von %s bis %s.</target>
+            </trans-unit>
 
 
 
