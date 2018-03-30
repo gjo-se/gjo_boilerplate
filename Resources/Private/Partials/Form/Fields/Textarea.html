@@ -26,7 +26,8 @@
 
     <label for="{f:if(condition: '{label}', then:'{label}', else:'{field}')}"
            class="{labelClass} {gjoSe:form.hasError(property:'{field}',then:'text-danger')}">
-        <f:translate key="{locallang}:form.field.{name}"/>
+        <f:translate key="{locallang}:form.field.{name}" default="{name}"/>
+        <v:condition.string.contains then=": *" else=":" condition="1" haystack="{data.validation}" needle="required" />
     </label>
 
     <span class="small text-danger">
