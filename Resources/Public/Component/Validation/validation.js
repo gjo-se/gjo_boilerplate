@@ -9,7 +9,6 @@ gjoSe.validation = {};
             _enabled: true,
             formClass: 'gjoSe-form',
             $form: null,
-            noValidateHtml5Class: 'no-validate-html5',
             validateJsClass: 'validate-js',
 
             fieldContainerClass: 'md-form',
@@ -117,10 +116,6 @@ gjoSe.validation = {};
                 }
 
                 gjoSe.validation._setForm($form);
-
-                if ($form.hasClass(gjoSe.validation._config.noValidateHtml5Class)) {
-                    $form.attr('novalidate', 'novalidate');
-                }
 
                 return true;
             }
