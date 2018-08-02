@@ -40,6 +40,10 @@
                 <source>Email</source>
                 <target>Email</target>
             </trans-unit>
+            <trans-unit id="form.field.telephone">
+                <source>Telephone</source>
+                <target>Telefon</target>
+            </trans-unit>
             <trans-unit id="form.field.message">
                 <source>Message</source>
                 <target>Nachricht</target>
