@@ -34,6 +34,7 @@ class stringLengthValidator extends AbstractValidator
      * Checks if the given value is a valid string (or can be cast to a string
      * if an object is given) and its length is between min and max
      * specified in the validation options.
+     * Usage: @validate GjoSe.GjoBoilerplate:StringLength(max=500)
      *
      * @param mixed $value The value that should be validated
      * @throws \TYPO3\CMS\Extbase\Validation\Exception\InvalidValidationOptionsException
