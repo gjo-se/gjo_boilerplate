@@ -19,11 +19,12 @@ gjoSe.modifyContentElements = {};
 
         _setFirstParagraphinCardBodyToRem: function (rem) {
 
-            var cardBody = $("div.card-body");
+            $("div.card-body").each(function(){
+                $(this).find('p').first().css({
+                    "font-size": rem + 'rem'
+                })
+            });
 
-            $("div.card-body p").first().css({
-                "font-size": rem + 'rem'
-            })
         }
 
     }
