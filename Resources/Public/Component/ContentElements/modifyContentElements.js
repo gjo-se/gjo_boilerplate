@@ -11,6 +11,7 @@ gjoSe.modifyContentElements = {};
 
         _setPrevNextArrowHeight: function (){
 
+            // TODO: hier wird immer die Höhe de ersten Eleemnts genommen udn auf alle angewendet!!!
             var figure = $("div.card figure");
 
             figure.parent().find('.carousel-control-prev').height(figure.height());
@@ -37,7 +38,8 @@ gjoSe.modifyContentElements = {};
             gjoSe.modifyContentElements._setPrevNextArrowHeight();
         });
 
-        gjoSe.modifyContentElements._setFirstParagraphinCardBodyToRem(gjoSe.modifyContentElements._config.firstParagraphinCardBodyRem);
+        // wird aktuell über RTE H3 gelöst
+        // gjoSe.modifyContentElements._setFirstParagraphinCardBodyToRem(gjoSe.modifyContentElements._config.firstParagraphinCardBodyRem);
 
     });
 
