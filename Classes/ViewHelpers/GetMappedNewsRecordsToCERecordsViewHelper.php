@@ -31,7 +31,9 @@ class GetMappedNewsRecordsToCERecordsViewHelper extends \TYPO3\CMS\Fluid\Core\Vi
             foreach ($newsRecords as $key => $newsRecord) {
 
                 $mappedNewsrecords[$key]['data']['isNews'] = true;
+                $mappedNewsrecords[$key]['data']['newsId'] = $newsRecord->getUid();
                 $mappedNewsrecords[$key]['data']['header'] = $newsRecord->getTitle();
+                $mappedNewsrecords[$key]['data']['datetime'] = $newsRecord->getDatetime();
                 $mappedNewsrecords[$key]['data']['bodytext'] = $newsRecord->getTeaser();
                 $mappedNewsrecords[$key]['data']['button_text'] = 'Zum Artikel';
 
