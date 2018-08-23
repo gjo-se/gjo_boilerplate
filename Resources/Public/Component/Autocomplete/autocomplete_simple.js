@@ -4,6 +4,16 @@
     var timer = null;
 
     var initAutocomplete = function () {
+        var $iconMenu = $('.icon-menu');
+        var $iconSearch = $('.icon-search');
+        var $iconProfile = $('.icon-profile');
+        var $iconShop = $('.icon-shop');
+        var $iconCross = $('.icon-cross');
+
+        var $logo = $('.logo');
+        var $searchForm = $('.search-form');
+        var $mainNav = $('.main-nav');
+
         var $searchbox = $('.search-sword');
         $searchbox.attr('autocomplete', 'off');
         var container = $('.search-suggestions');
@@ -36,10 +46,31 @@
                 }
             }, 1);
         });
-        $(document).bind('click keyup', function (e) {
-            if (!container.is(e.target) && container.has(e.target).length === 0 && !$(e.target).hasClass('tx-indexedsearch-searchbox-sword')) {
-                container.hide();
-            }
+
+
+        $iconMenu.click(function(){
+            $iconCross.trigger('click');
+        });
+
+        $iconSearch.click(function(){
+            $(this).parent().addClass('d-none');
+            $iconProfile.parent().addClass('d-none');
+            $iconShop.parent().addClass('d-none');
+            $logo.addClass('d-none');
+
+            $searchForm.removeClass('d-none');
+            $iconCross.parent().removeClass('d-none');
+            $mainNav.collapse('hide');
+        });
+
+        $iconCross.click(function(){
+            $(this).parent().addClass('d-none');
+            $iconSearch.parent().removeClass('d-none');
+            $iconProfile.parent().removeClass('d-none');
+            $iconShop.parent().removeClass('d-none');
+            $logo.removeClass('d-none');
+
+            $searchForm.addClass('d-none');
         });
 
     };
