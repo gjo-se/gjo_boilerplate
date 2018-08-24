@@ -151,9 +151,9 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            $('body,html').animate({
-                scrollTop: 270
-            }, 800);
+            // $('body,html').animate({
+            //     scrollTop: 270
+            // }, 800);
         });
     };
 
@@ -219,9 +219,9 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            $('body,html').animate({
-                scrollTop: 270
-            }, 800);
+            // $('body,html').animate({
+            //     scrollTop: 270
+            // }, 800);
 
         });
 
@@ -253,9 +253,9 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            $('body,html').animate({
-                scrollTop: 270
-            }, 800);
+            // $('body,html').animate({
+            //     scrollTop: 270
+            // }, 800);
 
         });
 
@@ -313,9 +313,9 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            $('body,html').animate({
-                scrollTop: 270
-            }, 800);
+            // $('body,html').animate({
+            //     scrollTop: 270
+            // }, 800);
         });
 
         // #### doorWidthSlider ####
@@ -340,9 +340,9 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            $('body,html').animate({
-                scrollTop: 270
-            }, 800);
+            // $('body,html').animate({
+            //     scrollTop: 270
+            // }, 800);
         });
 
         // #### doorHeightSlider ####
@@ -366,9 +366,9 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            $('body,html').animate({
-                scrollTop: 270
-            }, 800);
+            // $('body,html').animate({
+            //     scrollTop: 270
+            // }, 800);
         });
 
         _setDoorThicknessSlider(40, 1, 25, 70);
@@ -393,9 +393,9 @@
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            $('body,html').animate({
-                scrollTop: 270
-            }, 800);
+            // $('body,html').animate({
+            //     scrollTop: 270
+            // }, 800);
         });
 
 
