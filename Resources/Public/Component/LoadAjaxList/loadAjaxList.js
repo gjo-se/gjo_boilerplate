@@ -2,7 +2,7 @@
     'use strict';
     var pageType = 902;
     var ajaxListsProductsContainer = $('.ajax-lists-products');
-    var ajaxListsProductsHeadline = $('h3.ajax-list-products-count');
+    var ajaxListsProductsHeadline = $('.ajax-list-products-headline');
     var ajaxListProductsCountInit = 0;
     var ignoreScroll = false;
 
@@ -12,8 +12,8 @@
     var imagePlaceholderDisabledText = '?text=disabled';
     var imagePlaceholderActiveColor = '343a40';
 
-    var imageDefault100 = imagePlaceholder + '100/' + imagePlaceholderDefaultColor;
-    var imageDisabled100 = imagePlaceholder + '100/' + imagePlaceholderDisabledColor + imagePlaceholderDisabledText;
+    var imageDefault75 = imagePlaceholder + '75/' + imagePlaceholderDefaultColor;
+    var imageDisabled75 = imagePlaceholder + '75/' + imagePlaceholderDisabledColor + imagePlaceholderDisabledText;
 
     var loadAjaxListProducts = function (offset, productFinderFilter) {
 
@@ -298,12 +298,12 @@
                 buttonInputTwoWings.attr('disabled', false);
                 buttonInputThreeWings.attr('disabled', true);
 
-                buttonImageTwoWings.attr('src', imageDefault100);
-                buttonImageThreeWings.attr('src', imageDisabled100);
+                buttonImageTwoWings.attr('src', imageDefault75);
+                buttonImageThreeWings.attr('src', imageDisabled75);
             }
             if (parseInt(this.get()) == 3) {
-                buttonImageTwoWings.attr('src', imageDisabled100);
-                buttonImageThreeWings.attr('src', imageDefault100);
+                buttonImageTwoWings.attr('src', imageDisabled75);
+                buttonImageThreeWings.attr('src', imageDefault75);
 
                 buttonInputTwoWings.attr('disabled', true);
                 buttonInputThreeWings.attr('disabled', false);
