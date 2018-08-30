@@ -16,6 +16,10 @@
                 <source>Compnay</source>
                 <target>Firma</target>
             </trans-unit>
+            <trans-unit id="form.field.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
             <trans-unit id="form.field.firstName">
                 <source>Firstname</source>
                 <target>Vorname</target>
@@ -36,6 +40,10 @@
                 <source>City</source>
                 <target>Stadt</target>
             </trans-unit>
+            <trans-unit id="form.field.country">
+                <source>Country</source>
+                <target>Land</target>
+            </trans-unit>
             <trans-unit id="form.field.email">
                 <source>Email</source>
                 <target>Email</target>
@@ -44,9 +52,29 @@
                 <source>Telephone</source>
                 <target>Telefon</target>
             </trans-unit>
+            <trans-unit id="form.field.fax">
+                <source>Fax</source>
+                <target>Fax</target>
+            </trans-unit>
             <trans-unit id="form.field.message">
                 <source>Message</source>
                 <target>Nachricht</target>
+            </trans-unit>
+            <trans-unit id="form.field.user">
+                <source>Username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="form.field.username">
+                <source>Username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="form.field.pass">
+                <source>Password</source>
+                <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="form.field.password">
+                <source>Password</source>
+                <target>Passwort</target>
             </trans-unit>
 
 
