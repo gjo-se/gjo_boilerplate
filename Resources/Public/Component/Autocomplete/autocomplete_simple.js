@@ -13,6 +13,7 @@
         var $logo = $('.logo');
         var $searchForm = $('.search-form');
         var $mainNav = $('.main-nav');
+        var $feUsermenu = $('.fe-user-menu');
 
         var $searchbox = $('.search-sword');
         $searchbox.attr('autocomplete', 'off');
@@ -50,6 +51,8 @@
 
         $iconMenu.click(function(){
             $iconCross.trigger('click');
+            $feUsermenu.collapse('hide');
+
         });
 
         $iconSearch.click(function(){
@@ -60,6 +63,12 @@
 
             $searchForm.removeClass('d-none');
             $iconCross.parent().removeClass('d-none');
+            $mainNav.collapse('hide');
+            $feUsermenu.collapse('hide');
+
+        });
+
+        $iconProfile.click(function () {
             $mainNav.collapse('hide');
         });
 
