@@ -4,7 +4,7 @@
 
     var addToCartButton = $('.add-to-cart-button');
 
-    var addToCart = function (productSetVariantUid, quantity) {
+    var addToCart = function (productSetVariantUid, quantity, addToCartAlert) {
 
         $.ajax({
             url: '/index.php',
@@ -20,7 +20,7 @@
                 var openOrderCountProducts = responseObj.openOrderCountProducts;
 
                 _countCartProducts();
-                _showAlertSuccessAddToCart();
+                _showAlertSuccessAddToCart(addToCartAlert);
 
             },
             error: function (error) {
@@ -29,10 +29,10 @@
         });
     };
 
-    var _showAlertSuccessAddToCart = function () {
-        $('.alert-success-add-to-cart').removeClass('d-none');
-        $('.alert-success-add-to-cart').fadeIn(1000);
-        $('.alert-success-add-to-cart').fadeOut(3000);
+    var _showAlertSuccessAddToCart = function (addToCartAlert) {
+        addToCartAlert.removeClass('d-none');
+        addToCartAlert.fadeIn(1000);
+        addToCartAlert.fadeOut(3000);
     };
 
 
@@ -44,9 +44,11 @@
             var inputGroup = $(this).parent().parent();
             var productSetVariantUid = inputGroup.find('.productSetVariantUid').val();
             var quantity = inputGroup.find('.quantity').val();
+            var addToCartAlert = $(this).parent().parent().find('.alert-success-add-to-cart');
 
-            addToCart(productSetVariantUid, quantity);
+            addToCart(productSetVariantUid, quantity, addToCartAlert);
         });
+
     });
 
 })(jQuery);
