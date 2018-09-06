@@ -28,6 +28,10 @@
                 <source>Lastname</source>
                 <target>Nachname</target>
             </trans-unit>
+            <trans-unit id="form.field.name">
+                <source>Fullname</source>
+                <target>Vollständiger Name</target>
+            </trans-unit>
             <trans-unit id="form.field.address">
                 <source>Address</source>
                 <target>Straße / Nr.</target>
@@ -75,6 +79,10 @@
             <trans-unit id="form.field.password">
                 <source>Password</source>
                 <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="form.field.txGjoExtendsFemanagerVatId">
+                <source>VAT ID</source>
+                <target>Umsatzsteuer ID</target>
             </trans-unit>
 
 
