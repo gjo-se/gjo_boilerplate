@@ -37,9 +37,6 @@
             var orderProductUid = $(this).attr('data-orderproduct-uid');
             var quantity = $(this).val();
 
-            console.log('openOrderUid: ' + openOrderUid);
-            console.log('orderProductUid: ' + orderProductUid);
-
             _changeQuantityCartProducts(openOrderUid, orderProductUid, quantity);
         });
     });

@@ -2,8 +2,8 @@
     'use strict';
     var typeNum = 1516958422;
 
-    var removeFromCartAjaxButton = $('.remove-from-cart-ajax-button');
-    var orderProductUid;
+    var quantitySelect = $('.quantity');
+    var deleteProduct = 0;
 
     var removeFromCart = function (openOrderUid, orderProductUid) {
 
@@ -21,7 +21,7 @@
                 var openOrderCountProducts = responseObj.openOrderCountProducts;
 
                 _countCartProducts();
-                _removeProductFromCart();
+                _removeProductFromCart(orderProductUid);
                 _setOrderAmountAjax(openOrderUid);
 
             },
@@ -31,20 +31,22 @@
         });
     };
 
-    var _removeProductFromCart = function () {
+    var _removeProductFromCart = function (orderProductUid) {
         var $orderToRemove = $('#productItem_' + orderProductUid);
-
         $orderToRemove.fadeOut(1000, function(){ $orderToRemove.remove(); });
     }
 
     $(document).ready(function () {
-        $(removeFromCartAjaxButton).click(function (event) {
-            event.preventDefault();
+
+        $(quantitySelect).change(function (event) {
 
             var openOrderUid = $(this).attr('data-order-uid');
-            orderProductUid = $(this).attr('data-orderproduct-uid');
+            var orderProductUid = $(this).attr('data-orderproduct-uid');
+            var quantity = $(this).val();
 
-            removeFromCart(openOrderUid, orderProductUid);
+            if(parseInt(quantity) === deleteProduct){
+                removeFromCart(openOrderUid, orderProductUid);
+            }
         });
     });
 
