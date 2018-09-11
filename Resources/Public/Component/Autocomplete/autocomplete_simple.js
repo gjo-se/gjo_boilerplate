@@ -17,7 +17,7 @@
 
         var $searchbox = $('.search-sword');
         $searchbox.attr('autocomplete', 'off');
-        var container = $('.search-suggestions');
+        var $searchSuggestions = $('.search-suggestions');
 
         $searchbox.bind('click keyup', function (e) {
             var $this = jQuery(this);
@@ -26,7 +26,7 @@
                 clearTimeout(timer);
             }
             timer = setTimeout(function () {
-                container.show();
+                $searchSuggestions.show();
                 if (e.type != 'click') {
                     jQuery('.search-suggestions').html('<div class="ajax-loader"></div>');
                 }
@@ -35,15 +35,15 @@
                         //TODO: die URL sollte generisch im template gesetzt weden
                     	url: '/index.php?type=' + pageType + '&tx_gjotiger%5BsearchString%5D=' + encodeURIComponent($this.val()),
                     	success: function(response) {
-                            container.html(response);
+                            $searchSuggestions.html(response);
                     	},
                     	error: function(error) {
                     		console.error(error);
                     	}
                     });
                 } else {
-                    container.hide();
-                    container.html('');
+                    $searchSuggestions.hide();
+                    $searchSuggestions.html('');
                 }
             }, 1);
         });
@@ -52,6 +52,9 @@
         $iconMenu.click(function(){
             $iconCross.trigger('click');
             $feUsermenu.collapse('hide');
+
+            $searchSuggestions.hide();
+            $searchbox.val('');
 
         });
 
@@ -66,6 +69,10 @@
             $mainNav.collapse('hide');
             $feUsermenu.collapse('hide');
 
+            $searchbox.focus();
+
+            // $searchSuggestions.addClass('d-none');
+            // $searchbox.val('');
         });
 
         $iconProfile.click(function () {
@@ -80,6 +87,10 @@
             $logo.removeClass('d-none');
 
             $searchForm.addClass('d-none');
+
+            $searchSuggestions.hide();
+            $searchbox.val('');
+
         });
 
     };
