@@ -42,7 +42,6 @@ gjoSe.validation = {};
                 }
             });
 
-
             $(gjoSe.validation._getForms()).on('submit', function (event) {
                 if (gjoSe.validation._prepareValidation(this, event)) {
                     gjoSe.validation._handleSubmit(gjoSe.validation._getForm());
@@ -109,7 +108,12 @@ gjoSe.validation = {};
 
         _prepareValidation: function ($trigger, event) {
             var $form = $($trigger).closest('form');
+
             if ($form.hasClass(gjoSe.validation._config.validateJsClass) && gjoSe.validation._config._enabled) {
+
+                // data-rsa-encryption handel submit
+                // typo3conf/ext/gjo_vagrant/vendor/typo3/cms/typo3/sysext/rsaauth/Resources/Public/JavaScript/RsaEncryption.js
+                // bzw. RsaEncryptionModule per require.js einbinden
 
                 if (event.type === 'submit') {
                     event.preventDefault();

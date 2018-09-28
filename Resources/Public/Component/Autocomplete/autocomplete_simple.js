@@ -7,6 +7,7 @@
         var $iconMenu = $('.icon-menu');
         var $iconSearch = $('.icon-search');
         var $iconProfile = $('.icon-profile');
+        var $iconProfileLoggedIn = $('.fa-user');
         var $iconShop = $('.icon-shop');
         var $iconCross = $('.icon-cross');
 
@@ -14,6 +15,7 @@
         var $searchForm = $('.search-form');
         var $mainNav = $('.main-nav');
         var $feUsermenu = $('.fe-user-menu');
+        var $txFeLogin = $('.tx-felogin-pi1');
 
         var $searchbox = $('.search-sword');
         $searchbox.attr('autocomplete', 'off');
@@ -77,6 +79,12 @@
 
         $iconProfile.click(function () {
             $mainNav.collapse('hide');
+            $txFeLogin.toggleClass('d-none');
+        });
+
+        $iconProfileLoggedIn.click(function () {
+            $mainNav.collapse('hide');
+            $txFeLogin.toggleClass('d-none');
         });
 
         $iconCross.click(function(){
