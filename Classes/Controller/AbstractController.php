@@ -112,4 +112,17 @@ class AbstractController extends CoreAbstractController
     {
         $this->sendMailService = $sendMailService;
     }
+
+    /**
+     * @return void
+     */
+    public function redirectToPage($pid)
+    {
+        $uriBuilder = $this->uriBuilder;
+        $uri        = $uriBuilder
+            ->setTargetPageUid($pid)
+            ->build();
+        $this->redirectToUri($uri);
+    }
+
 }
