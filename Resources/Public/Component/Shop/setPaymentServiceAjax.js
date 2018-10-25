@@ -5,6 +5,7 @@
     var $paymentServiceSelect = $('.payment-service-select');
     var $openOrderHidden = $('.open-order-hidden');
     var $paymentServiceErrorMessageContainer = $('.payment-service-error-message');
+    var $btnOrderNow = $('#btn-order-now');
 
     var _setPaymentServiceAjax = function (paymentServiceSelectValue, openOrderUid) {
 
@@ -32,9 +33,11 @@
             var openOrderUid = $openOrderHidden.val();
 
             if(paymentServiceSelectValue === 4 || paymentServiceSelectValue === 5){
-                $paymentServiceErrorMessageContainer.removeClass('d-none')
+                $paymentServiceErrorMessageContainer.removeClass('d-none');
+                $btnOrderNow.addClass('disabled');
             }else{
                 $paymentServiceErrorMessageContainer.addClass('d-none')
+                $btnOrderNow.removeClass('disabled');
                 _setPaymentServiceAjax(paymentServiceSelectValue, openOrderUid);
             }
         });

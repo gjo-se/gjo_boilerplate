@@ -286,7 +286,8 @@ gjoSe.validation = {};
                 var fieldName = gjoSe.validation._getFieldName($field);
                 var fieldValue = gjoSe.validation._getFieldValue($field);
                 var fieldContainer = gjoSe.validation._getFieldContainer(null, $field);
-                if (fieldValue === '') {
+
+                if (fieldValue === '' || ($field.is(':checkbox') && !$field.prop('checked'))) {
                     gjoSe.validation._setErrorMessage('required', gjoSe.validation._getFieldErrorMessageContainer(null, $field));
                     gjoSe.validation._config.formErrors.push(fieldName + '_required');
                     fieldContainer.find('input').addClass(gjoSe.validation._config.inputErrorClass);
@@ -295,7 +296,7 @@ gjoSe.validation = {};
                     fieldContainer.find('input').addClass(gjoSe.validation._config.inputSuccessClass);
                 }
             },
-            sringLength: function ($field, fieldValidatorAttribute) {
+            stringLength: function ($field, fieldValidatorAttribute) {
                 var fieldName = gjoSe.validation._getFieldName($field);
                 var fieldValue = gjoSe.validation._getFieldValue($field);
                 var fieldContainer = gjoSe.validation._getFieldContainer(null, $field);

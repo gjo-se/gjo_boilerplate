@@ -28,6 +28,7 @@ var _setOrderAmountAjax = function (openOrderUid) {
 
             if(responseObj.feUserPercentageDiscount){
                 $feUserPercentageDiscountRow.removeClass('d-none');
+                $feUserPercentageDiscountRow.addClass('d-flex');
                 $feUserPercentageDiscount.text(responseObj.feUserPercentageDiscount + ' %');
                 $feUserTotalDiscount.text('- ' + responseObj.feUserTotalDiscount + ' €');
             }
