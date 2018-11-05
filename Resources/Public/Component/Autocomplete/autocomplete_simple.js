@@ -7,6 +7,7 @@
         var $iconMenu = $('.icon-menu');
         var $iconSearch = $('.icon-search');
         var $iconProfile = $('.icon-profile');
+        var $iconProfileActive = $('.icon-profile-active');
         var $iconProfileLoggedIn = $('.fa-user');
         var $iconShop = $('.icon-shop');
         var $iconCross = $('.icon-cross');
@@ -16,6 +17,7 @@
         var $mainNav = $('.main-nav');
         var $feUsermenu = $('.fe-user-menu');
         var $txFeLogin = $('.tx-felogin-pi1');
+        var $languageMenu = $('.languageMenu');
 
         var $searchbox = $('.search-sword');
         $searchbox.attr('autocomplete', 'off');
@@ -63,6 +65,7 @@
         $iconSearch.click(function(){
             $(this).parent().addClass('d-none');
             $iconProfile.parent().addClass('d-none');
+            $iconProfileActive.parent().addClass('d-none');
             $iconShop.parent().addClass('d-none');
             $logo.addClass('d-none');
 
@@ -70,11 +73,10 @@
             $iconCross.parent().removeClass('d-none');
             $mainNav.collapse('hide');
             $feUsermenu.collapse('hide');
+            $languageMenu.addClass('d-none');
 
             $searchbox.focus();
 
-            // $searchSuggestions.addClass('d-none');
-            // $searchbox.val('');
         });
 
         $iconProfile.click(function () {
@@ -91,10 +93,12 @@
             $(this).parent().addClass('d-none');
             $iconSearch.parent().removeClass('d-none');
             $iconProfile.parent().removeClass('d-none');
+            $iconProfileActive.parent().removeClass('d-none');
             $iconShop.parent().removeClass('d-none');
             $logo.removeClass('d-none');
 
             $searchForm.addClass('d-none');
+            $languageMenu.removeClass('d-none');
 
             $searchSuggestions.hide();
             $searchbox.val('');
