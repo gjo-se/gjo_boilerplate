@@ -317,12 +317,32 @@ class MediaViewHelper extends CoreMediaViewHelper
         $containerWidth = intval($settings['cropVariants'][$key]['container']);
         $gridSystem     = intval($settings['gridSystem']);
 
+        $colWidthWideScreen = intval($this->getColCountsArray()['wideScreen']['col']);
         $colWidthDesktop = intval($this->getColCountsArray()['desktop']['col']);
         $colWidthLaptop  = intval($this->getColCountsArray()['laptop']['col']);
         $colWidthTablet  = intval($this->getColCountsArray()['tablet']['col']);
         $colWidthMobile  = intval($this->getColCountsArray()['mobile']['col']);
 
         $widestImage = array();
+        if ($key == 'wideScreen') {
+
+            if ($colWidthWideScreen) {
+                return $this->witdh[] = $containerWidth / $gridSystem * $colWidthWideScreen;
+            }
+            if ($colWidthDesktop) {
+                return $this->witdh[] = $containerWidth / $gridSystem * $colWidthDesktop;
+            }
+            if ($colWidthLaptop) {
+                return $this->witdh[] = $containerWidth / $gridSystem * $colWidthLaptop;
+            }
+            if ($colWidthTablet) {
+                return $this->witdh[] = $containerWidth / $gridSystem * $colWidthTablet;
+            }
+            if ($colWidthMobile) {
+                return $this->witdh[] = $containerWidth / $gridSystem * $colWidthMobile;
+            }
+        }
+
         if ($key == 'desktop') {
 
             if ($colWidthDesktop) {
