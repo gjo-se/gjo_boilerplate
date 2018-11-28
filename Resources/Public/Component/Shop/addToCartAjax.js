@@ -41,9 +41,10 @@
         $(addToCartButton).click(function (event) {
             event.preventDefault();
 
-            var inputGroup = $(this).parent().parent();
-            var productSetVariantUid = inputGroup.find('.productSetVariantUid').val();
-            var quantity = inputGroup.find('.quantity').val();
+            var $variantGroup = $(this).parent().parent();
+            var productSetVariantUid = $variantGroup.find('.productSetVariantUid').val();
+            var $quantitySelect = $variantGroup.find('select.quantity');
+            var quantity = $quantitySelect.val();
             var addToCartAlert = $(this).parent().parent().find('.alert-success-add-to-cart');
 
             addToCart(productSetVariantUid, quantity, addToCartAlert);

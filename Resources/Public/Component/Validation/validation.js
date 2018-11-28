@@ -23,8 +23,8 @@ gjoSe.validation = {};
             fieldValidatorAttributeSplit: ':',
             whitespace: 'Ws',
             regex: {
-                alphabetic: /^[\p{L} ]*$/u,
-                alphanumeric: /^[\p{L}\d ]*$/u,
+                alphabetic: /^[p{L} ]*$/u,
+                alphanumeric: /^[p{L}\d ]*$/u,
                 numeric: /^-?\d+([,.])?\d*$/,
                 email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
                 uri: /^(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/

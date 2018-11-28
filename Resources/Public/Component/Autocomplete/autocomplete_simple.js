@@ -4,13 +4,11 @@
     var timer = null;
 
     var initAutocomplete = function () {
-        var $iconMenu = $('.icon-menu');
-        var $iconSearch = $('.icon-search');
-        var $iconProfile = $('.icon-profile');
-        var $iconProfileActive = $('.icon-profile-active');
-        var $iconProfileLoggedIn = $('.fa-user');
-        var $iconShop = $('.icon-shop');
-        var $iconCross = $('.icon-cross');
+        var $btnMenu = $('.btn-menu');
+        var $btnSearch = $('.btn-search');
+        var $btnProfile = $('.btn-profile');
+        var $btnShop = $('.btn-shop');
+        var $btnCross = $('.btn-cross');
 
         var $logo = $('.logo');
         var $searchForm = $('.search-form');
@@ -53,8 +51,8 @@
         });
 
 
-        $iconMenu.click(function(){
-            $iconCross.trigger('click');
+        $btnMenu.click(function(){
+            $btnCross.trigger('click');
             $feUsermenu.collapse('hide');
 
             $searchSuggestions.hide();
@@ -62,15 +60,14 @@
 
         });
 
-        $iconSearch.click(function(){
-            $(this).parent().addClass('d-none');
-            $iconProfile.parent().addClass('d-none');
-            $iconProfileActive.parent().addClass('d-none');
-            $iconShop.parent().addClass('d-none');
+        $btnSearch.click(function(){
+            $(this).addClass('d-none');
+            $btnProfile.addClass('d-none');
+            $btnShop.addClass('d-none');
             $logo.addClass('d-none');
 
             $searchForm.removeClass('d-none');
-            $iconCross.parent().removeClass('d-none');
+            $btnCross.removeClass('d-none');
             $mainNav.collapse('hide');
             $feUsermenu.collapse('hide');
             $languageMenu.addClass('d-none');
@@ -79,22 +76,17 @@
 
         });
 
-        $iconProfile.click(function () {
+        $btnProfile.click(function () {
             $mainNav.collapse('hide');
             $txFeLogin.toggleClass('d-none');
         });
 
-        $iconProfileLoggedIn.click(function () {
-            $mainNav.collapse('hide');
-            $txFeLogin.toggleClass('d-none');
-        });
-
-        $iconCross.click(function(){
-            $(this).parent().addClass('d-none');
-            $iconSearch.parent().removeClass('d-none');
-            $iconProfile.parent().removeClass('d-none');
-            $iconProfileActive.parent().removeClass('d-none');
-            $iconShop.parent().removeClass('d-none');
+        $btnCross.click(function(){
+            $(this).addClass('d-none');
+            $btnSearch.removeClass('d-none');
+            $btnProfile.removeClass('d-none');
+            // $iconProfileActive.parent().removeClass('d-none');
+            $btnShop.removeClass('d-none');
             $logo.removeClass('d-none');
 
             $searchForm.addClass('d-none');
