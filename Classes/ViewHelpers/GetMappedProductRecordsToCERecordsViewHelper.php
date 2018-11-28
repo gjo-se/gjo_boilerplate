@@ -41,9 +41,15 @@ class GetMappedProductRecordsToCERecordsViewHelper extends \TYPO3\CMS\Fluid\Core
                     $subheader = $record->getAdditionalInformation();
                 }
 
+                $currentImage = $record->getImage()->current();
+                $bodytext = '';
+                if($currentImage){
+                    $bodytext = $currentImage->getOriginalResource()->getDescription();
+                }
+
                 $mappedRecords[$key]['data']['header'] = $record->getName();
                 $mappedRecords[$key]['data']['sub_header'] = $subheader;
-                $mappedRecords[$key]['data']['bodytext'] = $record->getImage()->current()->getOriginalResource()->getDescription();
+                $mappedRecords[$key]['data']['bodytext'] = $bodytext;
                 $mappedRecords[$key]['images'] = $record->getImage();
 
             }
