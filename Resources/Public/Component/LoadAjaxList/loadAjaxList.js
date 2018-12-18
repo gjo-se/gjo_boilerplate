@@ -1,38 +1,475 @@
 (function ($) {
     'use strict';
-    var pageType = 902;
-    var ajaxListsProductsContainer = $('.ajax-lists-products');
-    var ajaxListsProductsHeadline = $('.ajax-list-products-headline');
-    var ajaxListProductsCountInit = 0;
+
+    const PAGE_TYPE = 902;
+    const DENSITY = 25;
+    const ANY = 'beliebig';
+    const MASK_ORANGE = 'rgba-orange-light';
+    const MASK_GREY = 'rgba-stylish-slight';
+
     var ignoreScroll = false;
 
-    var imagePlaceholder = 'http://via.placeholder.com/';
-    var imagePlaceholderDefaultColor = 'f8f9fa';
-    var imagePlaceholderDisabledColor = 'dee2e6';
-    var imagePlaceholderDisabledText = '?text=disabled';
-    var imagePlaceholderActiveColor = '343a40';
+    var ajaxListsProductsContainer = $('.ajax-lists-products');
+    var ajaxListsProductsHeadline = $('.ajax-list-products-headline');
+    var $buttonResetFilter = $('#button-reset-filter');
+    var $buttonCollapseProductFinder = $('#button-collapse-product-finder');
+    var $containerProductFinderAccordion = $('#productFinderAccordion');
+    var preloader = $('.preloader-wrapper');
+    var ajaxListProductsCountInit = 0;
 
-    var imageDefault75 = imagePlaceholder + '75/' + imagePlaceholderDefaultColor;
-    var imageDisabled75 = imagePlaceholder + '75/' + imagePlaceholderDisabledColor + imagePlaceholderDisabledText;
+    var $buttonWood = $('#button-wood');
+    var $buttonGlass = $('#button-glass');
+    var $buttonDesignCustomer = $('#button-design-customer');
+    var $buttonDesignAlu = $('#button-design-alu');
+    var $buttonDesignDesign = $('#button-design-design');
+    var $buttonSoftClose = $('#button-soft-close');
+    var $buttonEt3 = $('#button-et3');
+    var $buttonTFold = $('#button-t-fold');
+    var $buttonSynchron = $('#button-synchron');
+    var $buttonTelescop2 = $('#button-telescop2');
+    var $buttonTelescop3 = $('#button-telescop3');
+    var $buttonTClose = $('#button-t-close');
+    var $buttonTMaster = $('#button-t-master');
+    var $buttonMontageWall = $('#button-montage-wall');
+    var $buttonMontageCeiling = $('#button-montage-ceiling');
+    var $buttonMontageInWall = $('#button-montage-in-wall');
+
+    var $wingCountSliderContainer = $('#wingCountSlider');
+    var $wingCountSlider = $wingCountSliderContainer.get(0);
+    var $wingCountText = $('#wingCountText');
+    var $wingCountInput = $('#wingCountInput');
+
+    var $doorWidthSliderContainer = $('#doorWidthSlider');
+    var $doorWidthSlider = $doorWidthSliderContainer.get(0);
+    var $doorWidthText = $('#doorWidthText');
+    var $doorWidthInput = $('#doorWidthInput');
+
+    var $doorHeightSliderContainer = $('#doorHeightSlider');
+    var $doorHeightSlider = $doorHeightSliderContainer.get(0);
+    var $doorHeightText = $('#doorHeightText');
+    var $doorHeightInput = $('#doorHeightInput');
+
+    var $doorThicknessSliderContainer = $('#doorThicknessSlider');
+    var $doorThicknessSlider = $doorThicknessSliderContainer.get(0);
+    var $doorThicknessText = $('#doorThicknessText');
+    var $doorThicknessInput = $('#doorThicknessInput');
+
+    var $doorWeightSliderContainer = $('#doorWeightSlider');
+    var $doorWeightSlider = $doorWeightSliderContainer.get(0);
+    var $doorWeightText = $('#doorWeightText');
+    var $doorWeightInput = $('#doorWeightInput');
+
+
+    var disabledButtonsForButtons = [
+        {
+            buttonWood: [$buttonGlass],
+        },
+        {
+            buttonGlass: [$buttonWood, $buttonDesignDesign],
+        },
+        {
+            buttonDesignCustomer: [$buttonDesignAlu, $buttonDesignDesign, $buttonEt3],
+        },
+        {
+            buttonDesignAlu: [$buttonDesignCustomer, $buttonDesignDesign, $buttonTFold],
+        },
+        {
+            buttonDesignDesign: [$buttonDesignCustomer, $buttonDesignAlu, $buttonEt3, $buttonTFold, $buttonSynchron, $buttonTelescop2, $buttonTelescop3, $buttonTClose, $buttonTMaster, $buttonMontageCeiling, $buttonMontageInWall],
+        },
+        {
+            buttonSoftClose: [$buttonEt3, $buttonTFold],
+        },
+        {
+            buttonEt3: [$buttonSoftClose, $buttonTFold, $buttonTClose, $buttonTMaster],
+        },
+        {
+            buttonTFold: [$buttonSoftClose, $buttonEt3, $buttonSynchron, $buttonTelescop2, $buttonTelescop3, $buttonTClose, $buttonMontageWall, $buttonMontageInWall],
+        },
+        {
+            buttonSynchron: [$buttonTFold, $buttonTClose],
+        },
+        {
+            buttonTelescop2: [$buttonTFold, $buttonTelescop3, $buttonTClose, $buttonTMaster],
+        },
+        {
+            buttonTelescop3: [$buttonTFold, $buttonTelescop2, $buttonTClose, $buttonTMaster],
+        },
+        {
+            buttonTClose: [$buttonEt3, $buttonTFold, $buttonSynchron, $buttonTelescop2, $buttonTelescop3, $buttonTMaster],
+        },
+        {
+            buttonTMaster: [$buttonEt3, $buttonTelescop2, $buttonTelescop3, $buttonTClose],
+        },
+        {
+            buttonMontageWall: [$buttonTFold],
+        },
+        {
+            buttonMontageCeiling: [$buttonDesignDesign],
+        },
+        {
+            buttonMontageInWall: [$buttonDesignDesign, $buttonTFold],
+        }
+    ];
+
+    var _handleCheckboxes = function () {
+
+        $('#productFinder input[type=checkbox]').change(function (event) {
+
+            var label = $(this).parent();
+            var buttonInput = $(label).find(':input');
+            var buttonInputName = $(buttonInput).attr('name');
+            var $viewContainer = $(label).find('div.view');
+            var buttonImage = $(label).find('img');
+
+            _ableButtons();
+
+            if (buttonInput.attr('checked')) {
+                buttonInput.attr('checked', false);
+                $viewContainer.addClass('overlay');
+            } else {
+                buttonInput.attr('checked', true);
+                $viewContainer.removeClass('overlay');
+
+                switch (buttonInputName) {
+                    case $buttonWood.attr('name'):
+                        _createSlider($doorThicknessSlider, 0, 1, 25, 40, 75, 25);
+                        _handleThicknessSlider();
+                        break;
+                    case $buttonGlass.attr('name'):
+                        _createSlider($doorThicknessSlider, 0, 2, 8, 10, 12, 40);
+                        _handleThicknessSlider();
+                        break;
+                    default:
+                    //
+                }
+
+            }
+
+            _disableButtons();
+
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+        });
+    };
+
+    var _disableButtons = function () {
+
+        var buttons = $('#productFinder input[type=checkbox]');
+
+        $.each(buttons, function (key, $button) {
+            var checkedButtonId = jQuery.camelCase($($button).attr('id'));
+
+            if ($($button).attr('checked')) {
+
+                var checkedLabel = $($button).parent();
+                var checkedButtonInput = $(checkedLabel).find(':input');
+                var $viewContainer = $(checkedLabel).find('div.view');
+                var $maskContainer = $(checkedLabel).find('div.mask');
+
+                $viewContainer.removeClass('overlay');
+                $maskContainer.addClass(MASK_ORANGE);
+                $maskContainer.removeClass(MASK_GREY);
+
+                $.each(disabledButtonsForButtons, function (key, disabledButton) {
+                    $.each(disabledButton[checkedButtonId], function (key, singleDisabledButton) {
+
+                        var label = $(singleDisabledButton).parent();
+                        var buttonInput = $(label).find(':input');
+                        var $viewContainer = $(label).find('div.view');
+                        var $maskContainer = $(label).find('div.mask');
+
+                        $(singleDisabledButton).attr('disabled', true);
+
+                        $viewContainer.removeClass('overlay');
+                        $maskContainer.removeClass(MASK_ORANGE);
+                        $maskContainer.addClass(MASK_GREY);
+                    });
+                });
+            }
+        });
+
+        switch (parseInt($wingCountSlider.noUiSlider.get())) {
+            case 1:
+                var disabledButtonsForSlider = [$buttonSynchron, $buttonTelescop2, $buttonTelescop3];
+                _disableButtonsForSlider(disabledButtonsForSlider);
+                break;
+            case 2:
+                var disabledButtonsForSlider = [$buttonTFold, $buttonTelescop3];
+                _disableButtonsForSlider(disabledButtonsForSlider);
+                break;
+            case 3:
+                var disabledButtonsForSlider = [$buttonDesignDesign, $buttonSoftClose, $buttonEt3, $buttonTFold, $buttonSynchron, $buttonTelescop2, $buttonSoftClose, $buttonTMaster];
+                _disableButtonsForSlider(disabledButtonsForSlider);
+                break;
+            default:
+            //
+        }
+
+        if ($doorWidthSlider.noUiSlider) {
+            var doorWidthSliderValue = parseInt($doorWidthSlider.noUiSlider.get());
+            if (doorWidthSliderValue) {
+                switch (true) {
+                    case (doorWidthSliderValue < 600):
+                        var disabledButtonsForSlider = [$buttonDesignDesign, $buttonEt3, $buttonSynchron, $buttonTelescop2, $buttonTelescop3, $buttonTClose];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    case (doorWidthSliderValue < 620):
+                        var disabledButtonsForSlider = [$buttonDesignDesign, $buttonEt3];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    case (doorWidthSliderValue > 1250):
+                        var disabledButtonsForSlider = [$buttonTFold, $buttonSynchron, $buttonTelescop2, $buttonTelescop3];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    case (doorWidthSliderValue > 1200):
+                        var disabledButtonsForSlider = [$buttonTFold, $buttonTelescop2, $buttonTelescop3];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    case (doorWidthSliderValue > 1100):
+                        var disabledButtonsForSlider = [$buttonTFold];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    default:
+                    //
+                }
+            }
+        }
+
+        if ($doorWeightSlider.noUiSlider) {
+            var doorWeightSliderValue = parseInt($doorWeightSlider.noUiSlider.get());
+            if (doorWeightSliderValue) {
+                switch (true) {
+                    case (doorWeightSliderValue > 100):
+                        var disabledButtonsForSlider = [$buttonTFold, $buttonTelescop3, $buttonDesignCustomer, $buttonEt3, $buttonDesignDesign];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    case (doorWeightSliderValue > 80):
+                        var disabledButtonsForSlider = [$buttonTFold, $buttonTelescop3, $buttonDesignCustomer, $buttonEt3];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    case (doorWeightSliderValue > 65):
+                        var disabledButtonsForSlider = [$buttonTFold, $buttonTelescop3];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    case (doorWeightSliderValue > 50):
+                        var disabledButtonsForSlider = [$buttonTFold];
+                        _disableButtonsForSlider(disabledButtonsForSlider);
+                        break;
+                    default:
+                    //
+                }
+            }
+        }
+    };
+
+
+    var _disableButtonsForSlider = function (disabledButtonsForSlider) {
+
+        $.each(disabledButtonsForSlider, function (key, disabledButtonForSlider) {
+
+            var label = $(disabledButtonForSlider).parent();
+            var buttonInput = $(label).find(':input');
+            var $viewContainer = $(label).find('div.view');
+            var $maskContainer = $(label).find('div.mask');
+
+            $(disabledButtonForSlider).attr('disabled', true);
+
+            $viewContainer.removeClass('overlay');
+            $maskContainer.removeClass(MASK_ORANGE);
+            $maskContainer.addClass(MASK_GREY);
+        });
+
+    }
+
+
+    var _ableButtons = function (uncheck) {
+
+        var buttons = $('#productFinder input[type=checkbox]');
+
+        if (buttons.length > 0) {
+            $.each(buttons, function (key, $button) {
+
+                if(uncheck){
+                    $($button).attr('checked', false);
+                }
+
+                $($button).attr('disabled', false);
+
+                var label = $($button).parent();
+                var buttonInput = $(label).find(':input');
+                var $viewContainer = $(label).find('div.view');
+                var $maskContainer = $(label).find('div.mask');
+
+                $viewContainer.addClass('overlay');
+                $maskContainer.removeClass(MASK_GREY);
+                $maskContainer.addClass(MASK_ORANGE);
+
+            });
+        }
+    };
+
+
+    var _createSlider = function ($slider, start, step, min, half, max, density) {
+
+        if ($slider.noUiSlider) {
+            $slider.noUiSlider.destroy();
+        }
+
+        noUiSlider.create($slider, {
+            start: [start],
+            step: step,
+            range: {
+                'min': [0, min],
+                '10%': [min, step],
+                '50%': [half, step],
+                'max': [max]
+            },
+            pips: {
+                mode: 'range',
+                density: density
+            }
+
+        });
+    }
+
+    var _handleWingCountSlider = function () {
+
+        $wingCountSlider.noUiSlider.on('update', function (values, handle) {
+            var value = parseInt(values[handle]);
+            $wingCountInput.val(value);
+
+            _ableButtons();
+
+            if (value) {
+                $wingCountText.html(value);
+                $wingCountSliderContainer.addClass('active');
+            } else {
+                $wingCountText.html(ANY);
+                $wingCountSliderContainer.removeClass('active');
+            }
+
+            _disableButtons();
+
+        });
+
+        $wingCountSlider.noUiSlider.on('change', function () {
+
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+        });
+    };
+
+    var _handleDoorWidthSlider = function () {
+
+        $doorWidthSlider.noUiSlider.on('update', function (values, handle) {
+
+            var value = parseInt(values[handle]);
+            $doorWidthInput.val(parseInt(value));
+
+            _ableButtons();
+
+            if (value) {
+                $doorWidthText.html(value + ' mm');
+                $doorWidthSliderContainer.addClass('active');
+            } else {
+                $doorWidthText.html(ANY);
+                $doorWidthSliderContainer.removeClass('active');
+            }
+
+            _disableButtons();
+
+        });
+
+        $doorWidthSlider.noUiSlider.on('change', function () {
+
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+        });
+
+
+    };
+
+    var _handleThicknessSlider = function () {
+
+        $doorThicknessSlider.noUiSlider.on('update', function (values, handle) {
+            var value = parseInt(values[handle]);
+            $doorThicknessInput.val(value);
+
+            if (value) {
+                $doorThicknessText.html(value + ' mm');
+                $doorThicknessSliderContainer.addClass('active');
+            } else {
+                $doorThicknessText.html(ANY);
+                $doorThicknessSliderContainer.removeClass('active');
+            }
+
+        });
+
+        $doorThicknessSlider.noUiSlider.on('change', function () {
+
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+        });
+
+    };
+
+    var _handleDoorWeightSlider = function () {
+
+        $doorWeightSlider.noUiSlider.on('update', function (values, handle) {
+            var value = parseInt(values[handle]);
+            $doorWeightInput.val(value);
+
+            _ableButtons();
+
+            if (value) {
+                $doorWeightText.html(value + ' kg');
+                $doorWeightSliderContainer.addClass('active');
+            } else {
+                $doorWeightText.html(ANY);
+                $doorWeightSliderContainer.removeClass('active');
+            }
+
+            _disableButtons();
+
+        });
+
+        $doorWeightSlider.noUiSlider.on('change', function () {
+
+            sessionStorageFilterInputValues();
+            clearAjaxListsProductsContainer();
+            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+
+        });
+
+
+    }
+
 
     var loadAjaxListProducts = function (offset, productFinderFilter) {
 
         ajaxListsProductsHeadline.hide();
-        $("#loadingImage").show();
+        preloader.addClass('active');
 
         $.ajax({
-            //TODO: die URL sollte generisch im template gesetzt weden
             url: '/index.php',
             method: 'POST',
             data: {
-                type: pageType,
+                type: PAGE_TYPE,
                 offset: offset,
                 productFinderFilter: productFinderFilter
             },
             success: function (response) {
-                _setAjaxListsProductsContainer(response);
+                ajaxListsProductsContainer.append(response);
                 ajaxListsProductsHeadline.html(_getHeadlineContent());
-                $("#loadingImage").hide();
+                preloader.removeClass('active');
                 ajaxListsProductsHeadline.show();
                 ignoreScroll = false;
             },
@@ -42,37 +479,22 @@
         });
     };
 
-    var _setAjaxListsProductsContainer = function(response){
-        // var modifiedResponseObject = _setAimeosPrice(response);
-        ajaxListsProductsContainer.append(response);
-    }
-
     var sessionStorageFilterInputValues = function () {
 
         var productFinderFilter = {};
+        var checkboxes = $('#productFinder input[type=checkbox]');
 
-        //TODO: der kann so nicht funktionieren - this nicht verfügbar
-        productFinderFilter['event'] = $(this).attr('name');
-
-        var radioFields = $('input[type="radio"]', '#productFinder');
-        $.each(radioFields, function (i, field) {
-            if ($(field).attr("checked") === "checked") {
-                productFinderFilter[$(field).attr('name')] = $(field).val();
-            }
-        });
-
-        // TODO: anpassen, wie Radios
-        var checkboxFields = $('input[type="checkbox"]', '#productFinder');
-        $.each(checkboxFields, function (i, field) {
-            var checkedInputField = $(field).parent().find(':checked');
-            var name = checkedInputField.attr('name');
-            productFinderFilter[name] = checkedInputField.val();
-        });
+        if (checkboxes.length > 0) {
+            $.each(checkboxes, function (key, $checkbox) {
+                if ($($checkbox).attr('checked')) {
+                    productFinderFilter[$($checkbox).attr('name')] = $($checkbox).val();
+                }
+            });
+        }
 
         $("#productFinder .input-text").each(function () {
             productFinderFilter[$(this).attr('name')] = $(this).val();
         });
-
 
         sessionStorage.setItem('productFinderFilter', JSON.stringify(productFinderFilter));
     };
@@ -99,315 +521,70 @@
         }
     };
 
-    var _setDoorWeight = function (doorWeightDefault) {
 
-        var productFinderFilter = JSON.parse(sessionStorage.getItem('productFinderFilter'));
+    var _handleResetFilter = function () {
 
-        if(doorWeightDefault){
-            doorWeightSlider.noUiSlider.set(doorWeightDefault);
-        }else if(typeof productFinderFilter['automaticCompute'] !== 'undefined'){
-            var doorWidth = parseInt(productFinderFilter['doorWidth']);
-            var doorHeight = parseInt(productFinderFilter['doorHeight']);
-            var doorThickness = parseInt(productFinderFilter['doorThickness']);
-            var spezificMaterial = parseInt(productFinderFilter['spezificMaterial']);
+        $buttonResetFilter.on('click', function (event) {
 
+            event.preventDefault();
 
-            var doorWeight = parseInt((doorWidth / 1000) * (doorHeight / 1000) * (doorThickness / 1000) * spezificMaterial);
+            _ableButtons(true);
+            $wingCountSlider.noUiSlider.set(0);
+            $doorWidthSlider.noUiSlider.set(0);
+            $doorThicknessSlider.noUiSlider.set(0);
+            $doorWeightSlider.noUiSlider.set(0);
 
-            doorWeightSlider.noUiSlider.set(doorWeight);
-
-        }else{
-            // doorWeightSlider.noUiSlider.set(0);
-        }
-
-
-        sessionStorageFilterInputValues();
-    }
-
-    var _setDoorThicknessSlider = function ($start, $step, $min, $max) {
-
-        var doorThicknessSlider = $('#doorThicknessSlider').get(0);
-
-        if ($('#doorThicknessSlider').has('div').length) {
-            doorThicknessSlider.noUiSlider.destroy();
-        }
-
-        noUiSlider.create(doorThicknessSlider, {
-            start: [$start],
-            step: $step,
-            range: {
-                'min': [$min],
-                'max': [$max]
-            }
-        });
-        doorThicknessSlider.noUiSlider.set($start);
-        doorThicknessSlider.noUiSlider.on('update', function (values, handle) {
-            $('#doorThicknessSpan').html(parseInt(values[handle]));
-            $('#doorThicknessInput').val(parseInt(values[handle]));
-        });
-        doorThicknessSlider.noUiSlider.on('change', function (values, handle) {
             sessionStorageFilterInputValues();
-            _setDoorWeight();
             clearAjaxListsProductsContainer();
             loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
-            // $('body,html').animate({
-            //     scrollTop: 270
-            // }, 800);
         });
+
+        $buttonCollapseProductFinder.on('click', function () {
+            $buttonResetFilter.trigger('click');
+        });
+
+        if(window.matchMedia("(min-width: 992px)")){
+            $containerProductFinderAccordion.addClass('show');
+        }
+
     };
 
-    // var _setAimeosPrice = function (response){
-    //
-    //     var response = response;
-    //     var responseObject = $('<div/>').html(response).contents();
-    //     var aimeosListProductItems = $('#listProductItems').find('span');
-    //
-    //     $.each(aimeosListProductItems, function (i, field) {
-    //         var aimeosProductItemId = $(this).attr('id');
-    //         var aimeosProductItemPrice = $(this).find("meta[itemprop='price']").attr('content');
-    //         var ajaxListsProductPrice = responseObject.find('#' + aimeosProductItemId).find('.price');
-    //
-    //         ajaxListsProductPrice.append(aimeosProductItemPrice);
-    //     });
-    //
-    //     return responseObject;
-    //
-    // };
+
+
 
     $(document).ready(function () {
 
         sessionStorage.clear();
 
-        if(typeof ajaxListProductsOffset !== 'undefined'){
+        if (typeof ajaxListProductsOffset !== 'undefined') {
             sessionStorage.setItem('ajaxListProductsOffset', ajaxListProductsOffset);
         }
 
-        $('#productFinder input[type=radio]').change(function (event) {
+        _handleCheckboxes();
 
-            var buttonGroup = $(this).parent().parent();
-            var button = $(this).parent();
+        _createSlider($wingCountSlider, 0, 1, 1, 2, 3, 40);
+        _handleWingCountSlider();
 
-            $(buttonGroup).find(':input').attr('checked', false);
-            $(buttonGroup).find('img').removeClass('border-tiger-orange');
-            $(buttonGroup).find('img').addClass('border-gray-300');
+        _createSlider($doorWidthSlider, 0, 5, 500, 1000, 1500, 25);
+        _handleDoorWidthSlider();
 
-            $(button).find(':input').attr('checked', true);
-            $(button).find('img').addClass('border-tiger-orange');
+        _createSlider($doorThicknessSlider, 0, 1, 25, 40, 75, 25);
+        _handleThicknessSlider();
 
-            if ($(button).find(':input').val() == 'wood') {
-                $('.specific-material').removeClass('d-none');
-                $('#specificMaterialItemGlas').attr('checked', false);
-                $('.specificMaterialItemWood').attr('checked', false);
-
-                $('.specificMaterialItemWood').parent().find('img').removeClass('border-tiger-orange');
-                $('.specificMaterialItemWood').parent().find('img').addClass('border-gray-300');
-
-                _setDoorWeight(0);
-                _setDoorThicknessSlider(40, 1, 25, 70);
-            }
-            if ($(button).find(':input').val() == 'glas') {
-                $('.specific-material').addClass('d-none');
-                $('.specific-material').find(':input').attr('checked', false);
-                $('#specificMaterialItemGlas').attr('checked', true);
-                _setDoorThicknessSlider(8, 2, 8, 12);
-
-            }
-
-            sessionStorageFilterInputValues();
-            _setDoorWeight();
-            clearAjaxListsProductsContainer();
-            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-
-            // $('body,html').animate({
-            //     scrollTop: 270
-            // }, 800);
-
-        });
-
-
-        $('#productFinder input[type=checkbox]').change(function (event) {
-
-            var button = $(this).parent();
-            var buttonInput = $(button).find(':input');
-            var buttonImage = $(button).find('img');
-            var buttonInputSynchron = $('.telescope-synchron [name=synchron]').find(':input');
-            var buttonImageSynchron = $('.telescope-synchron [name=synchron]').find('img');
-
-            if (buttonInput.attr('checked')) {
-                buttonInput.attr('checked', false);
-                buttonImage.removeClass('border-tiger-orange');
-                buttonImage.addClass('border-gray-300');
-            } else {
-                buttonInput.attr('checked', true);
-                buttonImage.addClass('border-tiger-orange');
-                buttonImage.removeClass('border-gray-300');
-            }
-
-            if($(button).find(':input[name=automaticCompute]')){
-                sessionStorageFilterInputValues();
-                _setDoorWeight();
-            }
-
-            sessionStorageFilterInputValues();
-            clearAjaxListsProductsContainer();
-            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-
-            // $('body,html').animate({
-            //     scrollTop: 270
-            // }, 800);
-
-        });
-
-
-        // #### wingCountSlider ####
-        var wingCountSlider = $('#wingCountSlider').get(0);
-        var buttonInput = $('.telescope-synchron').find(':input');
-        var buttonImage = $('.telescope-synchron').find('img');
-        var buttonInputTwoWings = $('.telescope-synchron .two-wings').find(':input');
-        var buttonImageTwoWings = $('.telescope-synchron .two-wings').find('img');
-        var buttonInputThreeWings = $('.telescope-synchron .three-wings').find(':input');
-        var buttonImageThreeWings = $('.telescope-synchron .three-wings').find('img');
-
-        noUiSlider.create(wingCountSlider, {
-            start: [1],
-            step: 1,
-            range: {
-                'min': [1],
-                'max': [3]
-            }
-        });
-        wingCountSlider.noUiSlider.set(1);
-
-        wingCountSlider.noUiSlider.on('update', function (values, handle) {
-            $('#wingCountSpan').html(parseInt(values[handle]));
-            $('#wingCountInput').val(parseInt(values[handle]));
-        });
-        wingCountSlider.noUiSlider.on('change', function (values, handle) {
-
-            buttonImage.removeClass('border-tiger-orange');
-            buttonImage.addClass('border-gray-300');
-
-            if (parseInt(this.get()) == 1) {
-                buttonInput.attr('disabled', true);
-                buttonInput.attr('checked', false);
-
-                buttonImage.attr('src', imageDisabled100);
-            }
-            if (parseInt(this.get()) == 2) {
-                buttonInputTwoWings.attr('disabled', false);
-                buttonInputThreeWings.attr('disabled', true);
-
-                buttonImageTwoWings.attr('src', imageDefault75);
-                buttonImageThreeWings.attr('src', imageDisabled75);
-            }
-            if (parseInt(this.get()) == 3) {
-                buttonImageTwoWings.attr('src', imageDisabled75);
-                buttonImageThreeWings.attr('src', imageDefault75);
-
-                buttonInputTwoWings.attr('disabled', true);
-                buttonInputThreeWings.attr('disabled', false);
-            }
-
-            sessionStorageFilterInputValues();
-            clearAjaxListsProductsContainer();
-            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-
-            // $('body,html').animate({
-            //     scrollTop: 270
-            // }, 800);
-        });
-
-        // #### doorWidthSlider ####
-        var doorWidthSlider = $('#doorWidthSlider').get(0);
-        noUiSlider.create(doorWidthSlider, {
-            start: [1000],
-            step: 10,
-            range: {
-                'min': [500],
-                'max': [1500]
-            }
-        });
-        doorWidthSlider.noUiSlider.set(1000);
-        doorWidthSlider.noUiSlider.on('update', function (values, handle) {
-            $('#doorWidthSpan').html(parseInt(values[handle]));
-            $('#doorWidthInput').val(parseInt(values[handle]));
-
-        });
-        doorWidthSlider.noUiSlider.on('change', function (values, handle) {
-            sessionStorageFilterInputValues();
-            _setDoorWeight();
-            clearAjaxListsProductsContainer();
-            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-
-            // $('body,html').animate({
-            //     scrollTop: 270
-            // }, 800);
-        });
-
-        // #### doorHeightSlider ####
-        var doorHeightSlider = $('#doorHeightSlider').get(0);
-        noUiSlider.create(doorHeightSlider, {
-            start: [2000],
-            step: 10,
-            range: {
-                'min': [1800],
-                'max': [2500]
-            }
-        });
-        doorHeightSlider.noUiSlider.set(2000);
-        doorHeightSlider.noUiSlider.on('update', function (values, handle) {
-            $('#doorHeightSpan').html(parseInt(values[handle]));
-            $('#doorHeightInput').val(parseInt(values[handle]));
-        });
-        doorHeightSlider.noUiSlider.on('change', function (values, handle) {
-            sessionStorageFilterInputValues();
-            _setDoorWeight();
-            clearAjaxListsProductsContainer();
-            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-
-            // $('body,html').animate({
-            //     scrollTop: 270
-            // }, 800);
-        });
-
-        _setDoorThicknessSlider(40, 1, 25, 70);
-
-        // #### doorWeightSlider ####
-        var doorWeightSlider = $('#doorWeightSlider').get(0);
-        noUiSlider.create(doorWeightSlider, {
-            start: [80],
-            step: 1,
-            range: {
-                'min': [0],
-                'max': [300]
-            }
-        });
-        doorWeightSlider.noUiSlider.on('update', function (values, handle) {
-            // $('#automaticCompute').attr('checked', false);
-            $('#doorWeightSpan').html(parseInt(values[handle]));
-            $('#doorWeightInput').val(parseInt(values[handle]));
-        });
-        doorWeightSlider.noUiSlider.on('change', function (values, handle) {
-            sessionStorageFilterInputValues();
-            clearAjaxListsProductsContainer();
-            loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
-
-            // $('body,html').animate({
-            //     scrollTop: 270
-            // }, 800);
-        });
+        _createSlider($doorWeightSlider, 0, 1, 20, 100, 250, 25);
+        _handleDoorWeightSlider();
 
 
         sessionStorageFilterInputValues();
-        _setDoorWeight();
         loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
 
+        _handleResetFilter();
 
         $(window).scroll(function () {
             var windowHeight = parseInt($(window).height());
             var documentHeight = parseInt($(document).height());
-            var footerHight = 520;
+            var footerHight = 800; //520;
             var windowScrollTop = parseInt($(window).scrollTop());
 
             if (windowScrollTop >= (documentHeight - windowHeight - footerHight) && !ignoreScroll) {
@@ -425,11 +602,6 @@
                 ignoreScroll = true;
             }
         });
-
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-
     });
 
 })(jQuery);
