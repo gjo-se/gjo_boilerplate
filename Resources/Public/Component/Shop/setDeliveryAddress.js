@@ -65,28 +65,50 @@
             _setDeliveryAddressSalutationTextField($(this).val());
         });
 
+        $billingAddressSalutationFormField.on('change', function () {
+            _setDeliveryFormFieldValueFromBillingFormFieldValue();
+        });
+
         $deliveryAddressNameFormField.on('change', function () {
             _setDeliveryAddressNameTextField($(this).val());
+        });
+        $billingAddressNameFormField.on('change', function () {
+            _setDeliveryFormFieldValueFromBillingFormFieldValue();
         });
 
         $deliveryAddressCompanyFormField.on('change', function () {
             _setDeliveryAddressCompanyTextField($(this).val());
         });
+        $billingAddressCompanyFormField.on('change', function () {
+            _setDeliveryFormFieldValueFromBillingFormFieldValue();
+        });
 
         $deliveryAddressAddressFormField.on('change', function () {
             _setDeliveryAddressAddresseTextField($(this).val());
+        });
+        $billingAddressAddressFormField.on('change', function () {
+            _setDeliveryFormFieldValueFromBillingFormFieldValue();
         });
 
         $deliveryAddressZipFormField.on('change', function () {
             _setDeliveryAddressZipTextField($(this).val());
         });
+        $billingAddressZipFormField.on('change', function () {
+            _setDeliveryFormFieldValueFromBillingFormFieldValue();
+        });
 
         $deliveryAddressCityFormField.on('change', function () {
             _setDeliveryAddressCityTextField($(this).val());
         });
+        $billingAddressCityFormField.on('change', function () {
+            _setDeliveryFormFieldValueFromBillingFormFieldValue();
+        });
 
         $deliveryAddressCountryFormField.on('change', function () {
             _setDeliveryAddressCountryTextField($(this).val());
+        });
+        $billingAddressCountryFormField.on('change', function () {
+            _setDeliveryFormFieldValueFromBillingFormFieldValue();
         });
 
 
@@ -176,6 +198,14 @@
                 $deliveryAddressCountryTextField.html('');
         }
 
+    };
+
+    var _setDeliveryFormFieldValueFromBillingFormFieldValue = function () {
+
+        var deliveryAddressesSelectValue = $deliveryAddressesSelect.val();
+        if(deliveryAddressesSelectValue === BILLING_ADDRESS){
+            _handleDeliveryAddressIsLikeBillingAddress();
+        }
     };
 
     var _handleDeliveryAddressSelect = function () {
