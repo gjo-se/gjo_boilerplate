@@ -45,7 +45,7 @@ class ProductSetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
 
         $productSetVariantUid = $this->arguments['productSetVariantUid'];
 
-        $productSetVariantObj = $this->productSetVariantRepository->findByUid($productSetVariantUid);
+        $productSetVariantObj = $this->productSetVariantRepository->findByUid($productSetVariantUid, false, false);
 
         $productSet = null;
         if($productSetVariantObj){

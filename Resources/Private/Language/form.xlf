@@ -8,6 +8,9 @@
             ###### FIELDS            ######
             ###############################
 
+            <trans-unit id="form.field.pleaseChoose">
+                <source>-- please choose --</source>
+            </trans-unit>
             <trans-unit id="form.field.salutation">
                 <source>Salutation</source>
             </trans-unit>
@@ -24,10 +27,10 @@
                 <source>Name</source>
             </trans-unit>
             <trans-unit id="form.field.name">
-                <source>FullName</source>
+                <source>Full Name</source>
             </trans-unit>
             <trans-unit id="form.field.address">
-                <source>Adresse</source>
+                <source>Address</source>
             </trans-unit>
             <trans-unit id="form.field.zip">
                 <source>ZIP</source>
@@ -64,6 +67,9 @@
             </trans-unit>
             <trans-unit id="form.field.txGjoExtendsFemanagerVatId">
                 <source>VAT ID</source>
+            </trans-unit>
+            <trans-unit id="form.field.products">
+                <source>Products</source>
             </trans-unit>
 
 
@@ -126,6 +132,20 @@
                 <source>The given subjects must be equal.</source>
             </trans-unit>
 
+
+            ################################
+            ###### Values in Selects ######
+            ################################
+
+            <trans-unit id="form.select.salutation.mr">
+                <source>Mr.</source>
+            </trans-unit>
+            <trans-unit id="form.select.salutation.mrs">
+                <source>Mrs.</source>
+            </trans-unit>
+            <trans-unit id="form.select.country.germany">
+                <source>Germany</source>
+            </trans-unit>
 
 		</body>
 	</file>

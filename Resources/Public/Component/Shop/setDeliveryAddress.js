@@ -5,6 +5,7 @@
     const BILLING_ADDRESS = 'billingAddress';
     const NEW_DELIVERY_ADDRESS = 'newDeliveryAddress';
 
+    var locallangHelperNewDeliveryAddress = $('#locallang-helper-newDeliveryAddress').text();
     var $deliveryAddressUidFormField = $("#deliveryAddress-uid");
 
     var $deliveryAddressSalutationFormField = $("#deliveryAddress-salutation");
@@ -118,10 +119,10 @@
 
         switch (parseInt(value)) {
             case 1:
-                $deliveryAddressSalutationTextField.html('Herr' + '&nbsp');
+                $deliveryAddressSalutationTextField.html(langHelperSalutationMr + '&nbsp');
                 break;
             case 2:
-                $deliveryAddressSalutationTextField.html('Frau' + '&nbsp');
+                $deliveryAddressSalutationTextField.html(langHelperSalutationMrs + '&nbsp');
                 break;
             default:
                 $deliveryAddressSalutationTextField.html('');
@@ -133,7 +134,7 @@
         if (value) {
             $deliveryAddressNameTextField.text(value);
         } else {
-            $deliveryAddressNameTextField.html('<span class="text-danger"> - bitte Namen eintragen - </span>');
+            $deliveryAddressNameTextField.html('<span class="text-danger">' + langHelperPleaseEnterFullName + '</span>');
         }
     };
 
@@ -146,7 +147,7 @@
         if (value) {
             $deliveryAddressAddressTextField.text(value);
         } else {
-            $deliveryAddressAddressTextField.html('<span class="text-danger"> - bitte Adresse eintragen - </span>');
+            $deliveryAddressAddressTextField.html('<span class="text-danger">' + langHelperPleaseEnterAddress + '</span>');
         }
     };
 
@@ -155,7 +156,7 @@
         if (value) {
             $deliveryAddressZipTextField.html(value + '&nbsp');
         } else {
-            $deliveryAddressZipTextField.html('<span class="text-danger"> - bitte PLZ eintragen - </span>');
+            $deliveryAddressZipTextField.html('<span class="text-danger">' + langHelperPleaseEnterZip + '</span>');
         }
 
     };
@@ -165,7 +166,7 @@
         if (value) {
             $deliveryAddressCityTextField.text(value);
         } else {
-            $deliveryAddressCityTextField.html('<span class="text-danger"> - bitte Ort eintragen - </span>');
+            $deliveryAddressCityTextField.html('<span class="text-danger">' + langHelperPleaseEnterCity + '</span>');
         }
 
     };
@@ -280,7 +281,7 @@
 
         $btnDeliveryAddressEdit.click(function () {
             if ($('#delivery-addresses-select option[value="newDeliveryAddress"]').length === 0) {
-                var $optionNewDeliveryAddress = $('<option value="newDeliveryAddress">Neue Lieferanschrift</option>');
+                var $optionNewDeliveryAddress = $('<option value="newDeliveryAddress">' + locallangHelperNewDeliveryAddress + '</option>');
                 var $optionBillingAddress = $('option[value="billingAddress"]');
 
                 $optionNewDeliveryAddress.insertAfter($optionBillingAddress);

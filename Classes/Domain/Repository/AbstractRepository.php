@@ -161,6 +161,8 @@ class AbstractRepository extends Repository
 
         $return = $this->query->execute();
 
+        $this->debugQuery($this->query);
+
         $this->clearQuery();
 
         return $return;
@@ -268,12 +270,16 @@ class AbstractRepository extends Repository
      *
      * @return object
      */
-    public function findByUid($uid, $includeHidden = false)
+    public function findByUid($uid, $includeHidden = false, $setLanguageUid = true)
     {
         $query = $this->createQuery();
 
         if ($includeHidden) {
             $query->getQuerySettings()->setIgnoreEnableFields(true);
+        }
+
+        if($setLanguageUid){
+            $query->getQuerySettings()->setLanguageUid($GLOBALS['TSFE']->sys_language_uid);
         }
 
         $query->matching($query->equals('uid', $uid));

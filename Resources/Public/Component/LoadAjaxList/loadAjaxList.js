@@ -3,10 +3,10 @@
 
     const PAGE_TYPE = 902;
     const DENSITY = 25;
-    const ANY = 'beliebig';
     const MASK_ORANGE = 'rgba-orange-light';
     const MASK_GREY = 'rgba-stylish-slight';
 
+    var url = '/index.php';
     var ignoreScroll = false;
 
     var ajaxListsProductsContainer = $('.ajax-lists-products');
@@ -16,6 +16,12 @@
     var $containerProductFinderAccordion = $('#productFinderAccordion');
     var preloader = $('.preloader-wrapper');
     var ajaxListProductsCountInit = 0;
+    var sysLanguageUid = $('#locallang-helper-sysLanguageUid').text();
+    var sysLanguage = $('#locallang-helper-sysLanguage').text();
+    var $locallangHelperAny = $('#locallang-helper-any');
+    var $locallangHelperResults = $('#locallang-helper-results');
+    var $locallangHelperNoResults = $('#locallang-helper-no-results');
+
 
     var $buttonWood = $('#button-wood');
     var $buttonGlass = $('#button-glass');
@@ -346,7 +352,7 @@
                 $wingCountText.html(value);
                 $wingCountSliderContainer.addClass('active');
             } else {
-                $wingCountText.html(ANY);
+                $wingCountText.html($locallangHelperAny.text());
                 $wingCountSliderContainer.removeClass('active');
             }
 
@@ -376,7 +382,7 @@
                 $doorWidthText.html(value + ' mm');
                 $doorWidthSliderContainer.addClass('active');
             } else {
-                $doorWidthText.html(ANY);
+                $doorWidthText.html($locallangHelperAny.text());
                 $doorWidthSliderContainer.removeClass('active');
             }
 
@@ -405,7 +411,7 @@
                 $doorThicknessText.html(value + ' mm');
                 $doorThicknessSliderContainer.addClass('active');
             } else {
-                $doorThicknessText.html(ANY);
+                $doorThicknessText.html($locallangHelperAny.text());
                 $doorThicknessSliderContainer.removeClass('active');
             }
 
@@ -433,7 +439,7 @@
                 $doorWeightText.html(value + ' kg');
                 $doorWeightSliderContainer.addClass('active');
             } else {
-                $doorWeightText.html(ANY);
+                $doorWeightText.html($locallangHelperAny.text());
                 $doorWeightSliderContainer.removeClass('active');
             }
 
@@ -458,13 +464,19 @@
         ajaxListsProductsHeadline.hide();
         preloader.addClass('active');
 
+        if(sysLanguageUid){
+            url = url + '?L=' + sysLanguageUid;
+        }
+
         $.ajax({
-            url: '/index.php',
+            url: url,
             method: 'POST',
             data: {
                 type: PAGE_TYPE,
                 offset: offset,
-                productFinderFilter: productFinderFilter
+                productFinderFilter: productFinderFilter,
+                sysLanguageUid: sysLanguageUid,
+                sysLanguage: sysLanguage,
             },
             success: function (response) {
                 ajaxListsProductsContainer.append(response);
@@ -515,9 +527,9 @@
 
     var _getHeadlineContent = function () {
         if (parseInt(_getAjaxListProductsCount())) {
-            return 'Ihre passenden Treffer (' + _getAjaxListProductsCount() + ')';
+            return $locallangHelperResults.text() + ' (' + _getAjaxListProductsCount() + ')';
         } else {
-            return 'Keine Produkte gefunden';
+            return $locallangHelperNoResults.text();
         }
     };
 

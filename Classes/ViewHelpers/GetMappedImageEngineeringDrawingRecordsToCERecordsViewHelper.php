@@ -30,8 +30,6 @@ class GetMappedImageEngineeringDrawingRecordsToCERecordsViewHelper extends \TYPO
 
             foreach ($imageEngineeringDrawingRecords as $key => $record) {
 
-                                $mappedRecords[$key]['data']['isNews'] = true;
-                $mappedRecords[$key]['data']['newsId'] = $record->getUid();
                 $mappedRecords[$key]['data']['header'] = $record->getOriginalResource()->getTitle();
                 $mappedRecords[$key]['data']['bodytext'] = $record->getOriginalResource()->getDescription();
                 $mappedRecords[$key]['image'] = $record;

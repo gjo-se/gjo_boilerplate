@@ -4,6 +4,9 @@
     var timer = null;
 
     var initAutocomplete = function () {
+
+        var url = '/index.php';
+
         var $btnMenu = $('.btn-menu');
         var $btnSearch = $('.btn-search');
         var $btnProfile = $('.btn-profile');
@@ -18,24 +21,33 @@
         var $languageMenu = $('.languageMenu');
 
         var $searchbox = $('.search-sword');
+        var sysLanguageUid = $('#lang-helper-sysLanguage').text();
         $searchbox.attr('autocomplete', 'off');
         var $searchSuggestions = $('.search-suggestions');
 
+        if(sysLanguageUid){
+            url = url + '?L=' + sysLanguageUid;
+        }
+
         $searchbox.bind('click keyup', function (e) {
             var $this = jQuery(this);
-            var L = $('body').attr('data-languid');
             if (timer) {
                 clearTimeout(timer);
             }
             timer = setTimeout(function () {
                 $searchSuggestions.show();
+
                 if (e.type != 'click') {
                     jQuery('.search-suggestions').html('<div class="ajax-loader"></div>');
                 }
                 if ($this.val().length > 2) {
                     $.ajax({
-                        //TODO: die URL sollte generisch im template gesetzt weden
-                    	url: '/index.php?type=' + pageType + '&tx_gjotiger%5BsearchString%5D=' + encodeURIComponent($this.val()),
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            type: pageType,
+                            searchString: $this.val()
+                        },
                     	success: function(response) {
                             $searchSuggestions.html(response);
                     	},

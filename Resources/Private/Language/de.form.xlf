@@ -8,6 +8,10 @@
             ###### FIELDS            ######
             ###############################
 
+            <trans-unit id="form.field.pleaseChoose">
+                <source>-- please choose --</source>
+                <target>-- Bitte wählen --</target>
+            </trans-unit>
             <trans-unit id="form.field.salutation">
                 <source>Salutation</source>
                 <target>Anrede</target>
@@ -29,7 +33,7 @@
                 <target>Nachname</target>
             </trans-unit>
             <trans-unit id="form.field.name">
-                <source>Fullname</source>
+                <source>Full Name</source>
                 <target>Vollständiger Name</target>
             </trans-unit>
             <trans-unit id="form.field.address">
@@ -83,6 +87,10 @@
             <trans-unit id="form.field.txGjoExtendsFemanagerVatId">
                 <source>VAT ID</source>
                 <target>Umsatzsteuer ID</target>
+            </trans-unit>
+            <trans-unit id="form.field.products">
+                <source>Products</source>
+                <target>Produkte</target>
             </trans-unit>
 
 
@@ -157,6 +165,24 @@
             <trans-unit id="validator.validTestForm.error.compare">
                 <source>The given subjects must be equal.</source>
                 <target>Die Eingabewerte müssen übereinstimmen.</target>
+            </trans-unit>
+
+
+            ################################
+            ###### Countries in Selects ######
+            ################################
+
+            <trans-unit id="form.select.salutation.mr">
+                <source>Mr.</source>
+                <target>Herr</target>
+            </trans-unit>
+            <trans-unit id="form.select.salutation.mrs">
+                <source>Mrs.</source>
+                <target>Frau</target>
+            </trans-unit>
+            <trans-unit id="form.select.country.germany">
+                <source>Germany</source>
+                <target>Deutschland</target>
             </trans-unit>
 
 

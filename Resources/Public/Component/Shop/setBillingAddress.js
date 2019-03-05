@@ -1,3 +1,12 @@
+var langHelperSalutationMr = $('#llang-helper-salutation-mr').text();
+var langHelperSalutationMrs = $('#llang-helper-salutation-mrs').text();
+var langHelperPleaseEnterFullName = $('#lang-helper-pleaseEnterFullName').text();
+var langHelperPleaseEnterFullName = $('#lang-helper-pleaseEnterFullName').text();
+var langHelperPleaseEnterAddress = $('#lang-helper-pleaseEnterAddress').text();
+var langHelperPleaseEnterZip = $('#lang-helper-pleaseEnterZip').text();
+var langHelperPleaseEnterCity = $('#lang-helper-pleaseEnterCity').text();
+var langHelperPleaseEnterCountry = $('#lang-helper-pleaseEnterCountry').text();
+
 var $billingAddressSalutationFormField = $("#billingAddress-salutation-form-field");
 var $billingAddressSalutationTextField = $("#billingAddress-salutation-text-field");
 
@@ -40,10 +49,10 @@ var _setBillingAddressText = function (openOrderUid) {
 
         switch (parseInt($billingAddressSalutationFormField.val())) {
             case 1:
-                $billingAddressSalutationTextField.html('Herr' + '&nbsp');
+                $billingAddressSalutationTextField.html(langHelperSalutationMr + '&nbsp');
                 break;
             case 2:
-                $billingAddressSalutationTextField.html('Frau' + '&nbsp');
+                $billingAddressSalutationTextField.html(langHelperSalutationMrs + '&nbsp');
                 break;
             default:
                 $billingAddressSalutationTextField.html('');
@@ -57,7 +66,7 @@ var _setBillingAddressText = function (openOrderUid) {
         if(feUserNameTextFieldVal){
             $billingAddressNameTextField.text(feUserNameTextFieldVal);
         }else{
-            $billingAddressNameTextField.html('<span class="text-danger"> - bitte Namen eintragen - </span>');
+            $billingAddressNameTextField.html('<span class="text-danger">' + langHelperPleaseEnterFullName + '</span>');
         }
     });
 
@@ -71,7 +80,7 @@ var _setBillingAddressText = function (openOrderUid) {
         if(feUserAddressTextFieldVal){
             $billingAddressAddressTextField.text(feUserAddressTextFieldVal);
         }else{
-            $billingAddressAddressTextField.html('<span class="text-danger"> - bitte Adresse eintragen - </span>');
+            $billingAddressAddressTextField.html('<span class="text-danger">' + langHelperPleaseEnterAddress + '</span>');
         }
     });
 
@@ -81,7 +90,7 @@ var _setBillingAddressText = function (openOrderUid) {
         if(feUserZipTextFieldVal){
             $billingAddressZipTextField.html(feUserZipTextFieldVal + '&nbsp;');
         }else{
-            $billingAddressZipTextField.html('<span class="text-danger"> - bitte PLZ eintragen - </span>');
+            $billingAddressZipTextField.html('<span class="text-danger">' + langHelperPleaseEnterZip + '</span>');
         }
     });
 
@@ -91,7 +100,7 @@ var _setBillingAddressText = function (openOrderUid) {
         if(feUserCityTextFieldVal){
             $billingAddressCityTextField.text(feUserCityTextFieldVal);
         }else{
-            $billingAddressCityTextField.html('<span class="text-danger"> - bitte Ort eintragen - </span>');
+            $billingAddressCityTextField.html('<span class="text-danger">' + langHelperPleaseEnterCity + '</span>');
         }
     });
 
