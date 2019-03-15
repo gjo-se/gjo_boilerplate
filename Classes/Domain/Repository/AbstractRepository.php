@@ -161,8 +161,6 @@ class AbstractRepository extends Repository
 
         $return = $this->query->execute();
 
-        $this->debugQuery($this->query);
-
         $this->clearQuery();
 
         return $return;
