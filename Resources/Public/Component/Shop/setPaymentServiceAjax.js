@@ -1,6 +1,10 @@
 (function ($) {
     'use strict';
 
+    const PAYMENT_PROVIDER_PAYPAL = 3;
+    const PAYMENT_PROVIDER_CREDITCARD = 4;
+    const PAYMENT_PROVIDER_DEBIT_AUTH = 5;
+
     var typeNum = 1517848071;
     var $paymentServiceSelect = $('.payment-service-select');
     var $openOrderHidden = $('.open-order-hidden');
@@ -32,7 +36,7 @@
             var paymentServiceSelectValue = parseInt($paymentServiceSelect.val());
             var openOrderUid = $openOrderHidden.val();
 
-            if(paymentServiceSelectValue === 4 || paymentServiceSelectValue === 5){
+            if(paymentServiceSelectValue === PAYMENT_PROVIDER_PAYPAL || paymentServiceSelectValue === PAYMENT_PROVIDER_CREDITCARD || paymentServiceSelectValue === PAYMENT_PROVIDER_DEBIT_AUTH){
                 $paymentServiceErrorMessageContainer.removeClass('d-none');
                 $btnOrderNow.addClass('disabled');
             }else{
