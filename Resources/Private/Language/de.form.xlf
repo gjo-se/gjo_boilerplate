@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="de" datatype="plaintext" original="messages" date="2018-03-23T15:49:07Z" product-name="gjo_boilerplate">
+		<header/>
+		<body>
+
+            ###############################
+            ###### FIELDS            ######
+            ###############################
+
+            <trans-unit id="form.field.pleaseChoose">
+                <source>-- please choose --</source>
+                <target>-- Bitte wählen --</target>
+            </trans-unit>
+            <trans-unit id="form.field.salutation">
+                <source>Salutation</source>
+                <target>Anrede</target>
+            </trans-unit>
+            <trans-unit id="form.field.company">
+                <source>Compnay</source>
+                <target>Firma</target>
+            </trans-unit>
+            <trans-unit id="form.field.title">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="form.field.firstName">
+                <source>Firstname</source>
+                <target>Vorname</target>
+            </trans-unit>
+            <trans-unit id="form.field.lastName">
+                <source>Lastname</source>
+                <target>Nachname</target>
+            </trans-unit>
+            <trans-unit id="form.field.name">
+                <source>Full Name</source>
+                <target>Vollständiger Name</target>
+            </trans-unit>
+            <trans-unit id="form.field.address">
+                <source>Address</source>
+                <target>Straße / Nr.</target>
+            </trans-unit>
+            <trans-unit id="form.field.zip">
+                <source>ZIP</source>
+                <target>PLZ</target>
+            </trans-unit>
+            <trans-unit id="form.field.city">
+                <source>City</source>
+                <target>Stadt</target>
+            </trans-unit>
+            <trans-unit id="form.field.country">
+                <source>Country</source>
+                <target>Land</target>
+            </trans-unit>
+            <trans-unit id="form.field.email">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="form.field.telephone">
+                <source>Telephone</source>
+                <target>Telefon</target>
+            </trans-unit>
+            <trans-unit id="form.field.fax">
+                <source>Fax</source>
+                <target>Fax</target>
+            </trans-unit>
+            <trans-unit id="form.field.message">
+                <source>Message</source>
+                <target>Nachricht</target>
+            </trans-unit>
+            <trans-unit id="form.field.user">
+                <source>Username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="form.field.username">
+                <source>Username</source>
+                <target>Benutzername</target>
+            </trans-unit>
+            <trans-unit id="form.field.pass">
+                <source>Password</source>
+                <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="form.field.password">
+                <source>Password</source>
+                <target>Passwort</target>
+            </trans-unit>
+            <trans-unit id="form.field.txGjoExtendsFemanagerVatId">
+                <source>VAT ID</source>
+                <target>Umsatzsteuer ID</target>
+            </trans-unit>
+            <trans-unit id="form.field.products">
+                <source>Products</source>
+                <target>Produkte</target>
+            </trans-unit>
+
+
+            ###############################
+            ###### SUBMITS           ######
+            ###############################
+
+            <trans-unit id="form.submit.value.send">
+                <source>Send</source>
+                <target>Senden</target>
+            </trans-unit>
+
+
+            ###############################
+            ###### Messages          ######
+            ###############################
+
+            <trans-unit id="validator.alphabetic.error">
+                <source>The given subject was not a valid alphabetic string.</source>
+                <target>Zulässige Zeichen: Buchstaben a-z, Umlaute und Leerzeichen.</target>
+            </trans-unit>
+            <trans-unit id="validator.alphanumeric.error">
+                <source>The given subject was not a valid alphabetic string.</source>
+                <target>Zulässige Zeichen: Buchstaben a-z, Umlaute, Zahlen und Leerzeichen.</target>
+            </trans-unit>
+            <trans-unit id="validator.numeric.error">
+                <source>The given subject was not a valid numeric.</source>
+                <target>Zulässige Zeichen: Zahlen, Punkt und Komma.</target>
+            </trans-unit>
+            <trans-unit id="validator.email.error">
+                <source>The given subject was not a valid email address.</source>
+                <target>Der Eingabewert ist keine gültige Email-Adresse.</target>
+            </trans-unit>
+            <trans-unit id="validator.uri.error">
+                <source>The given subject was not a valid url.</source>
+                <target>Der Eingabewert ist keine gültige Url.</target>
+            </trans-unit>
+            <trans-unit id="validator.required.error">
+                <source>The given subject was empty.</source>
+                <target>Dieses Feld darf nicht leer sein.</target>
+            </trans-unit>
+            <trans-unit id="validator.stringLength.error.between">
+                <source>The length of the given string was not between %s and %s characters.</source>
+                <target>Die Länge der angegebenen Zeichenkette liegt nicht zwischen %s und %s Zeichen.</target>
+            </trans-unit>
+            <trans-unit id="validator.stringLength.error.min">
+                <source>The length of the given string is less than %s characters.</source>
+                <target>Die Länge der angegebenen Zeichenkette ist kürzer als %s Zeichen.</target>
+            </trans-unit>
+            <trans-unit id="validator.stringLength.error.max">
+                <source>The length of the given string exceeded %s characters.</source>
+                <target>Die Länge der angegebenen Zeichenkette übersteigt %s Zeichen.</target>
+            </trans-unit>
+            <trans-unit id="validator.numericRange.error.notvalid">
+                <source>The given subject was not a valid number.</source>
+                <target>Der Eingabewert ist keine gültige Zahl.</target>
+            </trans-unit>
+            <trans-unit id="validator.numericRange.error.range">
+                <source>The given subject was not in the valid range (%s - %s).</source>
+                <target>Die Länge der angegebene Zahl liegt nicht im Bereich von %s bis %s.</target>
+            </trans-unit>
+
+
+            ################################
+            ###### Object-Validierung ######
+            ################################
+
+            ## Schlüssel sollten in Ext stehen, wio auch das Object ist:
+            ## File umbennen: validator
+            ## objectValidator.validTestForm.error.methodenname
+
+            <trans-unit id="validator.validTestForm.error.compare">
+                <source>The given subjects must be equal.</source>
+                <target>Die Eingabewerte müssen übereinstimmen.</target>
+            </trans-unit>
+
+
+            ################################
+            ###### Countries in Selects ######
+            ################################
+
+            <trans-unit id="form.select.salutation.mr">
+                <source>Mr.</source>
+                <target>Herr</target>
+            </trans-unit>
+            <trans-unit id="form.select.salutation.mrs">
+                <source>Mrs.</source>
+                <target>Frau</target>
+            </trans-unit>
+            <trans-unit id="form.select.country.germany">
+                <source>Germany</source>
+                <target>Deutschland</target>
+            </trans-unit>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</body>
+	</file>
+</xliff>

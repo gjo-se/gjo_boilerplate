@@ -28,6 +28,9 @@ use \TYPO3\CMS\Extbase\Persistence\Repository;
 use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
+use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class AbstractRepository extends Repository
 {
@@ -62,6 +65,21 @@ class AbstractRepository extends Repository
     protected $dataMapFactory;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     */
+    protected $configurationManager;
+
+    /**
+     * @var array
+     */
+    protected $settings;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser
+     */
+    protected $queryParser;
+
+    /**
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
     public function __construct(ObjectManagerInterface $objectManager)
@@ -75,6 +93,35 @@ class AbstractRepository extends Repository
 
         $this->setDatabaseHandle();
 //        $this->setPdoDatabaseHandle();
+
+        $this->configurationManager = $this->objectManager->get('TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface');
+        $this->setSettings();
+    }
+
+    public function setSettings($type = '', $extension = null, $plugin = null)
+    {
+        switch ($type) {
+            case ('framework'):
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK;
+                break;
+            case ('full'):
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT;
+                break;
+            default:
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS;
+        }
+
+        $this->settings = $this->configurationManager->getConfiguration($type, $extension, $plugin);
+    }
+
+    protected function debugQuery($query, $params = false)
+    {
+        $queryParser = $this->objectManager->get(Typo3DbQueryParser::class);
+        DebuggerUtility::var_dump($queryParser->convertQueryToDoctrineQueryBuilder($query)->getSQL());
+
+        if($params){
+            DebuggerUtility::var_dump($queryParser->convertQueryToDoctrineQueryBuilder($query)->getParameters());
+        }
     }
 
     protected function clearQuery()
@@ -221,12 +268,16 @@ class AbstractRepository extends Repository
      *
      * @return object
      */
-    public function findByUid($uid, $includeHidden = false)
+    public function findByUid($uid, $includeHidden = false, $setLanguageUid = true)
     {
         $query = $this->createQuery();
 
         if ($includeHidden) {
             $query->getQuerySettings()->setIgnoreEnableFields(true);
+        }
+
+        if($setLanguageUid){
+            $query->getQuerySettings()->setLanguageUid($GLOBALS['TSFE']->sys_language_uid);
         }
 
         $query->matching($query->equals('uid', $uid));

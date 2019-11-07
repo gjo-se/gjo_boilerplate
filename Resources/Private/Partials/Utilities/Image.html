@@ -1,0 +1,28 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers">
+
+    <f:section name="main">
+
+        <f:if condition="{falObject}">
+            <f:then>
+                <f:for each="{falObject}" as="image">
+                    <f:image src="{image.uid}"
+                             treatIdAsReference="1"
+                             maxWidth="{maxWidth}"
+                             height="{height}"
+                             width="{width}"
+                             class="{class}"
+                    />
+                </f:for>
+            </f:then>
+            <f:else>
+                <img src="http://via.placeholder.com/{f:if(condition: width, then:'{width}', else:'200')}x{f:if(condition: height, then:'{height}', else:'200')}" />
+            </f:else>
+        </f:if>
+
+
+
+    </f:section>
+
+</div>
