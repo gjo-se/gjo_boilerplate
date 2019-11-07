@@ -1,12 +1,14 @@
 (function ($) {
     'use strict';
 
+    const PAYMENT_PROVIDER_PICKUP = 1;
     const PAYMENT_PROVIDER_PAYPAL = 3;
     const PAYMENT_PROVIDER_CREDITCARD = 4;
     const PAYMENT_PROVIDER_DEBIT_AUTH = 5;
 
     var typeNum = 1517848071;
     var $paymentServiceSelect = $('.payment-service-select');
+    var $shippingServiceSelect = $('.shipping-service-select');
     var $openOrderHidden = $('.open-order-hidden');
     var $paymentServiceErrorMessageContainer = $('.payment-service-error-message');
     var $btnOrderNow = $('#btn-order-now');
@@ -36,7 +38,18 @@
             var paymentServiceSelectValue = parseInt($paymentServiceSelect.val());
             var openOrderUid = $openOrderHidden.val();
 
-            if(paymentServiceSelectValue === PAYMENT_PROVIDER_PAYPAL || paymentServiceSelectValue === PAYMENT_PROVIDER_CREDITCARD || paymentServiceSelectValue === PAYMENT_PROVIDER_DEBIT_AUTH){
+            // TODO: der muss auch ausserhalb der cahnge stehen
+            console.log('paymentServiceSelectValue === PAYMENT_PROVIDER_PICKUP');
+            if(paymentServiceSelectValue === PAYMENT_PROVIDER_PICKUP){
+
+                console.log('before: ' + parseInt($(".shipping-service-select"). children("option:selected"). val()));
+                $(".shipping-service-select").val('0');
+                // $(".shipping-service-select option[value='0']").attr('disabled',true);
+                console.log('after: ' + parseInt($(".shipping-service-select"). children("option:selected"). val()));
+
+            }
+
+            if(paymentServiceSelectValue === PAYMENT_PROVIDER_CREDITCARD || paymentServiceSelectValue === PAYMENT_PROVIDER_DEBIT_AUTH){
                 $paymentServiceErrorMessageContainer.removeClass('d-none');
                 $btnOrderNow.addClass('disabled');
             }else{

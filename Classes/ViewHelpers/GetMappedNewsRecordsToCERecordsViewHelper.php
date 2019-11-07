@@ -44,9 +44,6 @@ class GetMappedNewsRecordsToCERecordsViewHelper extends \TYPO3\CMS\Fluid\Core\Vi
             }
         }
 
-//        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($mappedNewsrecords, '$mappedNewsrecords');
-
-
         return $mappedNewsrecords;
     }
 }

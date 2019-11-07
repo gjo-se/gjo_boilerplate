@@ -13,7 +13,7 @@
                     name="{f:if(condition: '{name}', then:'{name}', else:'{field}')}"
                     options="{options}"
                     value="{value}"
-                    class="{f:if(condition: '{class}', then:'{class}', else:'mdb-select validate')}"
+                    class="{f:if(condition: '{class}', then:'{class}', else:'mdb-select md-form colorful-select dropdown-dark validate')}"
                     errorClass="{f:if(condition: '{errorClass}', then:'{errorClass}', else:'invalid')}"
                     disabled="{disabled}"
                     title="{tooltip}"
@@ -24,7 +24,7 @@
     />
 
     <label for="{f:if(condition: '{label}', then:'{label}', else:'{field}')}"
-           class="select-label w-100 {labelClass} {gjoSe:form.hasError(property:'{field}',then:'text-danger')}">
+           class="mdb-main-label w-100 {labelClass} {gjoSe:form.hasError(property:'{field}',then:'text-danger')}">
         <f:translate key="{locallang}:form.field.{f:if(condition: '{translationKey}', then:'{translationKey}', else:'{name}')}" default="{name}"/>
         <v:condition.string.contains then=": *" else=":" condition="1" haystack="{data.validation}" needle="required" />
     </label>

@@ -30,6 +30,13 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
         );
 
         $this->registerArgument(
+            'shippingService',
+            'GjoSe\GjoShop\Domain\Model\Shipping',
+            'Shipping-Service',
+            false
+        );
+
+        $this->registerArgument(
             'productSetVariantGroups',
             'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
             'productSetVariantGroups',
@@ -42,12 +49,20 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
             'lowestPrice',
             false
         );
+
+        $this->registerArgument(
+            'feUserDiscount',
+            'double',
+            'FeUser Discount',
+            false
+        );
     }
 
     public function render()
     {
-        $feUserData = $GLOBALS['TSFE']->fe_user->user;
-        $feUserObj  = $this->feUserRepository->findByUid($feUserData['uid']);
+        $feUserData     = $GLOBALS['TSFE']->fe_user->user;
+        $feUserObj      = $this->feUserRepository->findByUid($feUserData['uid']);
+        $feUserDiscount = $this->arguments['feUserDiscount'];
 
         if ($feUserObj) {
             $feUserGroupsObj = $feUserObj->getUserGroup();
@@ -63,6 +78,10 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
             $price = $this->getDisplayPrice();
         }
 
+        if ($feUserDiscount) {
+            $price = $price - ($price * $feUserDiscount / 100);
+        }
+
         return $price;
     }
 
@@ -72,6 +91,7 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
         $orderproduct            = $this->arguments['orderproduct'];
         $productSetVariantGroups = $this->arguments['productSetVariantGroups'];
         $lowestPrice             = $this->arguments['lowestPrice'];
+        $shippingService         = $this->arguments['shippingService'];
 
         $displayPrice = null;
 
@@ -107,6 +127,14 @@ class VatPriceViewHelper extends AbstractFeUserViewHelper
                 $tmpPrice = $orderproduct->getProductPrice() + ($orderproduct->getProductPrice() * $orderproduct->getProductVat() / 100);
             } else {
                 $tmpPrice = $orderproduct->getProductPrice();
+            }
+
+            $displayPrice = $tmpPrice;
+        } elseif ($shippingService) {
+            if ($priceInclVat) {
+                $tmpPrice = $shippingService->getPrice() + ($shippingService->getPrice() * $shippingService->getVat() / 100);
+            } else {
+                $tmpPrice = $shippingService->getPrice();
             }
 
             $displayPrice = $tmpPrice;

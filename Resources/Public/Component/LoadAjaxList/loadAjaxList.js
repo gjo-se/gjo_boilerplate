@@ -21,6 +21,7 @@
     var $locallangHelperAny = $('#locallang-helper-any');
     var $locallangHelperResults = $('#locallang-helper-results');
     var $locallangHelperNoResults = $('#locallang-helper-no-results');
+    var $isShop = $('.is_shop');
 
 
     var $buttonWood = $('#button-wood');
@@ -187,6 +188,8 @@
                         var $maskContainer = $(label).find('div.mask');
 
                         $(singleDisabledButton).attr('disabled', true);
+                        $(singleDisabledButton).parent().find('a').addClass('disabled');
+
 
                         $viewContainer.removeClass('overlay');
                         $maskContainer.removeClass(MASK_ORANGE);
@@ -477,12 +480,15 @@
                 productFinderFilter: productFinderFilter,
                 sysLanguageUid: sysLanguageUid,
                 sysLanguage: sysLanguage,
+                isShop: isShop
             },
             success: function (response) {
                 ajaxListsProductsContainer.append(response);
                 ajaxListsProductsHeadline.html(_getHeadlineContent());
                 preloader.removeClass('active');
                 ajaxListsProductsHeadline.show();
+
+                _setIsShop();
                 ignoreScroll = false;
             },
             error: function (error) {
@@ -559,6 +565,40 @@
         if(window.matchMedia("(min-width: 992px)")){
             $containerProductFinderAccordion.addClass('show');
         }
+
+    };
+
+    var _setIsShop = function () {
+
+        if(isShop){
+            $isShop.removeClass('d-none');
+        }else{
+            $isShop.addClass('d-none');
+        }
+
+        // $buttonResetFilter.on('click', function (event) {
+        //
+        //     event.preventDefault();
+        //
+        //     _ableButtons(true);
+        //     $wingCountSlider.noUiSlider.set(0);
+        //     $doorWidthSlider.noUiSlider.set(0);
+        //     $doorThicknessSlider.noUiSlider.set(0);
+        //     $doorWeightSlider.noUiSlider.set(0);
+        //
+        //     sessionStorageFilterInputValues();
+        //     clearAjaxListsProductsContainer();
+        //     loadAjaxListProducts(parseInt(sessionStorage.getItem('ajaxListProductsOffset')), JSON.parse(sessionStorage.getItem('productFinderFilter')));
+        //
+        // });
+        //
+        // $buttonCollapseProductFinder.on('click', function () {
+        //     $buttonResetFilter.trigger('click');
+        // });
+        //
+        // if(window.matchMedia("(min-width: 992px)")){
+        //     $containerProductFinderAccordion.addClass('show');
+        // }
 
     };
 

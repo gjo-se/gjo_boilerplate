@@ -76,8 +76,6 @@ class stringLengthValidator extends AbstractValidator
                         ]
                     ), 1428504122, [$this->options['min'], $this->options['max']]);
             } elseif ($this->options['min'] > 0) {
-                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('2');
-                exit;
                 $this->addError(
                     $this->translateErrorMessage(
                         'LLL:' . $this->translationFile . 'validator.stringLength.error.min',
@@ -87,8 +85,6 @@ class stringLengthValidator extends AbstractValidator
                         ]
                     ), 1238108068, [$this->options['min']]);
             } else {
-                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('3');
-                exit;
                 $this->addError(
                     $this->translateErrorMessage(
                         'LLL:' . $this->translationFile . 'validator.stringLength.error.max',

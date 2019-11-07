@@ -18,8 +18,6 @@
             success: function (response) {
 
                 var responseObj = jQuery.parseJSON(response);
-
-                //TODO: der hier muss sein!!!
                 _setOrderAmountAjax(openOrderUid);
 
             },

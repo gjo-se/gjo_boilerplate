@@ -159,6 +159,8 @@ class AbstractRepository extends Repository
             );
         }
 
+        $this->query->getQuerySettings()->setLanguageUid($GLOBALS['TSFE']->sys_language_uid);
+
         $return = $this->query->execute();
 
         $this->clearQuery();
