@@ -8,7 +8,7 @@ $EM_CONF[$_EXTKEY] = array(
     'author_email' => 'gregory.jo@gjo-se.com',
     'author_company' => 'gjo-se.com',
 	'shy' => 0,
-	'version' => '1.0.0',
+	'version' => '1.2.0',
     'priority' => '',
     'state' => 'alpha',
     'uploadfolder' => 0,
@@ -18,7 +18,7 @@ $EM_CONF[$_EXTKEY] = array(
     'clearCacheOnLoad' => 1,
     'constraints' => array(
         'depends' => array(
-            'typo3' => '7.6.0-8.7.99',
+            'typo3' => '8.7.0-8.7.99',
         ),
         'conflicts' => array(
         ),
