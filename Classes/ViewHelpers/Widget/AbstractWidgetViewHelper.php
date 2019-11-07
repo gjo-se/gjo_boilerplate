@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\ViewHelpers\Widget;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget;
 
 /***************************************************************
  *  created: 22.02.17 - 08:21
@@ -24,4 +24,5 @@ use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper as CoreAbstractWidgetVi
 
 abstract class AbstractWidgetViewHelper extends CoreAbstractWidgetViewHelper
 {
+
 }

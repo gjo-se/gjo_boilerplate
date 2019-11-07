@@ -1,8 +1,8 @@
 plugin.tx_gjoboilerplate {
     view {
-        templateRootPath = {$filepaths.templateRootPath}
-        partialRootPath = {$filepaths.partialRootPath}
-        layoutRootPath = {$filepaths.layoutRootPath}
+        templateRootPath = {$plugin.tx_gjoboilerplate.view.templateRootPath}
+        partialRootPath = {$plugin.tx_gjoboilerplate.view.partialRootPath}
+        layoutRootPath = {$plugin.tx_gjoboilerplate.view.layoutRootPath}
     }
 
     persistence {
@@ -16,17 +16,16 @@ plugin.tx_gjoboilerplate {
 config.tx_extbase {
     persistence {
         classes {
-            Gjo\GjoBoilerplate\Domain\Model\BackendUser {
+            GjoSe\GjoBoilerplate\Domain\Model\BackendUser {
                 mapping {
                     tableName = be_users
-                    recordType = 0
                 }
             }
-        }
-    }
-    objects {
-        TYPO3\CMS\Fluid\Core\Parser\TemplateParser {
-            className = Gjo\GjoBoilerplate\View\TemplateParser
+            GjoSe\GjoBoilerplate\Domain\Model\Pages {
+                mapping {
+                    tableName = pages
+                }
+            }
         }
     }
 }

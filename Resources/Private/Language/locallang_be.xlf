@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-06-02T11:47:18Z" product-name="news">
+		<header/>
+		<body>
+            <trans-unit id="flexforms_tab.settings" >
+                <source>Settings</source>
+            </trans-unit>
+            <trans-unit id="flexforms_tab.mode" >
+                <source>Bitte wählen...</source>
+            </trans-unit>
+            <trans-unit id="flexforms_tab.layout" >
+                <source>Erscheinungsbild</source>
+            </trans-unit>
+            <trans-unit id="flexforms_tab.layout-col-4" >
+                <source>Erscheinungsbild 3-spaltig</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

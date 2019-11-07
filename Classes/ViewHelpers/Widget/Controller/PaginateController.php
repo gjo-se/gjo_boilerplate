@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller;
 
 /***************************************************************
  *  created: 26.09.16 - 12:05
@@ -24,7 +24,7 @@ use TYPO3\CMS\Fluid\ViewHelpers\Widget\Controller\PaginateController as FluidPag
 
 /**
  * Class PaginateController
- * @package Gjo\GjoBoilerplate\ViewHelpers\Widget\Controller
+ * @package GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller
  */
 class PaginateController extends FluidPaginateController
 {

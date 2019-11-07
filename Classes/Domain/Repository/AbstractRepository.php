@@ -1,5 +1,5 @@
 <?php
-namespace Gjo\GjoBoilerplate\Domain\Repository;
+namespace GjoSe\GjoBoilerplate\Domain\Repository;
 
 /***************************************************************
  *  created: 19.01.17 - 10:03
@@ -20,10 +20,17 @@ namespace Gjo\GjoBoilerplate\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+//TODO: ab Vers. 8.1 - Nutzung von ConnectionPool
+// siehe 8.1 - Seite 21 ff.
+// siehe 8.5 - Seite 39
+
 use \TYPO3\CMS\Extbase\Persistence\Repository;
 use \TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser;
+use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class AbstractRepository extends Repository
 {
@@ -58,6 +65,21 @@ class AbstractRepository extends Repository
     protected $dataMapFactory;
 
     /**
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     */
+    protected $configurationManager;
+
+    /**
+     * @var array
+     */
+    protected $settings;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser
+     */
+    protected $queryParser;
+
+    /**
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
     public function __construct(ObjectManagerInterface $objectManager)
@@ -70,7 +92,36 @@ class AbstractRepository extends Repository
         $this->defaultQuerySettings->setRespectStoragePage(false);
 
         $this->setDatabaseHandle();
-        $this->setPdoDatabaseHandle();
+//        $this->setPdoDatabaseHandle();
+
+        $this->configurationManager = $this->objectManager->get('TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface');
+        $this->setSettings();
+    }
+
+    public function setSettings($type = '', $extension = null, $plugin = null)
+    {
+        switch ($type) {
+            case ('framework'):
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK;
+                break;
+            case ('full'):
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT;
+                break;
+            default:
+                $type = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS;
+        }
+
+        $this->settings = $this->configurationManager->getConfiguration($type, $extension, $plugin);
+    }
+
+    protected function debugQuery($query, $params = false)
+    {
+        $queryParser = $this->objectManager->get(Typo3DbQueryParser::class);
+        DebuggerUtility::var_dump($queryParser->convertQueryToDoctrineQueryBuilder($query)->getSQL());
+
+        if($params){
+            DebuggerUtility::var_dump($queryParser->convertQueryToDoctrineQueryBuilder($query)->getParameters());
+        }
     }
 
     protected function clearQuery()
@@ -108,6 +159,8 @@ class AbstractRepository extends Repository
             );
         }
 
+        $this->query->getQuerySettings()->setLanguageUid($GLOBALS['TSFE']->sys_language_uid);
+
         $return = $this->query->execute();
 
         $this->clearQuery();
@@ -135,6 +188,12 @@ class AbstractRepository extends Repository
      */
     protected function getTableName()
     {
+
+//        TODO: das soll funktionieren:
+//        $className = \MyVendor\MyExt\Domain\Model\SomeModel::class;
+//        $dataMapper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper::class);
+//        $tableName = $dataMapper->getDataMap($className)->getTableName();
+
                 // TODO: das ging in 6.2 noch, aber nicht mehr in 7.6
 //        $tableName = $this->persistenceManager->getBackend()->getDataMapper()->getDataMap($this->getRepositoryClassName())->getTableName();
 
@@ -172,9 +231,11 @@ class AbstractRepository extends Repository
 
     public function setDatabaseHandle()
     {
+//        TODO: der Zugriff per $GLOBALS[TYPO3_DB] ist zwar mˆglich, wird aber nicht empfohlen!! Doctrine verwenden
         $this->db = $GLOBALS['TYPO3_DB'];
     }
 
+    // TODO: und der geht so überhautp nicht mehr!!
     public function setPdoDatabaseHandle()
     {
         $this->pdoDatabaseHandle = new \PDO('mysql:host=' . TYPO3_db_host . ';dbname=' . TYPO3_db, TYPO3_db_username, TYPO3_db_password);
@@ -209,12 +270,16 @@ class AbstractRepository extends Repository
      *
      * @return object
      */
-    public function findByUid($uid, $includeHidden = false)
+    public function findByUid($uid, $includeHidden = false, $setLanguageUid = true)
     {
         $query = $this->createQuery();
 
         if ($includeHidden) {
             $query->getQuerySettings()->setIgnoreEnableFields(true);
+        }
+
+        if($setLanguageUid){
+            $query->getQuerySettings()->setLanguageUid($GLOBALS['TSFE']->sys_language_uid);
         }
 
         $query->matching($query->equals('uid', $uid));

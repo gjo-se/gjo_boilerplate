@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-03-23T15:49:07Z" product-name="gjo_boilerplate">
+		<header/>
+		<body>
+
+            ###############################
+            ###### FIELDS            ######
+            ###############################
+
+            <trans-unit id="form.field.pleaseChoose">
+                <source>-- please choose --</source>
+            </trans-unit>
+            <trans-unit id="form.field.salutation">
+                <source>Salutation</source>
+            </trans-unit>
+            <trans-unit id="form.field.company">
+                <source>Company</source>
+            </trans-unit>
+            <trans-unit id="form.field.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="form.field.firstName">
+                <source>Firstname</source>
+            </trans-unit>
+            <trans-unit id="form.field.lastName">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="form.field.name">
+                <source>Full Name</source>
+            </trans-unit>
+            <trans-unit id="form.field.address">
+                <source>Address</source>
+            </trans-unit>
+            <trans-unit id="form.field.zip">
+                <source>ZIP</source>
+            </trans-unit>
+            <trans-unit id="form.field.city">
+                <source>City</source>
+            </trans-unit>
+            <trans-unit id="form.field.country">
+                <source>Country</source>
+            </trans-unit>
+            <trans-unit id="form.field.email">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="form.field.telephone">
+                <source>Telephone</source>
+            </trans-unit>
+            <trans-unit id="form.field.fax">
+                <source>Fax</source>
+            </trans-unit>
+            <trans-unit id="form.field.message">
+                <source>Message</source>
+            </trans-unit>
+            <trans-unit id="form.field.user">
+                <source>Username</source>
+            </trans-unit>
+            <trans-unit id="form.field.username">
+                <source>Username</source>
+            </trans-unit>
+            <trans-unit id="form.field.pass">
+                <source>Password</source>
+            </trans-unit>
+            <trans-unit id="form.field.password">
+                <source>Password</source>
+            </trans-unit>
+            <trans-unit id="form.field.txGjoExtendsFemanagerVatId">
+                <source>VAT ID</source>
+            </trans-unit>
+            <trans-unit id="form.field.product">
+                <source>Product</source>
+            </trans-unit>
+            <trans-unit id="form.field.products">
+                <source>Products</source>
+            </trans-unit>
+            <trans-unit id="form.field.checkbox_contact">
+                <source>I agree that the data given by me will be collected and stored electronically. My data is used only strictly earmarked for processing my request. The apply </source>
+                <target>Ich bin damit einverstanden, dass die von mir angegebenen Daten elektronisch erhoben und gespeichert werden. Meine Daten werden dabei nur streng zweckgebunden zur Bearbeitung meiner Anfrage genutzt. Es gelten die </target>
+            </trans-unit>
+            <trans-unit id="form.field.checkbox_applicationBusinessCustomer">
+                <source>I hereby apply for a business account and agree with</source>
+            </trans-unit>
+
+
+            ###############################
+            ###### SUBMITS           ######
+            ###############################
+
+            <trans-unit id="form.submit.value.send">
+                <source>Send</source>
+            </trans-unit>
+
+
+
+            ##################################
+            ###### Validierung - Messages ####
+            ##################################
+
+
+
+            <trans-unit id="validator.alphabetic.error">
+                <source>The given subject was not a valid alphabetic string.</source>
+            </trans-unit>
+            <trans-unit id="validator.alphanumeric.error">
+                <source>The given subject was not a valid alphanumeric string.</source>
+            </trans-unit>
+            <trans-unit id="validator.numeric.error">
+                <source>The given subject was not a valid numeric.</source>
+            </trans-unit>
+            <trans-unit id="validator.email.error">
+                <source>The given subject was not a valid email address.</source>
+            </trans-unit>
+            <trans-unit id="validator.uri.error">
+                <source>The given subject was not a valid url.</source>
+            </trans-unit>
+            <trans-unit id="validator.required.error">
+				<source>The given subject was empty.</source>
+            </trans-unit>
+            <trans-unit id="validator.stringLength.error.between">
+                <source>The length of the given string was not between %s and %s characters.</source>
+            </trans-unit>
+            <trans-unit id="validator.stringLength.error.min">
+                <source>The length of the given string is less than %s characters.</source>
+            </trans-unit>
+            <trans-unit id="validator.stringLength.error.max">
+                <source>The length of the given string exceeded %s characters.</source>
+            </trans-unit>
+            <trans-unit id="validator.numericRange.error.notvalid">
+                <source>The given subject was not a valid number.</source>
+            </trans-unit>
+            <trans-unit id="validator.numericRange.error.range">
+                <source>The given subject was not in the valid range (%s - %s).</source>
+            </trans-unit>
+
+
+            ################################
+            ###### Object-Validierung ######
+            ################################
+
+            <trans-unit id="validator.validTestForm.error.compare">
+                <source>The given subjects must be equal.</source>
+            </trans-unit>
+
+
+            ################################
+            ###### Values in Selects ######
+            ################################
+
+            <trans-unit id="form.select.salutation.mr">
+                <source>Mr.</source>
+            </trans-unit>
+            <trans-unit id="form.select.salutation.mrs">
+                <source>Mrs.</source>
+            </trans-unit>
+            <trans-unit id="form.select.country.germany">
+                <source>Germany</source>
+            </trans-unit>
+
+		</body>
+	</file>
+</xliff>

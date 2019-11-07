@@ -1,0 +1,43 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+     data-namespace-typo3-fluid="true">
+
+    <v:variable.set name="field" value="{name}"/>
+    <v:variable.set name="locallang" value="LLL:EXT:gjo_boilerplate/Resources/Private/Language/form.xlf"/>
+    <v:variable.set name="errorMessage" value="{locallang}:form.field.{name}.errorMessage"/>
+    <v:variable.set name="successMessage" value="{locallang}:form.field.{name}.successMessage"/>
+
+    <f:form.select  id="{f:if(condition: '{id}', then:'{id}', else:'{field}')}"
+                    property="{f:if(condition: '{property}', then:'{property}', else:'{field}')}"
+                    name="{f:if(condition: '{name}', then:'{name}', else:'{field}')}"
+                    options="{options}"
+                    value="{value}"
+                    class="{f:if(condition: '{class}', then:'{class}', else:'mdb-select md-form colorful-select dropdown-dark validate')}"
+                    errorClass="{f:if(condition: '{errorClass}', then:'{errorClass}', else:'invalid')}"
+                    disabled="{disabled}"
+                    title="{tooltip}"
+                    accesskey="{accesskey}"
+                    tabindex="{tabindex}"
+                    additionalAttributes="{additionalAttributes}"
+                    data="{data}"
+    />
+
+    <label for="{f:if(condition: '{label}', then:'{label}', else:'{field}')}"
+           class="mdb-main-label w-100 {labelClass} {gjoSe:form.hasError(property:'{field}',then:'text-danger')}">
+        <f:translate key="{locallang}:form.field.{f:if(condition: '{translationKey}', then:'{translationKey}', else:'{name}')}" default="{name}"/>
+        <v:condition.string.contains then=": *" else=":" condition="1" haystack="{data.validation}" needle="required" />
+    </label>
+
+    <span class="text-danger">
+        <f:render partial="Form/Errors/FieldErrorMessages"
+                  arguments="{
+                      object: '{formName}',
+                      property:'{field}'
+                  }"
+        />
+    </span>
+
+
+</div>
+
