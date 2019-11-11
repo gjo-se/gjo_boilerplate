@@ -1,12 +1,17 @@
 {
   "name": "gjo/gjo-boilerplate",
   "type": "typo3-cms-extension",
-  "description": "Composer Test",
+  "description": "GJO Boilerplate",
   "require": {
     "typo3/cms": "^8.7"
   },
   "replace": {
     "gjo_boilerplate": "self.version",
     "gjose/gjo-boilerplate": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "GjoSe\\GjoBoilerplate\\": "Classes/"
+    }
   }
 }

@@ -27,12 +27,12 @@ use GjoSe\GjoExtendsFemanager\Domain\Repository\FeUserRepository;
 abstract class AbstractFeUserViewHelper extends GjoSeAbstractViewHelper
 {
     /**
-     * @var \GjoSe\GjoExtendsFemanager\Domain\Repository
+     * @var \GjoSe\GjoExtendsFemanager\Domain\Repository\FeUserRepository
      */
     protected $feUserRepository;
 
     /**
-     * @param \GjoSe\GjoExtendsFemanager\Domain\Repository
+     * @param \GjoSe\GjoExtendsFemanager\Domain\Repository\FeUserRepository
      */
     public function injectFeUserRepository(FeUserRepository $feUserRepository)
     {
