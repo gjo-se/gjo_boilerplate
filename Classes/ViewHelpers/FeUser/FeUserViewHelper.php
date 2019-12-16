@@ -33,6 +33,7 @@ class FeUserViewHelper extends AbstractFeUserViewHelper
         }
 
         $property = $this->arguments['property'];
+        $GLOBALS["TSFE"]->set_no_cache();
         $userData = $GLOBALS['TSFE']->fe_user->user;
 
         if (null === $userData) {
