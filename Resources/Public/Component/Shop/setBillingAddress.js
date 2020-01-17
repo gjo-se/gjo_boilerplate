@@ -28,7 +28,7 @@ var $billingAddressCityTextField = $("#billingAddress_city_text_field");
 var $billingAddressCountryFormField = $("#billingAddress-country");
 var $billingAddressCountryTextField = $("#billingAddress-country-text-field");
 
-var _setBillingAddressText = function (openOrderUid) {
+var _setBillingAddressText = function () {
 
 
 
@@ -75,10 +75,10 @@ var _setBillingAddressText = function (openOrderUid) {
     });
 
     $billingAddressAddressFormField.on('change', function () {
-        var feUserAddressTextFieldVal = $billingAddressAddressFormField.val();
+        var billingAddressTextFieldVal = $billingAddressAddressFormField.val();
 
-        if(feUserAddressTextFieldVal){
-            $billingAddressAddressTextField.text(feUserAddressTextFieldVal);
+        if(billingAddressTextFieldVal){
+            $billingAddressAddressTextField.text(billingAddressTextFieldVal);
         }else{
             $billingAddressAddressTextField.html('<span class="text-danger">' + langHelperPleaseEnterAddress + '</span>');
         }

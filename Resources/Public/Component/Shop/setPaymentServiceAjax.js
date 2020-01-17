@@ -39,13 +39,14 @@
             var openOrderUid = $openOrderHidden.val();
 
             // TODO: der muss auch ausserhalb der cahnge stehen
-            console.log('paymentServiceSelectValue === PAYMENT_PROVIDER_PICKUP');
+            // direkte Änderung des SelectValues zerstört den DOM
+            // console.log('paymentServiceSelectValue === PAYMENT_PROVIDER_PICKUP');
             if(paymentServiceSelectValue === PAYMENT_PROVIDER_PICKUP){
 
-                console.log('before: ' + parseInt($(".shipping-service-select"). children("option:selected"). val()));
-                $(".shipping-service-select").val('0');
+                // console.log('before: ' + parseInt($(".shipping-service-select"). children("option:selected"). val()));
+                // $(".shipping-service-select").val('0');
                 // $(".shipping-service-select option[value='0']").attr('disabled',true);
-                console.log('after: ' + parseInt($(".shipping-service-select"). children("option:selected"). val()));
+                // console.log('after: ' + parseInt($(".shipping-service-select"). children("option:selected"). val()));
 
             }
 
