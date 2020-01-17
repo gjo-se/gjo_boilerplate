@@ -40,7 +40,11 @@ class GetLowestPriceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
             if ($productSetVariants) {
 
                 foreach ($productSetVariants as $key => $productSetVariant) {
+<<<<<<< HEAD
                     if($productSetVariant->getPrice()){
+=======
+                    if ($productSetVariant->getPrice()) {
+>>>>>>> release/1.2.7
                         array_push($prices, $productSetVariant->getPrice());
                     }
                 }

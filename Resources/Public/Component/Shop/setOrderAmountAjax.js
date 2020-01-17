@@ -52,27 +52,28 @@ var _setOrderAmountAjax = function (openOrderUid) {
                 $(".shipping-service-select option[value='1']").attr('disabled',true);
                 $(".shipping-service-select option[value='2']").attr('disabled',true);
                 $(".shipping-service-select option[value='8']").attr('disabled',false);
-                if(parseInt($(".shipping-service-select"). children("option:selected"). val()) !== 0){
-                    $(".shipping-service-select").val(8);
-                }
+                // TODO: das setzen des Wertes zerstört den DOM (löscht Elternelemente)
+                // if(parseInt($(".shipping-service-select"). children("option:selected"). val()) !== 0){
+                //     $(".shipping-service-select").val(8);
+                // }
             }
 
             if(responseObj.productLengthOver1650){
                 $(".shipping-service-select option[value='1']").attr('disabled',false);
                 $(".shipping-service-select option[value='2']").attr('disabled',true);
                 $(".shipping-service-select option[value='8']").attr('disabled',true);
-                if(parseInt($(".shipping-service-select"). children("option:selected"). val()) !== 0){
-                    $(".shipping-service-select").val(1);
-                }
+                // if(parseInt($(".shipping-service-select").children("option:selected"). val()) !== 0){
+                //     // $(".shipping-service-select").val(1);
+                // }
             }
 
             if(responseObj.productLengthOver2500){
                 $(".shipping-service-select option[value='1']").attr('disabled',true);
                 $(".shipping-service-select option[value='2']").attr('disabled',false);
                 $(".shipping-service-select option[value='8']").attr('disabled',true);
-                if(parseInt($(".shipping-service-select"). children("option:selected"). val()) !== 0){
-                    $(".shipping-service-select").val(2);
-                }
+                // if(parseInt($(".shipping-service-select"). children("option:selected"). val()) !== 0){
+                //     $(".shipping-service-select").val(2);
+                // }
             }
 
         },
