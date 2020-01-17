@@ -45,13 +45,12 @@ class GetLowestPriceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
                     }
                 }
 
-                if ($prices) {
-                    if (count($prices)) {
-                        $lowestPrice = min($prices);
-                    }
+                if (count($prices)) {
+                    $lowestPrice = min($prices);
                 }
             }
-
-            return $lowestPrice;
         }
+
+        return $lowestPrice;
     }
+}
