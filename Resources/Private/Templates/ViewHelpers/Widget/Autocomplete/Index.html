@@ -90,7 +90,7 @@
 
     <f:section name="javaScript">
 
-        <script type="text/javascript">
+        <script>
 
             var autocomplete = [];
             autocomplete['datasets'] = [];
@@ -98,7 +98,7 @@
         </script>
 
         <f:for each="{datasets}" as="dataset" iteration="iteration">
-            <script type="text/javascript">
+            <script>
 
                 autocomplete['datasets']['{iteration.index}'] = [];
                 autocomplete['datasets']['{iteration.index}']['source'] = '{dataset.source}';
@@ -110,7 +110,7 @@
             </script>
         </f:for>
 
-        <script type="text/javascript">
+        <script>
 
             autocomplete['id'] = '{id}';
             autocomplete['name'] = '{name}';
