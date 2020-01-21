@@ -33,14 +33,14 @@
         <v:condition.string.contains then=": *" else=":" haystack="{data.validation}" needle="required" />
     </label>
 
-    <span class="text-danger">
+    <div class="text-danger">
         <f:render partial="Form/Errors/FieldErrorMessages"
                   arguments="{
                       object: '{formName}',
                       property:'{field}'
                   }"
         />
-    </span>
+    </div>
 
 
 </div>
