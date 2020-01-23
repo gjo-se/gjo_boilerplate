@@ -107,12 +107,14 @@ class MediaViewHelper extends CoreMediaViewHelper
     protected function renderImage(FileInterface $image, $width, $height)
     {
         if ($this->getBreakPoints()) {
-            return $this->renderPicture($image, $width, $height);
+            $renderdImage = $this->renderPicture($image, $width, $height);
         } elseif ($this->arguments['srcset']) {
-            return $this->renderImageSrcset($image, $width, $height);
+            $renderdImage = $this->renderImageSrcset($image, $width, $height);
         } else {
-            return parent::renderImage($image, $width, $height);
+            $renderdImage = parent::renderImage($image, $width, $height);
         }
+
+        return $renderdImage;
     }
 
     /**
