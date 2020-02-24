@@ -1,5 +1,5 @@
 <?php
-namespace Pluswerk\Simpleblog\ViewHelpers\Widget\Controller;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget\Controller;
 
 class AtoZNavController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
 {

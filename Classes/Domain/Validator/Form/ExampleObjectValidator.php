@@ -1,6 +1,6 @@
 <?php
 
-namespace GjoSe\GjoExtendsFemanager\Domain\Validator\Form;
+namespace GjoSe\GjoBoilerplate\Domain\Validator\Form;
 
 /***************************************************************
  *  created: 30.03.18 - 07:10
