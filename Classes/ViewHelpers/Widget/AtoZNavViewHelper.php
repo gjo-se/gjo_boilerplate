@@ -1,5 +1,5 @@
 <?php
-namespace Pluswerk\Simpleblog\ViewHelpers\Widget;
+namespace GjoSe\GjoBoilerplate\ViewHelpers\Widget;
 
 class AtoZNavViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper
 {
